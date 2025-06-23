@@ -24,20 +24,9 @@
   .strikethrough {text-decoration: line-through; color: #bb9457;}
   .prezzo-sconto {color:#15803d; font-weight:700;}
   .form-title {text-align:center;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;}
-  
-  /* Modifiche per mobile */
-  @media (max-width: 640px) {
-    body {
-      padding-left: 1.5mm;
-      padding-right: 1.5mm;
-    }
-    .simResultGruppi, .simResultCamera, .popup-anim p {
-      font-size: 90% !important; /* Riduzione del 10% */
-    }
-    .popup-anim h3 {
-      font-size: 1.8rem !important; /* Riduzione del 10% */
-    }
-  }
+  .riepilogo-prezzo {font-size:0.9rem; line-height:1.4;}
+  .popup-text {font-size:0.95rem;}
+  .success-message {text-align:center; color:#15803d; font-weight:600; margin-top:1rem; display:none;}
 </style>
 </head>
 <body>
@@ -105,17 +94,17 @@
       <form id="formGruppi" class="flex flex-col gap-3">
         <label class="flex flex-col font-semibold text-sm">
           Persone (5–30):
-          <input type="number" id="people" min="5" max="30" value="5"
+          <input type="number" id="people" min="5" max="30" value="5" placeholder="Inserisci numero persone"
             class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
         </label>
         <label class="flex flex-col font-semibold text-sm">
           Check‑in:
-          <input type="date" id="checkin"
+          <input type="date" id="checkin" placeholder="Seleziona data check-in"
             class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
         </label>
         <label class="flex flex-col font-semibold text-sm">
           Check‑out:
-          <input type="date" id="checkout"
+          <input type="date" id="checkout" placeholder="Seleziona data check-out"
             class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
         </label>
         <button type="submit"
@@ -123,29 +112,29 @@
           Calcola
         </button>
         <div class="loader2" id="loaderGruppi" style="display:none;"><span></span></div>
-        <div class="result mt-2 simResultGruppi font-semibold" id="simResultGruppi"></div>
+        <div class="result mt-2 simResultGruppi font-semibold riepilogo-prezzo" id="simResultGruppi"></div>
       </form>
       <!-- Form Camera -->
       <form id="formCamera" class="flex flex-col gap-3 hidden">
         <div class="form-title">Simulatore prezzi</div>
         <label class="flex flex-col font-semibold text-sm">
           Adulti (1-2):
-          <input type="number" id="adulti" min="1" max="2" value="2"
+          <input type="number" id="adulti" min="1" max="2" value="2" placeholder="Inserisci numero adulti"
             class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
         </label>
         <label class="flex flex-col font-semibold text-sm">
           Bambini (0-12 anni):
-          <input type="number" id="bambini" min="0" max="2" value="0"
+          <input type="number" id="bambini" min="0" max="2" value="0" placeholder="Inserisci numero bambini"
             class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
         </label>
         <label class="flex flex-col font-semibold text-sm">
           Check‑in:
-          <input type="date" id="checkinCam"
+          <input type="date" id="checkinCam" placeholder="Seleziona data check-in"
             class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
         </label>
         <label class="flex flex-col font-semibold text-sm">
           Check‑out:
-          <input type="date" id="checkoutCam"
+          <input type="date" id="checkoutCam" placeholder="Seleziona data check-out"
             class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
         </label>
         <button type="submit"
@@ -153,7 +142,7 @@
           Calcola
         </button>
         <div class="loader2" id="loaderCamera" style="display:none;"><span></span></div>
-        <div class="result mt-2 simResultCamera font-semibold" id="simResultCamera"></div>
+        <div class="result mt-2 simResultCamera font-semibold riepilogo-prezzo" id="simResultCamera"></div>
       </form>
       <div class="text-center mt-2"><small>📢 Prenota 8+ notti e risparmia subito!</small></div>
     </div>
@@ -200,18 +189,26 @@
       <div class="form-title">Contatti</div>
       <form id="contactForm" class="flex flex-col gap-3">
         <label class="flex flex-col font-semibold text-sm">
-          Nome:
-          <input type="text" id="nome" required class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+          Nome*:
+          <input type="text" id="nome" required placeholder="Il tuo nome" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
         </label>
         <label class="flex flex-col font-semibold text-sm">
-          Email:
-          <input type="email" id="email" required class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+          Email*:
+          <input type="email" id="email" required placeholder="La tua email" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
         </label>
         <label class="flex flex-col font-semibold text-sm">
-          Messaggio:
-          <textarea id="messaggio" required rows="4" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base"></textarea>
+          Telefono (opzionale):
+          <input type="tel" id="telefono" placeholder="Il tuo numero di telefono" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+        </label>
+        <label class="flex flex-col font-semibold text-sm">
+          Messaggio*:
+          <textarea id="messaggio" required rows="4" placeholder="Contattaci per confermare le date e ottenere lo sconto..." class="mt-1 rounded border border-gray-300 px-3 py-2 text-base"></textarea>
         </label>
         <button type="submit" class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">Invia</button>
+        <div class="loader2" id="loaderContact" style="display:none;"><span></span></div>
+        <div class="success-message" id="successMessage">
+          Messaggio inviato correttamente, ti risponderemo non appena possibile, grazie!
+        </div>
       </form>
     </div>
   </section>
@@ -223,7 +220,7 @@
     <div class="popup-anim" id="popupAnim">
       <span class="close-popup-btn" id="closePopup" title="Chiudi popup">&times;</span>
       <h3 class="text-2xl font-extrabold mb-2 text-[#bb9457]">🎉 Sconto Speciale!</h3>
-      <p id="popupText" class="mb-3 text-lg"></p>
+      <p id="popupText" class="mb-3 popup-text"></p>
       <a href="#contatti" id="ctaSconto" class="cta">Contattaci ora per ottenere lo sconto</a>
     </div>
   </div>
@@ -408,6 +405,35 @@ formCamera.addEventListener('submit', e => {
     result.innerHTML = riepilogoBreve + '<br><a href="#contatti" class="cta">Richiedi info</a>';
     if (sconto) showPopupSconto(riepilogoBreve);
   }, 900);
+});
+
+// Form contatti
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const loader = document.getElementById('loaderContact');
+  const successMessage = document.getElementById('successMessage');
+  const form = e.target;
+  
+  // Mostra il loader
+  loader.style.display = 'flex';
+  successMessage.style.display = 'none';
+  
+  // Simula l'invio del form (nella realtà qui ci sarebbe una chiamata AJAX)
+  setTimeout(() => {
+    // Nascondi il loader
+    loader.style.display = 'none';
+    
+    // Mostra il messaggio di successo
+    successMessage.style.display = 'block';
+    
+    // Resetta il form
+    form.reset();
+    
+    // Nascondi il messaggio dopo 5 secondi
+    setTimeout(() => {
+      successMessage.style.display = 'none';
+    }, 5000);
+  }, 900); // Stesso tempo di attesa del simulatore prezzi
 });
 </script>
 </body>
