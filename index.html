@@ -24,231 +24,208 @@
   .strikethrough {text-decoration: line-through; color: #bb9457;}
   .prezzo-sconto {color:#15803d; font-weight:700;}
   .form-title {text-align:center;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;}
-  .riepilogo-prezzo {font-size:0.9rem; line-height:1.4;}
-  .popup-text {font-size:0.95rem;}
   .success-message {text-align:center; color:#15803d; font-weight:600; margin-top:1rem; display:none;}
+  .error-message {text-align:center; color:#b91c1c; font-weight:600; margin-top:1rem; display:none;}
 </style>
 </head>
 <body>
-  <!-- HERO SECTION -->
-  <section style="width:100vw; height:420px; overflow:hidden; border-radius:0 0 28px 28px; box-shadow:0 6px 18px rgba(0,0,0,0.18); position:relative;">
-    <img
-      src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1500&q=80"
-      alt="Spiaggia tropicale a Porto Seguro Bahia Brasile"
-      style="width:100vw; height:100%; object-fit:cover; display:block;"
-      loading="eager"
-    />
-    <div style="position:absolute; bottom:24px; left:36px; background:rgba(0,0,0,0.34); color:#fff; padding:1.2rem 2.4rem; border-radius:1.2rem; box-shadow:0 2px 8px rgba(0,0,0,0.18);">
-      <h1 style="font-size:2.2rem; font-weight:900; letter-spacing:-1px;">Casa Vacanze a Porto Seguro</h1>
-      <div style="font-size:1.2rem; margin-top:8px;">Il tuo rifugio esclusivo tra spiagge, palme e relax in Brasile</div>
-    </div>
-  </section>
-
-  <!-- DESCRIZIONE -->
-  <section id="descr1" class="max-w-3xl mx-auto my-10 px-4">
-    <h2 class="text-xl font-bold mb-2">Ti aspettiamo a Porto Seguro</h2>
-    <p>
-      Vivi Porto Seguro in Esclusiva
-      Relax, Sicurezza e Spazio per Gruppi, Coppie o Famiglie
-      
-      Scopri la magia di Porto Seguro, la prima città del Brasile, dove storia, cultura e natura si incontrano in <b>un'atmosfera unica.</b> Spiagge spettacolari, serate vibranti sulla Passarela do Álcool con musica dal vivo, artigianato e ristoranti... il Brasile più autentico ti aspetta.
-      
-      🎯 E tu potrai viverlo al meglio, in una villa privata esclusiva, all'interno di un residence di lusso immerso nel verde, videosorvegliato 24h, con accesso controllato per offrirti massima sicurezza, privacy e tranquillità.
-    </p>
-  </section>
-
-  <!-- GALLERIA -->
-  <section id="galleria" class="gallery">
-    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1465156799763-2c087c332922?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1468413253725-0d5181091126?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3fd9?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3fd9?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-    <img src="https://images.unsplash.com/photo-1465156799763-2c087c332922?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
-  </section>
-
-  <!-- Lightbox -->
-  <div id="lightbox" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.85);display:none;justify-content:center;align-items:center;z-index:10000;">
-    <img src="" alt="Foto ingrandita" style="max-width:92vw;max-height:88vh;border-radius:1rem;box-shadow:0 4px 32px #000;">
-    <button class="close-btn" style="position:absolute;top:24px;right:38px;font-size:2.8rem;font-weight:700;color:#fff;background:none;border:none;cursor:pointer;">&times;</button>
+<!-- HERO SECTION -->
+<section style="width:100vw; height:420px; overflow:hidden; border-radius:0 0 28px 28px; box-shadow:0 6px 18px rgba(0,0,0,0.18); position:relative;">
+  <img
+    src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1500&q=80"
+    alt="Spiaggia tropicale a Porto Seguro Bahia Brasile"
+    style="width:100vw; height:100%; object-fit:cover; display:block;"
+    loading="eager"
+  />
+  <div style="position:absolute; bottom:24px; left:36px; background:rgba(0,0,0,0.34); color:#fff; padding:1.2rem 2.4rem; border-radius:1.2rem; box-shadow:0 2px 8px rgba(0,0,0,0.18);">
+    <h1 style="font-size:2.2rem; font-weight:900; letter-spacing:-1px;">Casa Vacanze a Porto Seguro</h1>
+    <div style="font-size:1.2rem; margin-top:8px;">Il tuo rifugio esclusivo tra spiagge, palme e relax in Brasile</div>
   </div>
+</section>
 
-  <!-- SIMULATORE PREZZI DOPPIO -->
-  <section id="simulatore" class="my-12">
-    <div class="card max-w-2xl mx-auto">
+<!-- DESCRIZIONE -->
+<section id="descr1" class="max-w-3xl mx-auto my-10 px-4">
+  <h2 class="text-xl font-bold mb-2">Ti aspettiamo a Porto Seguro</h2>
+  <p>
+    Vivi Porto Seguro in Esclusiva. Relax, Sicurezza e Spazio per Gruppi, Coppie o Famiglie.<br>
+    Scopri la magia di Porto Seguro, la prima città del Brasile, dove storia, cultura e natura si incontrano in <b>un'atmosfera unica.</b> Spiagge spettacolari, serate vibranti sulla Passarela do Álcool con musica dal vivo, artigianato e ristoranti... il Brasile più autentico ti aspetta.<br>
+    🎯 E tu potrai viverlo al meglio, in una villa privata esclusiva, all'interno di un residence di lusso immerso nel verde, videosorvegliato 24h, con accesso controllato per offrirti massima sicurezza, privacy e tranquillità.
+  </p>
+</section>
+
+<!-- GALLERIA -->
+<section id="galleria" class="gallery">
+  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1465156799763-2c087c332922?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1468413253725-0d5181091126?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3fd9?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3fd9?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+  <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80" class="gallery-img" alt="">
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.85);display:none;justify-content:center;align-items:center;z-index:10000;">
+  <img src="" alt="Foto ingrandita" style="max-width:92vw;max-height:88vh;border-radius:1rem;box-shadow:0 4px 32px #000;">
+  <button class="close-btn" style="position:absolute;top:24px;right:38px;font-size:2.8rem;font-weight:700;color:#fff;background:none;border:none;cursor:pointer;">&times;</button>
+</div>
+
+<!-- SIMULATORE PREZZI DOPPIO -->
+<section id="simulatore" class="my-12">
+  <div class="card max-w-2xl mx-auto">
+    <div class="form-title">Simulatore prezzi</div>
+    <div class="flex gap-2 mb-5 justify-center">
+      <button type="button" id="btnGruppi" class="px-3 py-1 rounded bg-[#bb9457] text-white font-bold">Gruppi numerosi</button>
+      <button type="button" id="btnCamera" class="px-3 py-1 rounded bg-gray-200 font-bold">Coppie/Famiglie</button>
+    </div>
+    <!-- Form Gruppi -->
+    <form id="formGruppi" class="flex flex-col gap-3">
+      <label class="flex flex-col font-semibold text-sm">
+        Persone (5–30):
+        <input type="number" id="people" min="5" max="30" value="5" placeholder="Inserisci numero persone"
+          class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Check‑in:
+        <input type="date" id="checkin" placeholder="Seleziona data check-in"
+          class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Check‑out:
+        <input type="date" id="checkout" placeholder="Seleziona data check-out"
+          class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <button type="submit"
+        class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">
+        Calcola
+      </button>
+      <div class="loader2" id="loaderGruppi" style="display:none;"><span></span></div>
+      <div class="result mt-2 simResultGruppi font-semibold" id="simResultGruppi"></div>
+    </form>
+    <!-- Form Camera -->
+    <form id="formCamera" class="flex flex-col gap-3 hidden">
       <div class="form-title">Simulatore prezzi</div>
-      <div class="flex gap-2 mb-5 justify-center">
-        <button type="button" id="btnGruppi" class="px-3 py-1 rounded bg-[#bb9457] text-white font-bold">Gruppi numerosi</button>
-        <button type="button" id="btnCamera" class="px-3 py-1 rounded bg-gray-200 font-bold">Coppie/Famiglie</button>
-      </div>
-      <!-- Form Gruppi -->
-      <form id="formGruppi" class="flex flex-col gap-3">
-        <label class="flex flex-col font-semibold text-sm">
-          Persone (5–30):
-          <input type="number" id="people" min="5" max="30" value="5" placeholder="Inserisci numero persone"
-            class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Check‑in:
-          <input type="date" id="checkin" placeholder="Seleziona data check-in"
-            class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Check‑out:
-          <input type="date" id="checkout" placeholder="Seleziona data check-out"
-            class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <button type="submit"
-          class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">
-          Calcola
-        </button>
-        <div class="loader2" id="loaderGruppi" style="display:none;"><span></span></div>
-        <div class="result mt-2 simResultGruppi font-semibold riepilogo-prezzo" id="simResultGruppi"></div>
-      </form>
-      <!-- Form Camera -->
-      <form id="formCamera" class="flex flex-col gap-3 hidden">
-        <div class="form-title">Simulatore prezzi</div>
-        <label class="flex flex-col font-semibold text-sm">
-          Adulti (1-2):
-          <input type="number" id="adulti" min="1" max="2" value="2" placeholder="Inserisci numero adulti"
-            class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Bambini (0-12 anni):
-          <input type="number" id="bambini" min="0" max="2" value="0" placeholder="Inserisci numero bambini"
-            class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Check‑in:
-          <input type="date" id="checkinCam" placeholder="Seleziona data check-in"
-            class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Check‑out:
-          <input type="date" id="checkoutCam" placeholder="Seleziona data check-out"
-            class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <button type="submit"
-          class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">
-          Calcola
-        </button>
-        <div class="loader2" id="loaderCamera" style="display:none;"><span></span></div>
-        <div class="result mt-2 simResultCamera font-semibold riepilogo-prezzo" id="simResultCamera"></div>
-      </form>
-      <div class="text-center mt-2"><small>📢 Prenota 8+ notti e risparmia subito!</small></div>
+      <label class="flex flex-col font-semibold text-sm">
+        Adulti (1-2):
+        <input type="number" id="adulti" min="1" max="2" value="2" placeholder="Inserisci numero adulti"
+          class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Bambini (0-12 anni):
+        <input type="number" id="bambini" min="0" max="2" value="0" placeholder="Inserisci numero bambini"
+          class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Check‑in:
+        <input type="date" id="checkinCam" placeholder="Seleziona data check-in"
+          class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Check‑out:
+        <input type="date" id="checkoutCam" placeholder="Seleziona data check-out"
+          class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <button type="submit"
+        class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">
+        Calcola
+      </button>
+      <div class="loader2" id="loaderCamera" style="display:none;"><span></span></div>
+      <div class="result mt-2 simResultCamera font-semibold" id="simResultCamera"></div>
+    </form>
+    <div class="text-center mt-2"><small>📢 Prenota 8+ notti e risparmia subito!</small></div>
+  </div>
+</section>
+
+<!-- RECENSIONI -->
+<section id="recensioni" class="my-12 max-w-3xl mx-auto">
+  <h2 class="text-2xl font-bold mb-4 text-center">Recensioni degli ospiti</h2>
+  <div class="space-y-6">
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Giulia R.</span></div>
+      <p>Vacanza perfetta! La casa è spaziosa, pulitissima e in una zona sicura. Ci siamo sentiti subito a casa. Consigliatissima per famiglie numerose!</p>
     </div>
-  </section>
-
-  <!-- RECENSIONI -->
-  <section id="recensioni" class="my-12 max-w-3xl mx-auto">
-    <h2 class="text-2xl font-bold mb-4 text-center">Recensioni degli ospiti</h2>
-    <div class="space-y-6">
-      <div class="bg-white rounded-lg shadow p-5">
-        <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Giulia R.</span></div>
-        <p>Vacanza perfetta! La casa è spaziosa, pulitissima e in una zona sicura. Ci siamo sentiti subito a casa. Consigliatissima per famiglie numerose!</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-5">
-        <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Marco e Laura</span></div>
-        <p>Abbiamo adorato la piscina privata e la tranquillità del residence. L'assistenza italiana è stata un vero valore aggiunto. Torneremo sicuramente!</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-5">
-        <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Sofia B.</span></div>
-        <p>Esperienza indimenticabile! Spiagge da sogno a pochi minuti e tanti servizi a disposizione. Tutto curato nei minimi dettagli.</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-5">
-        <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Alessandro M.</span></div>
-        <p>Location top, ottima per gruppi di amici! Ampi spazi, barbecue e relax totale. Host sempre disponibile per ogni esigenza.</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-5">
-        <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★☆</span><span class="font-semibold">Francesca D.</span></div>
-        <p>Casa davvero bella e comoda, unica piccola pecca la connessione Wi-Fi a volte lenta. Ma nel complesso vacanza super positiva, torneremo!</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-5">
-        <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★☆</span><span class="font-semibold">Giorgio T.</span></div>
-        <p>Il soggiorno è stato ottimo, anche se avremmo gradito qualche utensile da cucina in più. Però l'host è stato gentilissimo e la posizione è fantastica!</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-5">
-        <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★☆</span><span class="font-semibold">Valentina P.</span></div>
-        <p>Struttura molto accogliente, forse la piscina un po' piccola per gruppi grandi, ma pulizia e comfort eccellenti. Esperienza positiva!</p>
-      </div>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Marco e Laura</span></div>
+      <p>Abbiamo adorato la piscina privata e la tranquillità del residence. L'assistenza italiana è stata un vero valore aggiunto. Torneremo sicuramente!</p>
     </div>
-  </section>
-
-  <!-- CONTATTI -->
-  <section id="contatti" class="my-12">
-    <div class="card max-w-2xl mx-auto">
-      <div class="form-title">Contatti</div>
-      <form id="contactForm" class="flex flex-col gap-3">
-        <label class="flex flex-col font-semibold text-sm">
-          Nome*:
-          <input type="text" id="nome" required placeholder="Il tuo nome" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Email*:
-          <input type="email" id="email" required placeholder="La tua email" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Telefono (opzionale):
-          <input type="tel" id="telefono" placeholder="Il tuo numero di telefono" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Messaggio*:
-          <textarea id="messaggio" required rows="4" placeholder="Contattaci per confermare le date e ottenere lo sconto..." class="mt-1 rounded border border-gray-300 px-3 py-2 text-base"></textarea>
-        </label>
-        <button type="submit" class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">Invia</button>
-        <div class="loader2" id="loaderContact" style="display:none;"><span></span></div>
-        <div class="success-message" id="successMessage">
-          Messaggio inviato correttamente, ti risponderemo non appena possibile, grazie!
-        </div>
-      </form>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Sofia B.</span></div>
+      <p>Esperienza indimenticabile! Spiagge da sogno a pochi minuti e tanti servizi a disposizione. Tutto curato nei minimi dettagli.</p>
     </div>
-  </section>
-
-  <footer class="bg-[#d9cbb1] text-center p-4 font-semibold">© 2025 Casa Vacanze Brasile</footer>
-
-  <!-- POPUP SCONTO MODERNO -->
-  <div class="popup-bg" id="popup">
-    <div class="popup-anim" id="popupAnim">
-      <span class="close-popup-btn" id="closePopup" title="Chiudi popup">&times;</span>
-      <h3 class="text-2xl font-extrabold mb-2 text-[#bb9457]">🎉 Sconto Speciale!</h3>
-      <p id="popupText" class="mb-3 popup-text"></p>
-      <a href="#contatti" id="ctaSconto" class="cta">Contattaci ora per ottenere lo sconto</a>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Alessandro M.</span></div>
+      <p>Location top, ottima per gruppi di amici! Ampi spazi, barbecue e relax totale. Host sempre disponibile per ogni esigenza.</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★☆</span><span class="font-semibold">Francesca D.</span></div>
+      <p>Casa davvero bella e comoda, unica piccola pecca la connessione Wi-Fi a volte lenta. Ma nel complesso vacanza super positiva, torneremo!</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★☆</span><span class="font-semibold">Giorgio T.</span></div>
+      <p>Il soggiorno è stato ottimo, anche se avremmo gradito qualche utensile da cucina in più. Però l'host è stato gentilissimo e la posizione è fantastica!</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★☆</span><span class="font-semibold">Valentina P.</span></div>
+      <p>Struttura molto accogliente, forse la piscina un po' piccola per gruppi grandi, ma pulizia e comfort eccellenti. Esperienza positiva!</p>
     </div>
   </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti" class="my-12">
+  <div class="card max-w-2xl mx-auto">
+    <div class="form-title">Contatti</div>
+    <form id="contactForm" class="flex flex-col gap-3">
+      <label class="flex flex-col font-semibold text-sm">
+        Nome*:
+        <input type="text" id="nome" name="nome" required placeholder="Il tuo nome" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Email*:
+        <input type="email" id="email" name="email" required placeholder="La tua email" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Telefono (opzionale):
+        <input type="tel" id="telefono" name="telefono" placeholder="Il tuo numero di telefono" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Messaggio*:
+        <textarea id="messaggio" name="messaggio" required rows="4" placeholder="Contattaci per ottenere lo sconto" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base"></textarea>
+      </label>
+      <button type="submit" class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">Invia</button>
+      <div class="loader2" id="loaderContact" style="display:none;"><span></span></div>
+      <div class="success-message" id="successMessage">
+        Messaggio inviato correttamente, ti risponderemo non appena possibile, grazie!
+      </div>
+      <div class="error-message" id="errorMessage">
+        Errore nell'invio. Riprova tra poco.
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-[#d9cbb1] text-center p-4 font-semibold">© 2025 Casa Vacanze Brasile</footer>
+
+<!-- POPUP SCONTO MODERNO -->
+<div class="popup-bg" id="popup">
+  <div class="popup-anim" id="popupAnim">
+    <span class="close-popup-btn" id="closePopup" title="Chiudi popup">&times;</span>
+    <h3 class="text-2xl font-extrabold mb-2 text-[#bb9457]">🎉 Sconto Speciale!</h3>
+    <p id="popupText" class="mb-3"></p>
+    <a href="#contatti" id="ctaSconto" class="cta">Contattaci ora per ottenere lo sconto</a>
+  </div>
+</div>
 
 <script>
-function euroFormat(n) {
-  return n.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-const TEMPERATURES = [30,30,30,29,28,27,26,26,27,28,29,30];
-function getStagione(mese) {
-  return ([11,0,1,2,6,7].includes(mese)) ? "Alta stagione" : "Bassa stagione";
-}
-// Date limits
-const today = new Date();
-const yyyy = today.getFullYear();
-const mm = String(today.getMonth() + 1).padStart(2, '0');
-const dd = String(today.getDate()).padStart(2, '0');
-const minDate = `${yyyy}-${mm}-${dd}`;
-const maxDateObj = new Date(today);
-maxDateObj.setMonth(maxDateObj.getMonth() + 10);
-const maxDate = `${maxDateObj.getFullYear()}-${String(maxDateObj.getMonth()+1).padStart(2,'0')}-${String(maxDateObj.getDate()).padStart(2,'0')}`;
-['checkin','checkout','checkinCam','checkoutCam'].forEach(id=>{
-  document.getElementById(id).setAttribute('min',minDate);
-  document.getElementById(id).setAttribute('max',maxDate);
-});
-document.getElementById('bambini').setAttribute('max',2);
-
-// Lightbox gallery
+// Lightbox galleria
 const lightbox = document.getElementById('lightbox');
 const lbImg = lightbox.querySelector('img');
 const closeBtn = lightbox.querySelector('.close-btn');
@@ -260,7 +237,14 @@ closeBtn.addEventListener('click', () => lightbox.style.display = 'none');
 window.addEventListener('keydown', e => e.key === 'Escape' && (lightbox.style.display = 'none'));
 lightbox.addEventListener('click', e => e.target === lightbox && (lightbox.style.display = 'none'));
 
-// Tabs simulatore
+// Simulatore prezzi e popup
+function euroFormat(n) {
+  return n.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+const TEMPERATURES = [30,30,30,29,28,27,26,26,27,28,29,30];
+const MONTHS = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
+let riepilogoBreve = "";
+
 const btnGruppi = document.getElementById('btnGruppi');
 const btnCamera = document.getElementById('btnCamera');
 const formGruppi = document.getElementById('formGruppi');
@@ -280,7 +264,6 @@ btnCamera.onclick = () => {
   formGruppi.classList.add('hidden');
 };
 
-// Popup sconto
 function showPopupSconto(riepilogo) {
   document.getElementById('popupText').innerHTML = riepilogo;
   document.getElementById('popup').style.display='flex';
@@ -290,184 +273,156 @@ document.getElementById('closePopup').onclick = function() {
   document.getElementById('popup').style.display = 'none';
   document.body.style.overflow = '';
 };
-document.getElementById('popup').addEventListener('click', e => {
-  if (e.target === document.getElementById('popup')) {
-    document.getElementById('popup').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-});
-document.getElementById('ctaSconto').addEventListener('click', function(e) {
-  document.getElementById('popup').style.display = 'none';
-  document.body.style.overflow = '';
-  setTimeout(function() {
-    document.getElementById('contatti').scrollIntoView({behavior: 'smooth'});
-  }, 100);
-});
 
-// Simulatore Gruppi
 formGruppi.addEventListener('submit', e => {
   e.preventDefault();
   const ppl = +document.getElementById('people').value;
-  const inD = new Date(document.getElementById('checkin').value);
-  const outD = new Date(document.getElementById('checkout').value);
-  const loader = document.getElementById('loaderGruppi');
-  const result = document.getElementById('simResultGruppi');
-  result.innerHTML = '';
-  loader.style.display = 'flex';
-
-  setTimeout(() => {
-    loader.style.display = 'none';
-    if (isNaN(inD) || isNaN(outD) || outD <= inD) {
-      result.innerHTML = "⚠️ Inserisci date valide.";
-      return;
-    }
-    const days = Math.floor((outD - inD) / (1000*60*60*24));
-    if (days < 1) {
-      result.innerHTML = "⚠️ Soggiorno minimo 1 notte.";
-      return;
-    }
-    const mese = inD.getMonth();
-    const stagione = getStagione(mese);
-    let basePrezzo = (stagione === "Alta stagione") ? 28 : 21;
-    let aumento = 1;
-    if (ppl < 30) {
-      let gruppiMeno = Math.floor((30 - ppl) / 4);
-      aumento = Math.pow(1.12, gruppiMeno);
-    }
-    let prezzoNottePersona = basePrezzo * aumento;
-    let prezzo = ppl * prezzoNottePersona * days;
-    let sconto = 0;
-    if (days >= 8) sconto = 0.046;
-    const prezzoScontato = prezzo * (1 - sconto);
-    let risparmio = prezzo - prezzoScontato;
-    let tempMedia = TEMPERATURES[mese] + 2;
-    let riepilogoBreve = `
-      <b>Richiesta per gruppo di ${ppl} persone</b><br>
-      Periodo: ${inD.toLocaleDateString()} - ${outD.toLocaleDateString()} (${days} notti)<br>
-      ${stagione} • Temperatura media: <b>${tempMedia}°C</b><br>
-      Prezzo per notte per persona: <b>€ ${euroFormat(prezzoNottePersona)}</b><br>
+  const inD = new Date(document.getElementById('checkin').value),
+        outD = new Date(document.getElementById('checkout').value);
+  const loaderGruppi = document.getElementById('loaderGruppi');
+  const simResultGruppi = document.getElementById('simResultGruppi');
+  if (ppl<5||ppl>30||isNaN(inD)||isNaN(outD)||outD<=inD) return alert('Controlla valori');
+  loaderGruppi.style.display='flex'; simResultGruppi.textContent='';
+  setTimeout(()=> {
+    loaderGruppi.style.display='none';
+    const nights = Math.ceil((outD-inD)/(1000*60*60*24));
+    const monthIdx = inD.getMonth();
+    const alta = (monthIdx+1 >= 11 || monthIdx+1 <= 3);
+    const base = alta ? 28 : 21;
+    const steps = Math.floor((30-ppl)/4);
+    const ppp = +(base * Math.pow(1.12, steps)).toFixed(2);
+    const total = +(ppp*ppl*nights).toFixed(2);
+    const discount = nights>7 ? 4.5 : 0;
+    const scontoVal = discount ? +(total*discount/100).toFixed(2) : 0;
+    const final = discount ? +(total-scontoVal).toFixed(2) : total;
+    const seasonTxt = alta?'Alta stagione':'Bassa stagione';
+    const temp = TEMPERATURES[monthIdx];
+    const tempIcon = temp >= 26 ? "🌡️" : "☀️";
+    riepilogoBreve = discount ? `Ciao! Hai diritto a uno <b>sconto speciale</b> per <b>${nights} notti</b>: <span class="strikethrough">€${euroFormat(total)}</span> ora solo <span class="prezzo-sconto">€${euroFormat(final)}</span>!` : "";
+    simResultGruppi.innerHTML=`
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-2xl">${tempIcon}</span>
+        <span class="font-semibold">${MONTHS[monthIdx]}: ${temp}°C &middot; <span class="capitalize">${seasonTxt}</span></span>
+      </div>
+      <div>Prezzo per notte per persona: <span class="font-bold">€${euroFormat(ppp)}</span></div>
+      <div>
+        Prezzo totale gruppo (${ppl} pers, ${nights} notti): 
+        ${
+          discount
+            ? `<span class="strikethrough mr-2">€${euroFormat(total)}</span>
+               <span class="font-bold text-green-600">€${euroFormat(final)}</span>`
+            : `<span class="font-bold">€${euroFormat(final)}</span>`
+        }
+      </div>
       ${
-        sconto
-          ? `<span class="strikethrough">€ ${euroFormat(prezzo)}</span> <span class="prezzo-sconto">€ ${euroFormat(prezzoScontato)}</span><br><span style="color:#15803d;">Risparmi tot: € ${euroFormat(risparmio)}</span>`
-          : `<span class="prezzo-sconto">€ ${euroFormat(prezzo)}</span>`
+        discount
+          ? `<div class="text-green-600 font-bold mt-2">(Risparmi €${euroFormat(scontoVal)})</div>`
+          : ""
       }
     `;
-    result.innerHTML = riepilogoBreve + '<br><a href="#contatti" class="cta">Richiedi info</a>';
-    if (sconto) showPopupSconto(riepilogoBreve);
-  }, 900);
+    if (discount) showPopupSconto(riepilogoBreve);
+  },1500);
 });
 
-// Simulatore Camera
 formCamera.addEventListener('submit', e => {
   e.preventDefault();
   const adulti = +document.getElementById('adulti').value;
-  const bambini = Math.min(2, +document.getElementById('bambini').value);
-  document.getElementById('bambini').value = bambini;
-  const inD = new Date(document.getElementById('checkinCam').value);
-  const outD = new Date(document.getElementById('checkoutCam').value);
-  const loader = document.getElementById('loaderCamera');
-  const result = document.getElementById('simResultCamera');
-  result.innerHTML = '';
-  loader.style.display = 'flex';
-
-  setTimeout(() => {
-    loader.style.display = 'none';
-    if (isNaN(inD) || isNaN(outD) || outD <= inD) {
-      result.innerHTML = "⚠️ Inserisci date valide.";
-      return;
-    }
-    const days = Math.floor((outD - inD) / (1000*60*60*24));
-    if (days < 1) {
-      result.innerHTML = "⚠️ Soggiorno minimo 1 notte.";
-      return;
-    }
-    const mese = inD.getMonth();
-    const stagione = getStagione(mese);
-    let prezzoBase = (stagione === "Alta stagione") ? 56 : 42;
-    let prezzoNotte = prezzoBase + bambini * 9;
-    let prezzo = prezzoNotte * days;
-    let sconto = 0;
-    if (days >= 8) sconto = 0.046;
-    const prezzoScontato = prezzo * (1 - sconto);
-    let risparmio = prezzo - prezzoScontato;
-    let tempMedia = TEMPERATURES[mese] + 2;
-    let riepilogoBreve = `
-      <b>Richiesta per ${adulti} adulto/i${bambini ? ' e ' + bambini + ' bambino/i' : ''}</b><br>
-      Periodo: ${inD.toLocaleDateString()} - ${outD.toLocaleDateString()} (${days} notti)<br>
-      ${stagione} • Temperatura media: <b>${tempMedia}°C</b><br>
-      Prezzo per notte per camera: <b>€ ${euroFormat(prezzoNotte)}</b><br>
+  const bambini = +document.getElementById('bambini').value;
+  const inD = new Date(document.getElementById('checkinCam').value),
+        outD = new Date(document.getElementById('checkoutCam').value);
+  const loaderCamera = document.getElementById('loaderCamera');
+  const simResultCamera = document.getElementById('simResultCamera');
+  if (adulti<1||adulti>2||bambini<0||bambini>2||isNaN(inD)||isNaN(outD)||outD<=inD) return alert('Controlla valori');
+  loaderCamera.style.display='flex'; simResultCamera.textContent='';
+  setTimeout(()=> {
+    loaderCamera.style.display='none';
+    const nights = Math.ceil((outD-inD)/(1000*60*60*24));
+    const monthIdx = inD.getMonth();
+    const alta = (monthIdx+1 >= 11 || monthIdx+1 <= 3);
+    const prezzoCamera = alta ? 54 : 43;
+    const prezzoBambino = 9;
+    const totalNotte = prezzoCamera + bambini*prezzoBambino;
+    const total = totalNotte * nights;
+    const discount = nights>7 ? 4.5 : 0;
+    const scontoVal = discount ? +(total*discount/100).toFixed(2) : 0;
+    const final = discount ? +(total-scontoVal).toFixed(2) : total;
+    const seasonTxt = alta?'Alta stagione':'Bassa stagione';
+    const temp = TEMPERATURES[monthIdx];
+    const tempIcon = temp >= 26 ? "🌡️" : "☀️";
+    riepilogoBreve = discount ? `Ciao! Hai diritto a uno <b>sconto speciale</b> per <b>${nights} notti</b>: <span class="strikethrough">€${euroFormat(total)}</span> ora solo <span class="prezzo-sconto">€${euroFormat(final)}</span>!` : "";
+    simResultCamera.innerHTML=`
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-2xl">${tempIcon}</span>
+        <span class="font-semibold">${MONTHS[monthIdx]}: ${temp}°C &middot; <span class="capitalize">${seasonTxt}</span></span>
+      </div>
+      <div>Prezzo per notte (fino a 2 adulti${bambini>0?` + ${bambini} bambino/i`:''}): <span class="font-bold">€${euroFormat(totalNotte)}</span></div>
+      <div>
+        Prezzo totale camera (${nights} notti): 
+        ${
+          discount
+            ? `<span class="strikethrough mr-2">€${euroFormat(total)}</span>
+               <span class="font-bold text-green-600">€${euroFormat(final)}</span>`
+            : `<span class="font-bold">€${euroFormat(final)}</span>`
+        }
+      </div>
       ${
-        sconto
-          ? `<span class="strikethrough">€ ${euroFormat(prezzo)}</span> <span class="prezzo-sconto">€ ${euroFormat(prezzoScontato)}</span><br><span style="color:#15803d;">Risparmi tot: € ${euroFormat(risparmio)}</span>`
-          : `<span class="prezzo-sconto">€ ${euroFormat(prezzo)}</span>`
+        discount
+          ? `<div class="text-green-600 font-bold mt-2">(Risparmi €${euroFormat(scontoVal)})</div>`
+          : ""
       }
     `;
-    result.innerHTML = riepilogoBreve + '<br><a href="#contatti" class="cta">Richiedi info</a>';
-    if (sconto) showPopupSconto(riepilogoBreve);
-  }, 900);
+    if (discount) showPopupSconto(riepilogoBreve);
+  },1500);
 });
-<!-- CONTATTI -->
-  <section id="contatti" class="my-12">
-    <div class="card max-w-2xl mx-auto">
-      <div class="form-title">Contatti</div>
-      <form id="contactForm" class="flex flex-col gap-3">
-        <label class="flex flex-col font-semibold text-sm">
-          Nome*:
-          <input type="text" id="nome" name="nome" required placeholder="Il tuo nome" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Email*:
-          <input type="email" id="email" name="email" required placeholder="La tua email" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Telefono (opzionale):
-          <input type="tel" id="telefono" name="telefono" placeholder="Il tuo numero di telefono" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
-        </label>
-        <label class="flex flex-col font-semibold text-sm">
-          Messaggio*:
-          <textarea id="messaggio" name="messaggio" required rows="4" placeholder="Contattaci per confermare le date e ottenere lo sconto..." class="mt-1 rounded border border-gray-300 px-3 py-2 text-base"></textarea>
-        </label>
-        <button type="submit" class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">Invia</button>
-        <div class="loader2" id="loaderContact" style="display:none;"><span></span></div>
-        <div class="success-message" id="successMessage">
-          Messaggio inviato correttamente, ti risponderemo non appena possibile, grazie!
-        </div>
-      </form>
-    </div>
-  </section>
 
-  <footer class="bg-[#d9cbb1] text-center p-4 font-semibold">© 2025 Casa Vacanze Brasile</footer>
+// Form contatti: Google Sheet + loader + placeholder popup sconto
+const contactForm = document.getElementById('contactForm');
+const loaderContact = document.getElementById('loaderContact');
+const successMessage = document.getElementById('successMessage');
+const errorMessage = document.getElementById('errorMessage');
 
-  <!-- POPUP SCONTO MODERNO -->
-  <!-- ...popup sconto, altri script invariati... -->
+// Sostituisci con il TUO URL Apps Script pubblicato
+const scriptURL = "https://script.google.com/macros/s/AKfycbwgClGpAIfiXZbMiUB-jPtOQw4uJXyLKbKyEG1p7wzm-Rzl9bimD_q7FOwOiwSKGloc/exec";
 
-<script>
-/* ...tutto il tuo JS originale per galleria, lightbox, simulatore prezzi, popup ecc... */
-
-/* --- INVIO FORM CONTATTI SU GOOGLE SHEET --- */
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+contactForm.addEventListener('submit', async function(e) {
   e.preventDefault();
-  document.getElementById('loaderContact').style.display = 'flex';
-  document.getElementById('successMessage').style.display = 'none';
+  loaderContact.style.display = 'flex';
+  successMessage.style.display = 'none';
+  errorMessage.style.display = 'none';
 
-  fetch('https://script.google.com/macros/s/AKfycbwgClGpAIfiXZbMiUB-jPtOQw4uJXyLKbKyEG1p7wzm-Rzl9bimD_q7FOwOiwSKGloc/exec', { // <-- Sostituisci con l’URL del tuo Apps Script Web App
-    method: 'POST',
-    body: new FormData(this)
-  })
-  .then(res => {
-    if (!res.ok) throw new Error('Errore di rete');
-    return res.text();
-  })
-  .then(data => {
-    document.getElementById('loaderContact').style.display = 'none';
-    document.getElementById('successMessage').style.display = 'block';
-    document.getElementById('contactForm').reset();
-  })
-  .catch(err => {
-    document.getElementById('loaderContact').style.display = 'none';
-    alert("Errore durante l'invio: " + err.message);
-  });
+  const formData = new FormData(contactForm);
+
+  try {
+    const response = await fetch(scriptURL, {
+      method: 'POST',
+      body: formData
+    });
+    if (response.ok) {
+      loaderContact.style.display = 'none';
+      successMessage.style.display = 'block';
+      contactForm.reset();
+    } else {
+      throw new Error('Errore di rete');
+    }
+  } catch (err) {
+    loaderContact.style.display = 'none';
+    errorMessage.style.display = 'block';
+  }
+});
+
+// INTEGRAZIONE: click sul pulsante popup sconto
+document.getElementById('ctaSconto').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('popup').style.display = 'none';
+  document.body.style.overflow = '';
+  const messaggio = document.getElementById('messaggio');
+  if (messaggio) {
+    messaggio.placeholder = "Contattaci per ottenere lo sconto";
+    messaggio.focus();
+  }
+  document.getElementById('contatti').scrollIntoView({behavior: "smooth"});
 });
 </script>
 </body>
 </html>
+
