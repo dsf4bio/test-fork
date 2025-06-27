@@ -67,43 +67,49 @@ header {
 }
 #cartBtn {
     position: fixed;
-    top: 22px;
-    right: 32px;
+    top: 16px;
+    right: 16px;
     z-index: 1100;
     background: var(--secondary);
     color: var(--primary);
     border: none;
-    border-radius: 50px;
-    padding: 0.7em 1.4em;
-    font-size: 1.15rem;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
     font-weight: bold;
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.09);
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
     display: flex;
     align-items: center;
-    gap: 0.7em;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 0;
 }
 #cartBtn .cart-count {
     background: #fff;
     color: var(--secondary);
     border-radius: 50%;
-    padding: 0.1em 0.7em;
-    font-size: 1rem;
-    margin-left: 0.3em;
-    min-width: 2em;
+    padding: 0.1em 0.5em;
+    font-size: 0.95rem;
+    margin-left: 0.1em;
+    min-width: 1.6em;
     text-align: center;
     font-weight: bold;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: 1.5px solid var(--secondary);
 }
 #cartBtn.shake {
     animation: shake-cart 0.5s;
 }
 @keyframes shake-cart {
     0% { transform: translateX(0);}
-    20% { transform: translateX(-5px);}
-    40% { transform: translateX(5px);}
-    60% { transform: translateX(-5px);}
-    80% { transform: translateX(5px);}
+    20% { transform: translateX(-4px);}
+    40% { transform: translateX(4px);}
+    60% { transform: translateX(-4px);}
+    80% { transform: translateX(4px);}
     100% { transform: translateX(0);}
 }
 .modal {
@@ -113,8 +119,11 @@ header {
 @keyframes fadeIn { from { opacity: 0;} to { opacity: 1;} }
 .modal-content {
     background: linear-gradient(135deg, var(--primary) 80%, var(--secondary) 100%);
-    width: 95%; max-width: 460px; padding: 2.2rem 2rem 2.5rem 2rem; border-radius: 18px;
+    width: 95%; max-width: 420px; padding: 2.2rem 1.1rem 2.5rem 1.1rem; border-radius: 18px;
     border: 2px solid var(--secondary); box-shadow: 0 5px 25px 0 rgba(0,0,0,0.35); position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 .close-modal {
     color: var(--secondary); position: absolute; top: 18px; right: 24px; font-size: 2.2rem;
@@ -128,41 +137,92 @@ header {
     background: rgba(255,255,255,0.10);
     color: var(--white);
     border-radius: 8px;
-    padding: 1rem 1.2rem;
+    padding: 0.5rem 0.6rem;
     margin-bottom: 1.2rem;
-    font-size: 1.08rem;
+    font-size: 0.98rem;
     font-weight: 500;
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+    min-width: 240px;
+    max-width: 100%;
 }
-.order-summary strong {
+.order-summary table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+}
+.order-summary th, .order-summary td {
+    padding: 0.28em 0.3em;
+    text-align: left;
+}
+.order-summary th {
     color: var(--secondary);
-    font-size: 1.09rem;
+    font-size: 1em;
+    font-weight: 700;
+    border-bottom: 1px solid var(--secondary);
 }
-.order-summary .emoji {
-    font-size: 1.3em;
-    vertical-align: middle;
-    margin-right: 0.25em;
+.order-summary td {
+    color: var(--light);
 }
-.cart-list { margin: 0; padding: 0; list-style: none;}
-.cart-list li { margin-bottom: 0.5em;}
-.cart-list .cart-qty { font-weight: bold; color: var(--secondary);}
-.cart-list .cart-item-name { font-weight: bold;}
-.cart-list .cart-price { color: var(--light);}
-.cart-remove {
-    background: none; border: none; color: #ff6b6b; font-size: 1.1em; cursor: pointer; margin-left: 0.5em;
+.order-summary .totale {
+    color: #D4AF37;
+    font-weight: bold;
+    font-size: 1.08em;
+    border-top: 1px solid var(--secondary);
 }
-.form-group { margin-bottom: 1.3rem;}
+.order-summary .remove-btn {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+@media (max-width: 480px) {
+    .order-summary { font-size: 0.93rem; }
+    #cartBtn { width: 40px; height: 40px; font-size: 1rem; }
+    #cartBtn .cart-count { font-size: 0.85rem; min-width: 1.1em; }
+}
+.form-group {
+    margin-bottom: 1.3rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+}
 .form-group label {
-    display: block; margin-bottom: 0.5rem; color: var(--light); font-weight: 500; letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--light);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-align: left;
+    width: 100%;
 }
 .form-group input,
 .form-group textarea {
-    width: 100%; padding: 0.8rem 1rem; background-color: rgba(255,255,255,0.08);
-    border: 1px solid var(--secondary); color: var(--white); border-radius: 5px; font-size: 1rem; transition: border-color 0.2s;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: rgba(255,255,255,0.08);
+    border: 1px solid var(--secondary);
+    color: var(--white);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    text-align: left;
+    box-sizing: border-box;
 }
-.form-group input:focus,
-.form-group textarea:focus { outline: none; border-color: var(--light);}
-.form-group textarea { min-height: 60px; max-height: 120px; resize: vertical;}
+.form-group textarea {
+    min-height: 60px;
+    max-height: 120px;
+    resize: vertical;
+}
+#notesCounter {
+    color: #D4AF37;
+    font-size: 0.9em;
+    text-align: right;
+    width: 100%;
+    margin-top: 0.2rem;
+}
 .error-message { color: #ff6b6b; font-size: 0.85rem; margin-top: 0.3rem; display: none;}
 #send-whatsapp {
     background-color: var(--whatsapp); color: var(--white); border: none; padding: 1rem; width: 100%;
@@ -179,13 +239,6 @@ header {
 }
 #thankYouMsg .big { color:#D4AF37;font-size:2.2rem; margin-bottom:1rem;}
 #thankYouMsg .small { font-size:1.2rem; color:#F5E6C8;}
-@media (max-width: 768px) {
-    .menu-grid { grid-template-columns: 1fr;}
-    .logo { font-size: 2.2rem;}
-    .slogan { font-size: 1rem;}
-    .modal-content { padding: 1.3rem 0.7rem 1.5rem 0.7rem;}
-    #cartBtn { top: 12px; right: 10px; font-size: 1rem; padding: 0.5em 1em;}
-}
 footer {
     background: linear-gradient(90deg, var(--footer-bg) 60%, var(--secondary) 100%);
     color: var(--white); font-size: 1rem; padding: 2.5rem 0 1.2rem 0; margin-top: 3.5rem;
@@ -206,13 +259,14 @@ footer {
     <div class="logo">BAR DOZZA</div>
     <p class="slogan">Ordina comodamente dal tuo tavolo via WhatsApp</p>
 </header>
-<!-- Carrello fisso in alto a destra -->
-<button id="cartBtn"><span>🛒</span> Ordine <span class="cart-count">0</span></button>
+<button id="cartBtn" aria-label="Visualizza carrello">
+    <span style="font-size:1.4em;">🛒</span>
+    <span class="cart-count">0</span>
+</button>
 <div class="menu-container">
     <h2 class="category-title">Birre Artigianali & Cocktail</h2>
     <div class="menu-grid" id="menuGrid"></div>
 </div>
-<!-- Modal per ordinazione multipla -->
 <div class="modal" id="orderModal">
     <div class="modal-content">
         <span class="close-modal" id="closeModal">&times;</span>
@@ -231,7 +285,8 @@ footer {
             </div>
             <div class="form-group">
                 <label for="notes">Note</label>
-                <textarea id="notes" name="notes" placeholder="Non vedo l’ora di gustare il mio ordine!"></textarea>
+                <textarea id="notes" name="notes" maxlength="200" placeholder="Non vedo l’ora di gustare il mio ordine!"></textarea>
+                <div id="notesCounter">*Max 200 caratteri</div>
             </div>
             <button type="submit" id="send-whatsapp">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon" alt="WhatsApp"> Invia Ordine su WhatsApp
@@ -328,7 +383,7 @@ const prodotti = [
         tipo: "Cocktail",
         descrizione: "Spritz 40cl: Aperol, Prosecco e soda, servito con ghiaccio e fetta d’arancia. Il classico aperitivo italiano, fresco, vivace e leggermente bitter.",
         prezzo: 6.00,
-        img: "https://i.postimg.cc/2yQb4pL0/spritz.jpg"
+        img: "https://i.postimg.cc/br6PMH3V/spritz.webp"
     }
 ];
 // Stato del carrello
@@ -355,134 +410,109 @@ prodotti.forEach((p, idx) => {
 });
 // Aggiungi al carrello
 document.querySelectorAll('.order-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
         const idx = parseInt(this.getAttribute('data-idx'));
         const qty = parseInt(document.getElementById('qty-' + idx).value);
-        if (!qty || qty < 1 || qty > 20) return;
-        // Se già presente aggiorna quantità, altrimenti aggiungi
-        const existing = cart.findIndex(item => item.idx === idx);
-        if (existing !== -1) {
-            cart[existing].qty += qty;
-            if (cart[existing].qty > 20) cart[existing].qty = 20;
+        const prod = prodotti[idx];
+        const cartIdx = cart.findIndex(item => item.nome === prod.nome);
+        if (cartIdx > -1) {
+            cart[cartIdx].qty += qty;
         } else {
-            cart.push({ idx, qty });
+            cart.push({ ...prod, qty });
         }
-        updateCartBtn();
-        animateCart();
+        updateCartCount();
+        shakeCart();
     });
 });
-// Aggiorna badge carrello
-function updateCartBtn() {
-    const total = cart.reduce((sum, item) => sum + item.qty, 0);
-    document.querySelector('#cartBtn .cart-count').innerText = total;
+function updateCartCount() {
+    document.querySelector('.cart-count').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
 }
-function animateCart() {
+function shakeCart() {
     const btn = document.getElementById('cartBtn');
-    btn.classList.remove('shake');
-    void btn.offsetWidth; // Trigger reflow
     btn.classList.add('shake');
+    setTimeout(() => btn.classList.remove('shake'), 500);
 }
-// Apri modale ordine
+// Gestione modale ordine
+const orderModal = document.getElementById('orderModal');
 document.getElementById('cartBtn').onclick = function() {
-    updateOrderSummary();
-    document.getElementById('orderModal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    renderOrderSummary();
+    orderModal.style.display = 'flex';
 };
-document.getElementById('closeModal').onclick = closeModal;
+document.getElementById('closeModal').onclick = function() {
+    orderModal.style.display = 'none';
+};
 window.onclick = function(event) {
-    if (event.target === document.getElementById('orderModal')) closeModal();
+    if (event.target == orderModal) orderModal.style.display = 'none';
 };
-function closeModal() {
-    document.getElementById('orderModal').style.display = 'none';
-    document.body.style.overflow = '';
-    document.getElementById('orderForm').reset();
-    document.getElementById('orderSummary').innerHTML = '';
-    document.getElementById('nameError').style.display = 'none';
-    document.getElementById('tableError').style.display = 'none';
-}
-// Rimuovi prodotto dal carrello
-function removeFromCart(idx) {
-    cart = cart.filter(item => item.idx !== idx);
-    updateOrderSummary();
-    updateCartBtn();
-}
-// Aggiorna riepilogo ordine
-function updateOrderSummary() {
-    const summary = document.getElementById('orderSummary');
+// Riepilogo ordine
+function renderOrderSummary() {
+    const orderSummary = document.getElementById('orderSummary');
     if (cart.length === 0) {
-        summary.innerHTML = `<span class="emoji">🛒</span> <strong>Nessun prodotto selezionato.</strong>`;
+        orderSummary.innerHTML = "<p>Il carrello è vuoto.</p>";
         return;
     }
-    let tot = 0;
-    summary.innerHTML = `
-        <span class="emoji">📝</span> <strong>Riepilogo ordine:</strong>
-        <ul class="cart-list">
-            ${cart.map(item => {
-                const p = prodotti[item.idx];
-                const subtot = item.qty * p.prezzo;
-                tot += subtot;
-                return `<li>
-                    <span class="cart-qty">${item.qty}×</span>
-                    <span class="cart-item-name">${p.nome}</span>
-                    <span class="cart-price">(${p.prezzo.toFixed(2)}€)</span>
-                    <button class="cart-remove" onclick="removeFromCart(${item.idx})" title="Rimuovi">✖</button>
-                </li>`;
-            }).join('')}
-        </ul>
-        <div style="margin-top:0.7em;">
-            <span class="emoji">💶</span> <strong>Totale:</strong> <span style="color:#D4AF37;font-weight:bold;">${tot.toFixed(2)}€</span>
-        </div>
-    `;
+    let html = '<table><thead><tr><th>Prodotto</th><th>Qtà</th><th>Prezzo</th><th></th></tr></thead><tbody>';
+    let totale = 0;
+    cart.forEach((item, idx) => {
+        html += `<tr>
+            <td>${item.nome}</td>
+            <td>${item.qty}</td>
+            <td>€${(item.prezzo * item.qty).toFixed(2)}</td>
+            <td><button class="remove-btn" data-idx="${idx}">✕</button></td>
+        </tr>`;
+        totale += item.prezzo * item.qty;
+    });
+    html += `</tbody><tfoot>
+        <tr><td colspan="2"></td><td class="totale">Totale</td><td class="totale">€${totale.toFixed(2)}</td></tr>
+    </tfoot></table>`;
+    orderSummary.innerHTML = html;
+    document.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.onclick = function() {
+            cart.splice(parseInt(this.getAttribute('data-idx')), 1);
+            updateCartCount();
+            renderOrderSummary();
+        };
+    });
 }
-window.removeFromCart = removeFromCart;
-// Invia ordine
+// Gestione campo note (max 200 caratteri)
+const notes = document.getElementById('notes');
+const notesCounter = document.getElementById('notesCounter');
+notes.addEventListener('input', function() {
+    const max = 200;
+    const len = notes.value.length;
+    if (len > max) notes.value = notes.value.substring(0, max);
+    notesCounter.textContent = (max - notes.value.length) + " caratteri rimasti";
+});
+// Invio ordine (esempio, personalizza secondo necessità)
 document.getElementById('orderForm').onsubmit = function(e) {
     e.preventDefault();
     const name = document.getElementById('customerName').value.trim();
     const table = document.getElementById('tableNumber').value.trim();
-    const notes = document.getElementById('notes').value.trim();
+    const notesVal = notes.value.trim();
     let valid = true;
     if (!name) {
         document.getElementById('nameError').style.display = 'block';
         valid = false;
-    } else {
-        document.getElementById('nameError').style.display = 'none';
-    }
+    } else document.getElementById('nameError').style.display = 'none';
     if (!table) {
         document.getElementById('tableError').style.display = 'block';
         valid = false;
-    } else {
-        document.getElementById('tableError').style.display = 'none';
-    }
-    if (cart.length === 0) {
-        alert("Seleziona almeno un prodotto!");
-        return;
-    }
+    } else document.getElementById('tableError').style.display = 'none';
     if (!valid) return;
-    // Messaggio WhatsApp
-    let msg = `📝 *Nuovo Ordine*\n`;
-    cart.forEach(item => {
-        const p = prodotti[item.idx];
-        msg += `🍹 *${p.nome}* × *${item.qty}* (*${p.prezzo.toFixed(2)}€* cad)\n`;
-    });
-    const tot = cart.reduce((sum, item) => sum + prodotti[item.idx].prezzo * item.qty, 0);
-    msg += `💶 *Totale:* *${tot.toFixed(2)}€*\n`;
-    msg += `👤 *Nome:* *${name}*\n🪑 *Tavolo:* *${table}*`;
-    if (notes) msg += `\n💬 *Note:* _${notes}_`;
-    msg += `\n\nGrazie per aver scelto Bar Dozza! 🥂`;
-    // Mostra ringraziamento
-    closeModal();
+    // Simula invio ordine
     document.getElementById('thankYouMsg').style.display = 'flex';
+    orderModal.style.display = 'none';
     setTimeout(() => {
         document.getElementById('thankYouMsg').style.display = 'none';
-    }, 3500);
-    // Invia WhatsApp
-    const whatsappNumber = "3440301412";
-    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
-    cart = [];
-    updateCartBtn();
-}
+        cart = [];
+        updateCartCount();
+        renderOrderSummary();
+        document.getElementById('orderForm').reset();
+        notesCounter.textContent = "200 caratteri rimasti";
+    }, 2500);
+};
 </script>
 </body>
 </html>
+
