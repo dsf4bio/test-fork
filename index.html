@@ -286,7 +286,7 @@ footer {
             <div class="form-group">
                 <label for="notes">Note</label>
                 <textarea id="notes" name="notes" maxlength="200" placeholder="Non vedo l’ora di gustare il mio ordine!"></textarea>
-                <div id="notesCounter">*Max 200 caratteri</div>
+                <div id="notesCounter">200 caratteri rimasti</div>
             </div>
             <button type="submit" id="send-whatsapp">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon" alt="WhatsApp"> Invia Ordine su WhatsApp
@@ -484,7 +484,7 @@ notes.addEventListener('input', function() {
     if (len > max) notes.value = notes.value.substring(0, max);
     notesCounter.textContent = (max - notes.value.length) + " caratteri rimasti";
 });
-// Invio ordine (esempio, personalizza secondo necessità)
+// Invio ordine su WhatsApp
 document.getElementById('orderForm').onsubmit = function(e) {
     e.preventDefault();
     const name = document.getElementById('customerName').value.trim();
@@ -500,17 +500,33 @@ document.getElementById('orderForm').onsubmit = function(e) {
         valid = false;
     } else document.getElementById('tableError').style.display = 'none';
     if (!valid) return;
-    // Simula invio ordine
-    document.getElementById('thankYouMsg').style.display = 'flex';
-    orderModal.style.display = 'none';
+
+    // Genera il riepilogo ordine
+    let msg = `*Nuovo ordine dal tavolo ${table}*\n👤 Nome: ${name}\n\n*Ordine:*\n`;
+    let totale = 0;
+    cart.forEach(item => {
+        msg += `- ${item.nome} x${item.qty} = €${(item.prezzo * item.qty).toFixed(2)}\n`;
+        totale += item.prezzo * item.qty;
+    });
+    msg += `\n*Totale: €${totale.toFixed(2)}*`;
+    if (notesVal) msg += `\n\n*Note:* ${notesVal}`;
+
+    // Numero WhatsApp di destinazione (sostituisci con il tuo)
+    const numero = "3440301412"; // <-- Sostituisci qui!
+
+    // Codifica e apri WhatsApp
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+
+    // Reset e chiudi modale (opzionale)
+    document.getElementById('orderModal').style.display = 'none';
     setTimeout(() => {
-        document.getElementById('thankYouMsg').style.display = 'none';
         cart = [];
         updateCartCount();
         renderOrderSummary();
         document.getElementById('orderForm').reset();
         notesCounter.textContent = "200 caratteri rimasti";
-    }, 2500);
+    }, 1000);
 };
 </script>
 </body>
