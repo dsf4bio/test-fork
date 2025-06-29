@@ -5,105 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menu Digitale Base – DSFabio digital</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: 'Inter', sans-serif; background:#1f2937; color:#fff; }
-    input, textarea {
-      background:#374151; border:none; padding:0.8rem 1rem; border-radius:0.5rem; width:100%; color:#fff;
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #111827;
+      color: #fff;
     }
-    input:focus, textarea:focus { outline:2px solid #facc15; }
-    .video-wrap { width:100%; max-width:70%; margin:auto; }
+    input, textarea {
+      background-color: #1f2937;
+      border: none;
+      padding: 0.9rem 1.2rem;
+      border-radius: 0.5rem;
+      color: #fff;
+    }
+    input:focus, textarea:focus {
+      outline: 2px solid #facc15;
+      box-shadow: 0 0 5px #facc15;
+    }
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<header class="text-center py-12 bg-gray-900 px-4">
-  <h1 class="text-4xl font-bold mb-4">Menu Digitale Base</h1>
-  <p class="max-w-2xl mx-auto text-lg text-gray-300">
-    Offri ai tuoi clienti un'esperienza moderna e pratica: il tuo menu in pochi secondi, senza app da installare.
+<header class="text-center py-16 bg-gray-900 px-6" data-aos="fade-down">
+  <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Menu Digitale Base</h1>
+  <p class="max-w-3xl mx-auto text-lg text-gray-300">
+    Offri un’esperienza moderna ai tuoi clienti: il tuo menu è accessibile in 1 secondo, senza installazioni né complicazioni.
   </p>
 </header>
 
 <!-- CONTENUTO -->
-<section class="py-12 px-4 max-w-5xl mx-auto">
+<main class="max-w-7xl mx-auto px-6 py-12 space-y-24">
 
-  <!-- BENEFICI -->
-  <div class="mb-10">
-    <h2 class="text-2xl font-semibold mb-4">🎯 Perché ti serve subito</h2>
-    <ul class="list-disc pl-6 space-y-2 text-gray-200">
-      <li>Niente stampa: aggiorni prezzi e piatti quando vuoi</li>
-      <li>Accesso istantaneo via QR code personalizzato</li>
-      <li>Design mobile ‑ first, leggibile su ogni schermo</li>
-      <li>Modifiche illimitate incluse per 12 mesi</li>
-      <li>Hosting e assistenza dedicata h24</li>
-    </ul>
-  </div>
+  <!-- FEATURES -->
+  <section data-aos="fade-up">
+    <h2 class="text-3xl font-semibold mb-6 text-yellow-400">🎯 Perché sceglierlo</h2>
+    <div class="grid md:grid-cols-2 gap-6 text-gray-200 text-lg leading-relaxed">
+      <ul class="space-y-3 list-disc pl-6">
+        <li>Apertura istantanea da QR code personalizzato</li>
+        <li>Funziona su tutti i dispositivi, senza scaricare nulla</li>
+        <li>Modifiche illimitate: piatti, prezzi, immagini</li>
+        <li>Design responsive, ottimizzato mobile</li>
+        <li>Hosting incluso, zero pensieri</li>
+      </ul>
+      <ul class="space-y-3 list-disc pl-6">
+        <li>Compatibile con stampabile o solo digitale</li>
+        <li>Design chiaro e leggibile, anche in esterni</li>
+        <li>Aggiornamenti gratuiti per 12 mesi</li>
+        <li>Assistenza personale sempre disponibile</li>
+        <li>Incluso il tuo logo e colori personalizzati</li>
+      </ul>
+    </div>
+  </section>
 
   <!-- VIDEO DEMO -->
-  <div class="video-wrap mb-12">
-    <div class="aspect-w-16 aspect-h-9">
-      <iframe class="w-full h-full rounded-lg"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="Demo Menu Digitale Base" allowfullscreen></iframe>
+  <section class="space-y-6" data-aos="zoom-in-up">
+    <h2 class="text-2xl font-bold">🎥 Guarda il menu in azione</h2>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              title="Demo Menu Digitale Base"
+              allowfullscreen></iframe>
     </div>
-  </div>
-  <div class="text-center mb-16">
-    <a href="https://link-alla-demo.it/menu-digitale"
-       target="_blank"
-       class="inline-block bg-yellow-400 text-black font-semibold px-8 py-3 rounded-full hover:bg-yellow-300 transition">
-       🔍 Prova la demo reale
-    </a>
-  </div>
+    <div class="text-center">
+      <a href="https://link-alla-demo.it/menu-digitale" target="_blank"
+         class="inline-block bg-yellow-400 text-black font-semibold px-8 py-3 rounded-full hover:bg-yellow-300 transition-all">
+        🔍 Prova una demo reale
+      </a>
+    </div>
+  </section>
 
   <!-- FORM CONTATTI -->
-  <div id="contatto" class="bg-gray-800 p-8 rounded-2xl shadow-lg mb-16">
-    <h2 class="text-2xl font-semibold mb-6 text-center">📩 Richiedi informazioni</h2>
-    <form action="https://SCRIPT_WEB_APP_URL" method="POST" class="grid gap-6 md:grid-cols-2">
-      <!-- Nome -->
-      <div class="md:col-span-1">
-        <label class="block mb-2 font-semibold" for="nome">Nome*</label>
-        <input id="nome" type="text" name="nome" placeholder="Il tuo nome" required>
+  <section id="contatto" class="bg-gray-800 p-10 rounded-2xl shadow-lg" data-aos="fade-up">
+    <h2 class="text-2xl font-semibold mb-6 text-center">📩 Vuoi il tuo menu? Scrivimi ora</h2>
+    <form action="https://SCRIPT_WEB_APP_URL" method="POST" class="grid md:grid-cols-2 gap-6">
+      <div>
+        <label for="nome" class="block mb-2 font-semibold">Nome*</label>
+        <input type="text" name="nome" id="nome" required placeholder="Il tuo nome" />
       </div>
-      <!-- Email -->
-      <div class="md:col-span-1">
-        <label class="block mb-2 font-semibold" for="email">Email*</label>
-        <input id="email" type="email" name="email" placeholder="La tua email" required>
+      <div>
+        <label for="email" class="block mb-2 font-semibold">Email*</label>
+        <input type="email" name="email" id="email" required placeholder="la-tua@email.it" />
       </div>
-      <!-- Messaggio -->
       <div class="md:col-span-2">
-        <label class="block mb-2 font-semibold" for="messaggio">Messaggio*</label>
-        <textarea id="messaggio" name="messaggio" rows="5" maxlength="700"
-                  placeholder="Raccontami il tuo locale e cosa ti serve (max 700 caratteri)" required></textarea>
+        <label for="messaggio" class="block mb-2 font-semibold">Messaggio*</label>
+        <textarea name="messaggio" id="messaggio" rows="5" maxlength="700"
+                  required placeholder="Raccontami il tuo locale e cosa ti serve (max 700 caratteri)"></textarea>
       </div>
-      <!-- Pulsante -->
       <div class="md:col-span-2 text-center">
         <button type="submit"
                 class="bg-yellow-400 text-black font-semibold px-10 py-3 rounded-full hover:bg-yellow-300 transition">
-          🚀 Richiedi il preventivo
+          🚀 Richiedi il preventivo personalizzato
         </button>
       </div>
     </form>
-    <p class="mt-4 text-sm text-center text-gray-400">* campi obbligatori</p>
-  </div>
+    <p class="mt-4 text-sm text-center text-gray-400">* Campi obbligatori</p>
+  </section>
 
   <!-- CTA WHATSAPP -->
-  <div class="text-center bg-gray-900 p-8 rounded-xl">
-    <h2 class="text-xl font-semibold mb-3">📲 Pronto in soli 2 giorni</h2>
-    <p class="mb-5 text-gray-300">Scrivimi ora e pubblicheremo il tuo Menu Digitale Base entro 48 ore lavorative.</p>
-    <a href="https://wa.me/393491234567?text=Ciao%20Fabio%2C%20voglio%20il%20Menu%20Digitale%20Base%20per%20il%20mio%20locale."
+  <section class="text-center bg-gradient-to-r from-green-600 to-green-500 p-10 rounded-xl shadow-xl" data-aos="zoom-in">
+    <h2 class="text-2xl font-bold mb-2">📲 Pronto in soli 2 giorni</h2>
+    <p class="text-white mb-5 text-lg">Scrivimi su WhatsApp e ti preparo il tuo menu digitale personalizzato entro 48 ore lavorative.</p>
+    <a href="https://wa.me/393491234567?text=Ciao%20Fabio%2C%20voglio%20attivare%20il%20Menu%20Digitale%20Base"
        target="_blank"
-       class="inline-block bg-green-500 text-white font-semibold px-8 py-3 rounded-full hover:bg-green-400 transition">
-       💬 Contattami su WhatsApp
+       class="inline-block bg-white text-green-700 font-bold px-8 py-3 rounded-full hover:bg-gray-100 transition">
+       💬 Contattami su WhatsApp
     </a>
-  </div>
+  </section>
 
-</section>
+</main>
 
 <!-- FOOTER -->
-<footer class="bg-gray-900 text-center text-sm py-6 text-gray-400">
-  © 2025 DSFabio digital – Tutti i diritti riservati
+<footer class="bg-gray-900 text-center text-sm py-6 text-gray-400 mt-16">
+  © 2025 DSFabio digital – Tutti i diritti riservati
 </footer>
+
+<!-- SCRIPT -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+</script>
 
 </body>
 </html>
+
