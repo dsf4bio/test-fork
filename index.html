@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <style>
-    /* Reset base */
-    * {
+    /* Reset e base */
+    *, *::before, *::after {
       box-sizing: border-box;
     }
     body {
@@ -18,16 +18,17 @@
       color: #fff;
       scroll-behavior: smooth;
       line-height: 1.6;
+      font-size: 16px;
     }
     a {
       color: #facc15;
       text-decoration: none;
     }
-    a:hover {
+    a:hover, a:focus {
       text-decoration: underline;
     }
 
-    /* Container centrale con max width */
+    /* Container centrale */
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -43,8 +44,8 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      gap: 3rem;
       justify-content: space-between;
-      gap: 2rem;
     }
     .logo {
       font-size: 3rem;
@@ -59,11 +60,12 @@
       text-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
     .intro {
-      flex: 2 1 500px;
+      flex: 2 1 600px;
       text-align: left;
+      max-width: 600px;
     }
     .intro h1 {
-      font-size: 2.5rem;
+      font-size: 2.75rem;
       margin-bottom: 1rem;
       font-weight: 800;
       color: #fff;
@@ -77,14 +79,17 @@
       background-color: #facc15;
       color: #1f2937;
       font-weight: 700;
-      padding: 1rem 2rem;
+      padding: 1rem 2.5rem;
       border-radius: 8px;
       display: inline-block;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgb(250 204 21 / 0.5);
     }
-    .cta-button:hover {
+    .cta-button:hover, .cta-button:focus {
       background-color: #eab308;
+      box-shadow: 0 6px 10px rgb(234 179 8 / 0.7);
+      outline: none;
     }
 
     /* Sezione servizi */
@@ -95,13 +100,13 @@
     section#services h2 {
       font-size: 2.5rem;
       font-weight: 800;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       color: #facc15;
       text-align: left;
     }
     .services {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2.5rem;
     }
     .service-card {
@@ -109,31 +114,40 @@
       border-radius: 12px;
       padding: 1.5rem;
       text-align: left;
-      box-shadow: 0 4px 8px rgb(0 0 0 / 0.3);
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
       transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
-    .service-card:hover {
-      transform: translateY(-5px);
+    .service-card:hover, .service-card:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.5);
     }
     .service-card img {
       width: 100%;
+      height: 180px;
       border-radius: 8px;
       margin-bottom: 1rem;
       object-fit: cover;
-      height: 180px;
+      flex-shrink: 0;
     }
     .service-card h3 {
       color: #facc15;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       margin-bottom: 0.75rem;
+      flex-shrink: 0;
     }
     .service-card p {
       color: #e5e7eb;
       font-size: 1rem;
       margin-bottom: 1rem;
+      flex-grow: 1;
     }
     .service-card a {
       font-weight: 600;
+      align-self: flex-start;
+      margin-top: auto;
     }
 
     /* Sezione contatti */
@@ -147,6 +161,7 @@
       font-weight: 800;
       margin-bottom: 1rem;
       color: #facc15;
+      max-width: 600px;
     }
     section#contact p {
       font-size: 1.2rem;
@@ -170,13 +185,14 @@
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       .header-inner {
         flex-direction: column;
         align-items: flex-start;
       }
       .logo {
         font-size: 2.5rem;
+        margin-bottom: 1.5rem;
       }
       .intro h1 {
         font-size: 2rem;
@@ -185,52 +201,73 @@
         height: 150px;
       }
     }
+    @media (max-width: 480px) {
+      .intro h1 {
+        font-size: 1.75rem;
+      }
+      .intro p {
+        font-size: 1rem;
+      }
+      .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
+      .service-card {
+        padding: 1rem;
+      }
+      .service-card h3 {
+        font-size: 1.3rem;
+      }
+      .service-card p {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="container header-inner">
-      <div class="logo">DSFabio <span>digital</span></div>
+    <div class="container header-inner" role="banner">
+      <div class="logo" aria-label="Logo Dsfabio Digital">DSFabio <span>digital</span></div>
       <div class="intro">
         <h1>Soluzioni smart per bar, ristoranti e locali</h1>
         <p>Trasforma il tuo menu in uno strumento che semplifica gli ordini, <strong>aumenta le vendite</strong> e migliora l’esperienza dei clienti.</p>
-        <a href="#services" class="cta-button">Scopri i servizi</a>
+        <a href="#services" class="cta-button" role="button">Scopri i servizi</a>
       </div>
     </div>
   </header>
 
-  <section id="services" class="container">
+  <section id="services" class="container" aria-label="Sezione servizi">
     <h2 data-aos="fade-up">I Nostri Servizi</h2>
     <div class="services">
-      <div class="service-card" data-aos="zoom-in">
+      <article class="service-card" data-aos="zoom-in" tabindex="0">
         <img src="https://i.postimg.cc/tTyqHvb2/con-ordine.jpg" alt="Menu Digitale Base" />
         <h3>Menu Digitale Base</h3>
         <p>Menu consultabile da QR Code, facile e veloce, senza installazioni o complicazioni.</p>
         <a href="servizio1.html">Scopri di più</a>
-      </div>
-      <div class="service-card" data-aos="zoom-in">
+      </article>
+      <article class="service-card" data-aos="zoom-in" tabindex="0">
         <img src="https://i.postimg.cc/tTyqHvb2/con-ordine.jpg" alt="Ordini WhatsApp" />
         <h3>Ordini via WhatsApp</h3>
         <p>I clienti ordinano direttamente dal tavolo via WhatsApp. Semplice per loro, efficiente per te.</p>
         <a href="ordini-whatsapp.html">Scopri di più</a>
-      </div>
-      <div class="service-card" data-aos="zoom-in">
+      </article>
+      <article class="service-card" data-aos="zoom-in" tabindex="0">
         <img src="https://i.postimg.cc/tTyqHvb2/con-ordine.jpg" alt="Upsell Smart" />
         <h3>Ordini + Upsell</h3>
         <p>Offri suggerimenti intelligenti (es. bevanda + snack) per aumentare lo scontrino medio.</p>
         <a href="upsell-smart.html">Scopri di più</a>
-      </div>
+      </article>
     </div>
   </section>
 
-  <section id="contact" class="container" data-aos="fade-up">
+  <section id="contact" class="container" data-aos="fade-up" aria-label="Sezione contatti">
     <h2>Contattaci</h2>
     <p>Ricevi un preventivo personalizzato per il tuo locale. Assistenza e aggiornamenti inclusi per 12 mesi.</p>
-    <a class="cta-button" href="mailto:info@fabiodigital.com">Contattaci ora</a>
+    <a class="cta-button" href="mailto:info@fabiodigital.com" role="button">Contattaci ora</a>
   </section>
 
-  <footer>
+  <footer role="contentinfo">
     <p>DSFabio Digital Solutions – Tutti i diritti riservati © 2025</p>
     <p>
       <a href="#why">Perché scegliere noi</a> · 
