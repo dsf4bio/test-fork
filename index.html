@@ -13,29 +13,49 @@
       background-color: #111827;
       color: #fff;
       text-align: left;
+      margin: 0; padding: 0;
     }
     h1, h2, p, ul, li, label {
       text-align: left;
     }
     input, textarea {
-      background-color: #1f2937;
-      border: 1px solid #4b5563;
-      padding: 0.9rem 1.2rem;
-      border-radius: 0.5rem;
+      background-color: transparent;
+      border: 2px solid #facc15;
+      padding: 1.1rem 1.4rem;
+      border-radius: 1rem;
+      font-size: 1.1rem;
       color: #fff;
       width: 100%;
-      transition: border-color 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #f3f4f6;
+      opacity: 0.8;
     }
     input:focus, textarea:focus {
       outline: none;
-      border-color: #facc15;
-      box-shadow: 0 0 8px #facc15;
+      border-color: #eab308;
+      box-shadow: 0 0 10px #facc15aa;
+      background-color: #1f2937;
     }
-    form {
-      background-color: #272c37;
-      border-radius: 1rem;
-      padding: 2rem;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    button {
+      background-color: #facc15;
+      color: #111827;
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 1rem 3rem;
+      border-radius: 2rem;
+      box-shadow: 0 5px 15px #facc1588;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #eab308;
+      box-shadow: 0 8px 25px #eab308cc;
     }
     .video-wrapper {
       position: relative;
@@ -52,11 +72,58 @@
       border-radius: 0.75rem;
       border: none;
     }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+      color: #d1d5db;
+    }
+    .whatsapp-cta {
+      width: 100%;
+      text-align: center;
+      margin-top: 4rem;
+    }
+    .whatsapp-cta h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #facc15;
+      text-align: left;
+    }
+    .whatsapp-cta p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      color: #d1fae5;
+      text-align: left;
+    }
+    .whatsapp-cta a {
+      background: #22c55e;
+      color: #f0fdf4;
+      padding: 1rem 4rem;
+      border-radius: 3rem;
+      font-weight: 700;
+      font-size: 1.4rem;
+      box-shadow: 0 5px 20px #22c55eaa;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .whatsapp-cta a:hover {
+      background: #16a34a;
+      box-shadow: 0 8px 25px #16a34acc;
+    }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="text-left py-16 bg-gray-900 px-6" data-aos="fade-down">
   <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Menu Digitale Base</h1>
   <p class="max-w-3xl text-lg text-gray-300">
@@ -64,21 +131,19 @@
   </p>
 </header>
 
-<!-- CONTENUTO -->
-<main class="max-w-7xl mx-auto px-6 py-12 space-y-24">
+<main>
 
-  <!-- FEATURES -->
   <section data-aos="fade-up">
     <h2 class="text-3xl font-semibold mb-6 text-yellow-400">🎯 Perché sceglierlo</h2>
-    <div class="grid md:grid-cols-2 gap-6 text-gray-200 text-lg leading-relaxed">
-      <ul class="space-y-3 list-disc pl-6">
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+      <ul style="flex: 1 1 45%; margin:0;">
         <li>Apertura istantanea da QR code personalizzato</li>
         <li>Funziona su tutti i dispositivi, senza scaricare nulla</li>
         <li>Modifiche illimitate: piatti, prezzi, immagini</li>
         <li>Design responsive, ottimizzato mobile</li>
         <li>Hosting incluso, zero pensieri</li>
       </ul>
-      <ul class="space-y-3 list-disc pl-6">
+      <ul style="flex: 1 1 45%; margin:0;">
         <li>Compatibile con stampabile o solo digitale</li>
         <li>Design chiaro e leggibile, anche in esterni</li>
         <li>Aggiornamenti gratuiti per 12 mesi</li>
@@ -88,7 +153,6 @@
     </div>
   </section>
 
-  <!-- VIDEO DEMO -->
   <section class="space-y-6" data-aos="zoom-in-up">
     <h2 class="text-2xl font-bold">🎥 Guarda il menu in azione</h2>
     <div class="video-wrapper">
@@ -96,18 +160,20 @@
               title="Demo Menu Digitale Base"
               allowfullscreen></iframe>
     </div>
-    <div class="text-left">
+    <div class="text-left" style="margin-bottom: 3rem;">
       <a href="https://link-alla-demo.it/menu-digitale" target="_blank"
-         class="inline-block bg-yellow-400 text-black font-semibold px-8 py-3 rounded-full hover:bg-yellow-300 transition-all">
+         style="background: #facc15; color: #111827; font-weight: 700; padding: 1rem 2.5rem; border-radius: 2rem; text-decoration: none; box-shadow: 0 5px 15px #facc1588; transition: background-color 0.3s ease;"
+         onmouseover="this.style.background='#eab308';"
+         onmouseout="this.style.background='#facc15';">
         🔍 Prova una demo reale
       </a>
     </div>
   </section>
 
-  <!-- FORM CONTATTI -->
-  <section id="contatto" class="bg-gray-800 p-10 rounded-2xl shadow-lg" data-aos="fade-up">
-    <h2 class="text-2xl font-semibold mb-6">📩 Vuoi il tuo menu? Scrivimi ora</h2>
-    <form action="https://SCRIPT_WEB_APP_URL" method="POST" class="grid md:grid-cols-2 gap-6">
+  <section id="contatto" data-aos="fade-up" style="width: 100%;">
+    <h2 class="text-3xl font-semibold mb-8 text-yellow-400">📩 Vuoi il tuo menu? Scrivimi ora</h2>
+    <form action="https://SCRIPT_WEB_APP_URL" method="POST"
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
       <div>
         <label for="nome" class="block mb-2 font-semibold">Nome*</label>
         <input type="text" name="nome" id="nome" required placeholder="Il tuo nome" />
@@ -116,40 +182,32 @@
         <label for="email" class="block mb-2 font-semibold">Email*</label>
         <input type="email" name="email" id="email" required placeholder="la-tua@email.it" />
       </div>
-      <div class="md:col-span-2">
+      <div style="grid-column: 1 / -1;">
         <label for="messaggio" class="block mb-2 font-semibold">Messaggio*</label>
-        <textarea name="messaggio" id="messaggio" rows="5" maxlength="700"
-                  required placeholder="Raccontami il tuo locale e cosa ti serve (max 700 caratteri)"></textarea>
+        <textarea name="messaggio" id="messaggio" rows="5" maxlength="700" required
+                  placeholder="Raccontami il tuo locale e cosa ti serve (max 700 caratteri)"></textarea>
       </div>
-      <div class="md:col-span-2 text-left">
-        <button type="submit"
-                class="bg-yellow-400 text-black font-semibold px-10 py-3 rounded-full hover:bg-yellow-300 transition">
-          🚀 Richiedi il preventivo personalizzato
-        </button>
+      <div style="grid-column: 1 / -1; text-align: left;">
+        <button type="submit">🚀 Richiedi il preventivo personalizzato</button>
       </div>
     </form>
-    <p class="mt-4 text-sm text-gray-400">* Campi obbligatori</p>
-  </section>
 
-  <!-- CTA WHATSAPP -->
-  <section class="text-left bg-gradient-to-r from-green-600 to-green-500 p-10 rounded-xl shadow-xl" data-aos="zoom-in">
-    <h2 class="text-2xl font-bold mb-2">📲 Pronto in soli 2 giorni</h2>
-    <p class="text-white mb-5 text-lg">Scrivimi su WhatsApp e ti preparo il tuo menu digitale personalizzato entro 48 ore lavorative.</p>
-    <a href="https://wa.me/393491234567?text=Ciao%20Fabio%2C%20voglio%20attivare%20il%20Menu%20Digitale%20Base"
-       target="_blank"
-       class="inline-block bg-white text-green-700 font-bold px-8 py-3 rounded-full hover:bg-gray-100 transition">
-       💬 Contattami su WhatsApp
-    </a>
+    <div class="whatsapp-cta">
+      <h2>📲 Pronto in soli 2 giorni</h2>
+      <p>Scrivimi su WhatsApp e ti preparo il tuo menu digitale personalizzato entro 48 ore lavorative.</p>
+      <a href="https://wa.me/393491234567?text=Ciao%20Fabio%2C%20voglio%20attivare%20il%20Menu%20Digitale%20Base"
+         target="_blank" rel="noopener noreferrer">
+         💬 Contattami su WhatsApp
+      </a>
+    </div>
   </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer class="bg-gray-900 text-center text-sm py-6 text-gray-400 mt-16">
   © 2025 DSFabio digital – Tutti i diritti riservati
 </footer>
 
-<!-- SCRIPT -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({ duration: 800, once: true });
@@ -157,3 +215,4 @@
 
 </body>
 </html>
+
