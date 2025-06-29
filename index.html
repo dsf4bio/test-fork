@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Menu Digitale Base – DSFabio digital</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* Reset e base */
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0f172a;
@@ -14,12 +14,30 @@
       margin: 0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
+    a {
+      text-decoration: none;
+    }
+    /* Container centrale */
     .container {
       max-width: 960px;
       margin: 2rem auto 4rem;
       padding: 0 1.5rem;
     }
+
+    /* Animazione fade-slide-up */
+    .fade-slide-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-slide-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Header con immagine affiancata */
     header {
       display: flex;
       flex-wrap: wrap;
@@ -42,6 +60,10 @@
       color: #facc15;
       margin-bottom: 1rem;
       line-height: 1.1;
+      transition: color 0.3s ease;
+    }
+    header h1:hover {
+      color: #eab308;
     }
     header p {
       font-size: 1.25rem;
@@ -51,19 +73,26 @@
       margin-bottom: 2rem;
     }
     header a.cta-btn {
-      background-color: #facc15;
+      background: linear-gradient(270deg, #facc15, #eab308, #facc15);
+      background-size: 600% 600%;
       color: #0f172a;
       font-weight: 700;
       font-size: 1.25rem;
       padding: 1rem 3rem;
       border-radius: 9999px;
-      text-decoration: none;
       box-shadow: 0 6px 20px #facc1544;
-      transition: background-color 0.3s ease;
+      animation: gradientShift 8s ease infinite;
       display: inline-block;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
     header a.cta-btn:hover {
       background-color: #eab308;
+      transform: scale(1.05);
+    }
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
     header .service-image {
       flex: 0 0 605px;
@@ -72,7 +101,14 @@
       box-shadow: 0 0 30px #facc1544;
       object-fit: cover;
       aspect-ratio: 3 / 2;
+      transition: transform 0.3s ease;
+      cursor: pointer;
     }
+    header .service-image:hover {
+      transform: scale(1.05);
+    }
+
+    /* Benefici */
     section.benefits {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
@@ -86,6 +122,12 @@
       font-size: 1.15rem;
       color: #e2e8f0;
       line-height: 1.4;
+      transition: color 0.3s ease, transform 0.3s ease;
+      cursor: default;
+    }
+    section.benefits div:hover {
+      color: #facc15;
+      transform: translateX(8px);
     }
     section.benefits div span.icon {
       color: #facc15;
@@ -93,7 +135,13 @@
       line-height: 1;
       flex-shrink: 0;
       margin-top: 0.2rem;
+      transition: transform 0.3s ease;
     }
+    section.benefits div:hover span.icon {
+      transform: scale(1.3);
+    }
+
+    /* Video demo */
     .video-wrapper {
       width: 638px;
       max-width: 100%;
@@ -103,6 +151,13 @@
       overflow: hidden;
       box-shadow: 0 0 30px #facc1544;
       margin: 0 auto 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .video-wrapper.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .video-wrapper iframe {
       width: 100%;
@@ -110,6 +165,8 @@
       border: none;
       display: block;
     }
+
+    /* Link demo */
     .demo-link {
       display: block;
       max-width: 280px;
@@ -121,22 +178,32 @@
       padding: 1rem 2.5rem;
       border-radius: 9999px;
       text-align: center;
-      text-decoration: none;
       box-shadow: 0 6px 20px #facc1544;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      text-decoration: none;
     }
     .demo-link:hover {
       background-color: #eab308;
+      transform: scale(1.05);
+    }
+
+    /* Form full width */
+    section#form-contatto {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    section#form-contatto.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     form {
       background-color: #1e293b;
       border-radius: 1.5rem;
       padding: 3rem 2.5rem;
-      max-width: 720px;
-      margin-left: auto;
-      margin-right: auto;
+      width: 100%;
       box-shadow: 0 0 30px #000000bb;
-      margin-bottom: 4rem;
+      box-sizing: border-box;
     }
     form label {
       font-weight: 600;
@@ -172,16 +239,21 @@
       color: #0f172a;
       font-weight: 700;
       font-size: 1.25rem;
-      padding: 1.25rem;
+      padding: 1rem 3rem;
       border-radius: 9999px;
       border: none;
       cursor: pointer;
       box-shadow: 0 8px 24px #facc1544;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      display: block;
+      margin-top: 0.5rem;
     }
     form button:hover {
       background-color: #eab308;
+      transform: scale(1.05);
     }
+
+    /* WhatsApp fixed button */
     .whatsapp-cta {
       position: fixed;
       bottom: 24px;
@@ -199,15 +271,24 @@
       text-decoration: none;
       z-index: 9999;
       transition: background-color 0.3s ease;
+      animation: pulse 2.5s infinite;
+      cursor: pointer;
     }
     .whatsapp-cta:hover {
       background-color: #16a34a;
+      animation-play-state: paused;
     }
     .whatsapp-cta svg {
       width: 1.5rem;
       height: 1.5rem;
       fill: white;
     }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 6px 24px #22c55eaa; }
+      50% { box-shadow: 0 10px 30px #22c55eee; }
+    }
+
+    /* Footer */
     footer {
       background-color: #0f172a;
       color: #94a3b8;
@@ -224,6 +305,8 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* Responsive */
     @media (max-width: 900px) {
       header {
         flex-direction: column;
@@ -244,7 +327,7 @@
 </head>
 <body>
 
-  <header class="container" role="banner">
+  <header class="container fade-slide-up" role="banner">
     <div class="title-section">
       <h1>Menu Digitale Base</h1>
       <p>Il servizio più semplice per portare il tuo menu online in modo professionale, veloce e senza app.</p>
@@ -254,7 +337,7 @@
   </header>
 
   <main class="container" role="main" aria-labelledby="main-title">
-    <section class="benefits" aria-label="Vantaggi del Menu Digitale Base">
+    <section class="benefits fade-slide-up" aria-label="Vantaggi del Menu Digitale Base">
       <div><span class="icon">✔</span> QR code personalizzato, apertura istantanea senza app</div>
       <div><span class="icon">✔</span> Design responsive leggibile su tutti i dispositivi</div>
       <div><span class="icon">✔</span> Aggiornamenti gratuiti illimitati per 12 mesi</div>
@@ -265,15 +348,15 @@
       <div><span class="icon">✔</span> Aggiornamenti in tempo reale per promuovere piatti del giorno o novità</div>
     </section>
 
-    <section aria-label="Demo video Menu Digitale Base" class="video-wrapper">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Demo Menu Digitale" allowfullscreen></iframe>
+    <section class="video-wrapper fade-slide-up" aria-label="Demo video Menu Digitale Base">
+      <iframe src="https://youtu.be/68df2w0PM8k?si=OfpM-7OYyfK6C2gG" title="Demo Menu Digitale" allowfullscreen></iframe>
     </section>
 
-    <a href="https://link-alla-demo.it/menu-digitale" target="_blank" rel="noopener noreferrer" class="demo-link" aria-label="Prova il menu reale">
+    <a href="https://link-alla-demo.it/menu-digitale" target="_blank" rel="noopener noreferrer" class="demo-link fade-slide-up" aria-label="Prova il menu reale">
       🔍 Prova il menu reale
     </a>
 
-    <section id="form-contatto" aria-label="Modulo di richiesta preventivo">
+    <section id="form-contatto" aria-label="Modulo di richiesta preventivo" class="fade-slide-up">
       <form action="https://SCRIPT_WEB_APP_URL" method="POST" novalidate>
         <label for="nome">Nome*</label>
         <input type="text" id="nome" name="nome" required placeholder="Mario Rossi" autocomplete="name" aria-required="true" />
@@ -303,6 +386,24 @@
     © 2025 DSFabio digital – Tutti i diritti riservati • <a href="#" aria-label="Privacy Policy">Privacy Policy</a>
   </footer>
 
+  <script>
+    // Scroll reveal con IntersectionObserver
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.fade-slide-up');
+      const options = { threshold: 0.1 };
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, options);
+      elements.forEach(el => observer.observe(el));
+    });
+  </script>
+
 </body>
 </html>
+
 
