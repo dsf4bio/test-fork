@@ -356,22 +356,31 @@
       🔍 Prova il menu reale
     </a>
 
-    <section id="form-contatto" aria-label="Modulo di richiesta preventivo" class="fade-slide-up">
-      <form action="https://SCRIPT_WEB_APP_URL" method="POST" novalidate>
-        <label for="nome">Nome*</label>
-        <input type="text" id="nome" name="nome" required placeholder="Mario Rossi" autocomplete="name" aria-required="true" />
+<section id="form-contatto" class="form-section" aria-label="Modulo di richiesta preventivo" style="max-width:720px; margin: 0 auto 4rem; background-color:#111827; padding:2.5rem 2rem; border-radius:12px; box-shadow: 0 0 30px #000000bb;">
+  <h3 style="font-size:2rem; font-weight:700; color:#facc15; margin-bottom:1.5rem; text-align:center;">Richiedi il tuo menu digitale personalizzato</h3>
+  <form action="https://SCRIPT_WEB_APP_URL" method="POST" novalidate style="display:flex; flex-direction:column; gap:1.25rem;">
+    <label for="nome" style="font-weight:600; color:#facc15;">Nome*</label>
+    <input type="text" id="nome" name="nome" required placeholder="Mario Rossi" autocomplete="name" aria-required="true"
+      style="width:100%; padding:1rem 1.25rem; border-radius:12px; border:2px solid #facc15; background:#1f2937; color:#fff; font-size:1rem; font-family:'Inter', sans-serif; transition:border-color 0.3s ease;" 
+      onfocus="this.style.borderColor='#eab308'" onblur="this.style.borderColor='#facc15'" />
+    
+    <label for="email" style="font-weight:600; color:#facc15;">Email*</label>
+    <input type="email" id="email" name="email" required placeholder="esempio@email.it" autocomplete="email" aria-required="true"
+      style="width:100%; padding:1rem 1.25rem; border-radius:12px; border:2px solid #facc15; background:#1f2937; color:#fff; font-size:1rem; font-family:'Inter', sans-serif; transition:border-color 0.3s ease;"
+      onfocus="this.style.borderColor='#eab308'" onblur="this.style.borderColor='#facc15'" />
+    
+    <label for="messaggio" style="font-weight:600; color:#facc15;">Messaggio*</label>
+    <textarea id="messaggio" name="messaggio" rows="5" maxlength="700" required placeholder="Parlami del tuo locale, cosa ti serve, ecc. (max 700 caratteri)" aria-required="true"
+      style="width:100%; padding:1rem 1.25rem; border-radius:12px; border:2px solid #facc15; background:#1f2937; color:#fff; font-size:1rem; font-family:'Inter', sans-serif; resize:vertical; transition:border-color 0.3s ease;"
+      onfocus="this.style.borderColor='#eab308'" onblur="this.style.borderColor='#facc15'"></textarea>
+    
+    <button type="submit" aria-label="Invia richiesta preventivo personalizzato"
+      style="width:100%; background:#facc15; color:#1f2937; font-weight:700; font-size:1.25rem; padding:1rem; border-radius:9999px; border:none; cursor:pointer; box-shadow:0 6px 20px #facc1544; transition: background-color 0.3s ease, transform 0.2s ease;">
+      🚀 Richiedi il preventivo personalizzato
+    </button>
+  </form>
+</section>
 
-        <label for="email">Email*</label>
-        <input type="email" id="email" name="email" required placeholder="esempio@email.it" autocomplete="email" aria-required="true" />
-
-        <label for="messaggio">Messaggio*</label>
-        <textarea id="messaggio" name="messaggio" rows="5" maxlength="700" required placeholder="Parlami del tuo locale, cosa ti serve, ecc. (max 700 caratteri)" aria-required="true"></textarea>
-
-        <button type="submit" aria-label="Invia richiesta preventivo personalizzato">
-          🚀 Richiedi il preventivo
-        </button>
-      </form>
-    </section>
   </main>
 
   <a href="https://wa.me/393491234567?text=Ciao%20Fabio%2C%20voglio%20attivare%20il%20Menu%20Digitale%20Base" target="_blank" rel="noopener noreferrer" class="whatsapp-cta" aria-label="Contattami su WhatsApp">
