@@ -16,8 +16,9 @@
       font-family: 'Inter', sans-serif;
       background-color: #1f2937;
       color: #fff;
-      overflow-x: hidden;
       scroll-behavior: smooth;
+      line-height: 1.6;
+      font-size: 16px;
     }
     a {
       color: #facc15;
@@ -30,14 +31,28 @@
       outline: none;
     }
 
-    /* Container centrale */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
+    /* Pulsante */
+    .btn-primary {
+      background-color: #facc15;
+      color: #1f2937;
+      font-weight: 700;
+      padding: 1rem 3rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: 0 6px 15px rgb(250 204 21 / 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background-color: #eab308;
+      box-shadow: 0 8px 25px rgb(234 179 8 / 0.7);
+      outline: none;
     }
 
-    /* Hero Section */
+    /* Hero Section (testata) */
     header.hero {
       height: 100vh;
       display: flex;
@@ -99,86 +114,70 @@
       color: #d1d5db;
       line-height: 1.5;
     }
-    .btn-primary {
-      background-color: #facc15;
-      color: #1f2937;
-      font-weight: 700;
-      padding: 1rem 3rem;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-      box-shadow: 0 6px 15px rgb(250 204 21 / 0.5);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .btn-primary:hover, .btn-primary:focus {
-      background-color: #eab308;
-      box-shadow: 0 8px 25px rgb(234 179 8 / 0.7);
-      outline: none;
-    }
 
     /* Services Section */
     section#services {
+      width: 100%;
       background-color: #111827;
-      padding: 5rem 2rem;
-    }
-    section#services .container {
-      max-width: 1100px;
+      padding: 4rem 5vw;
     }
     section#services h2 {
-      font-size: 2.8rem;
-      font-weight: 900;
+      font-size: 2rem;
+      font-weight: 700;
       color: #facc15;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 1.5px;
       text-align: center;
-      letter-spacing: 2px;
-      text-transform: uppercase;
     }
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
-      gap: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .service-card {
       background: #374151;
-      border-radius: 16px;
-      padding: 1.8rem;
-      box-shadow: 0 4px 15px rgb(0 0 0 / 0.3);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
+      border: 1px solid rgba(250, 204, 21, 0.15); /* micro bordo sottilissimo */
       display: flex;
       flex-direction: column;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
     .service-card:hover, .service-card:focus-within {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgb(250 204 21 / 0.6);
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgb(250 204 21 / 0.5);
       outline: none;
     }
     .service-card img {
       width: 100%;
-      height: 180px;
+      height: 320px; /* immagine verticale, più alta della larghezza */
       object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 1.4rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
       flex-shrink: 0;
     }
     .service-card h3 {
-      font-size: 1.6rem;
       color: #facc15;
-      margin-bottom: 0.8rem;
-      font-weight: 800;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
     }
     .service-card p {
-      flex-grow: 1;
       color: #d1d5db;
+      flex-grow: 1;
       font-size: 1rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
       line-height: 1.4;
     }
     .service-card a {
-      font-weight: 700;
+      font-weight: 600;
       color: #facc15;
       text-decoration: underline;
       align-self: flex-start;
@@ -189,72 +188,145 @@
       outline: none;
     }
 
-    /* Testimonials Section */
-    section#testimonials {
-      background: linear-gradient(135deg, #374151, #1f2937);
-      padding: 5rem 2rem;
+    /* New Section: Perché scegliere DSFabio Digital */
+    section#why-choose {
+      background-color: #1f2937;
+      padding: 4rem 5vw;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto 4rem auto;
+    }
+    section#why-choose h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #facc15;
+      margin-bottom: 2rem;
+      letter-spacing: 1.5px;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+    .why-item {
+      background: #374151;
+      border-radius: 12px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
+      transition: box-shadow 0.3s ease;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .why-item:hover {
+      box-shadow: 0 8px 25px rgb(250 204 21 / 0.6);
+    }
+    .why-icon {
+      font-size: 3rem;
+      color: #facc15;
+      margin-bottom: 1rem;
+      animation: iconBounce 2s infinite;
+    }
+    @keyframes iconBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .why-item h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
       color: #facc15;
       text-align: center;
     }
-    section#testimonials h2 {
-      font-size: 2.8rem;
-      font-weight: 900;
-      margin-bottom: 3rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    .testimonial-slider {
-      max-width: 700px;
-      margin: 0 auto;
-      position: relative;
-      overflow: hidden;
-    }
-    .testimonial {
-      display: none;
-      font-style: italic;
-      font-size: 1.2rem;
-      line-height: 1.6;
-      padding: 0 1rem;
-      user-select: none;
-    }
-    .testimonial.active {
-      display: block;
-      animation: fadeIn 1s ease forwards;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    .testimonial-author {
-      margin-top: 1.5rem;
-      font-weight: 700;
+    .why-item p {
+      color: #d1d5db;
       font-size: 1rem;
-      color: #fff;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    /* New Section: Come funziona */
+    section#how-it-works {
+      background-color: #111827;
+      padding: 4rem 5vw;
+      max-width: 1200px;
+      margin: 0 auto 4rem auto;
+      text-align: center;
+    }
+    section#how-it-works h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #facc15;
+      margin-bottom: 2rem;
+      letter-spacing: 1.5px;
+    }
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .step {
+      background: #374151;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      max-width: 280px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
+      transition: box-shadow 0.3s ease;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .step:hover {
+      box-shadow: 0 8px 25px rgb(250 204 21 / 0.6);
+    }
+    .step-icon {
+      font-size: 3.5rem;
+      color: #facc15;
+      margin-bottom: 1rem;
+      animation: iconPulse 2.5s infinite;
+    }
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+    .step h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #facc15;
+      text-align: center;
+    }
+    .step p {
+      color: #d1d5db;
+      font-size: 1rem;
+      line-height: 1.4;
+      text-align: center;
     }
 
     /* Contact Section */
     section#contact {
+      width: 100%;
       background-color: #111827;
-      padding: 4rem 2rem;
+      padding: 4rem 5vw;
       text-align: center;
     }
     section#contact h2 {
-      font-size: 2.5rem;
-      font-weight: 900;
+      font-size: 1.8rem;
+      font-weight: 700;
       color: #facc15;
       margin-bottom: 1.5rem;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
     }
     section#contact p {
-      font-size: 1.2rem;
       color: #d1d5db;
+      font-size: 1.1rem;
       max-width: 600px;
       margin: 0 auto 2.5rem;
       line-height: 1.5;
-    }
-    section#contact a.btn-primary {
-      padding: 1rem 3rem;
-      font-size: 1.2rem;
     }
 
     /* Footer */
@@ -277,15 +349,6 @@
       outline: none;
     }
 
-    /* Animazioni */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0s !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0s !important;
-      }
-    }
-
     /* Responsive */
     @media (max-width: 900px) {
       header.hero {
@@ -301,7 +364,15 @@
         grid-template-columns: 1fr;
       }
       .service-card img {
-        height: 160px;
+        height: 280px;
+      }
+      .why-grid, .steps {
+        grid-template-columns: 1fr !important;
+        display: block;
+      }
+      .why-item, .step {
+        max-width: 100% !important;
+        margin-bottom: 2rem;
       }
     }
     @media (max-width: 480px) {
@@ -314,6 +385,8 @@
       }
     }
   </style>
+  <!-- Icone dinamiche tramite FontAwesome CDN -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -328,7 +401,7 @@
   </header>
 
   <!-- Services Section -->
-  <section id="services" class="container" aria-label="Sezione servizi">
+  <section id="services" aria-label="Sezione servizi">
     <h2 data-aos="fade-up">I Nostri Servizi</h2>
     <div class="services-grid">
       <article class="service-card" data-aos="zoom-in" tabindex="0" role="region" aria-label="Menu Digitale Base">
@@ -352,39 +425,69 @@
     </div>
   </section>
 
-  <!-- Testimonials Section -->
-  <section id="testimonials" aria-label="Testimonianze clienti">
-    <h2 data-aos="fade-up">Cosa dicono i nostri clienti</h2>
-    <div class="testimonial-slider" aria-live="polite" aria-atomic="true">
-      <blockquote class="testimonial active" tabindex="0">
-        "Grazie a DSFabio Digital abbiamo rivoluzionato il modo di prendere ordini, aumentando il fatturato e migliorando l’esperienza dei clienti."
-        <footer class="testimonial-author">- Marco R., Proprietario di Ristorante</footer>
-      </blockquote>
-      <blockquote class="testimonial" tabindex="0">
-        "Il sistema di ordini via WhatsApp è semplice e funzionale, ha semplificato il lavoro del nostro staff."
-        <footer class="testimonial-author">- Laura B., Bar Manager</footer>
-      </blockquote>
-      <blockquote class="testimonial" tabindex="0">
-        "L’upsell intelligente ci ha permesso di aumentare lo scontrino medio senza sforzi aggiuntivi."
-        <footer class="testimonial-author">- Gianni F., Titolare Locale</footer>
-      </blockquote>
+  <!-- Why Choose Section -->
+  <section id="why-choose" aria-label="Perché scegliere DSFabio Digital" data-aos="fade-up">
+    <h2>Perché scegliere DSFabio Digital</h2>
+    <div class="why-grid">
+      <div class="why-item" tabindex="0">
+        <div class="why-icon"><i class="fas fa-bolt"></i></div>
+        <h3>Soluzioni Veloci</h3>
+        <p>Implementazioni rapide e senza complicazioni per iniziare subito a migliorare il tuo servizio.</p>
+      </div>
+      <div class="why-item" tabindex="0">
+        <div class="why-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Aumento Vendite</h3>
+        <p>Strumenti intelligenti per incrementare lo scontrino medio e fidelizzare i clienti.</p>
+      </div>
+      <div class="why-item" tabindex="0">
+        <div class="why-icon"><i class="fas fa-headset"></i></div>
+        <h3>Assistenza Dedicata</h3>
+        <p>Supporto continuo e aggiornamenti per garantirti sempre la migliore esperienza.</p>
+      </div>
+      <div class="why-item" tabindex="0">
+        <div class="why-icon"><i class="fas fa-mobile-alt"></i></div>
+        <h3>Design Responsive</h3>
+        <p>Accesso facile e veloce da qualsiasi dispositivo, per te e i tuoi clienti.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" aria-label="Come funziona DSFabio Digital" data-aos="fade-up">
+    <h2>Come funziona</h2>
+    <div class="steps">
+      <div class="step" tabindex="0">
+        <div class="step-icon"><i class="fas fa-qrcode"></i></div>
+        <h3>1. Scansiona il QR Code</h3>
+        <p>I clienti accedono al menu digitale direttamente dal tavolo, senza installazioni.</p>
+      </div>
+      <div class="step" tabindex="0">
+        <div class="step-icon"><i class="fas fa-mobile-alt"></i></div>
+        <h3>2. Ordina via WhatsApp</h3>
+        <p>Ordini semplici e veloci direttamente dal telefono, senza errori.</p>
+      </div>
+      <div class="step" tabindex="0">
+        <div class="step-icon"><i class="fas fa-chart-pie"></i></div>
+        <h3>3. Aumenta le vendite</h3>
+        <p>Offri suggerimenti intelligenti per incrementare lo scontrino medio.</p>
+      </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="container" aria-label="Contatti">
-    <h2 data-aos="fade-up">Contattaci</h2>
-    <p data-aos="fade-up" data-aos-delay="100">Ricevi un preventivo personalizzato per il tuo locale. Assistenza e aggiornamenti inclusi per 12 mesi.</p>
-    <a href="mailto:info@fabiodigital.com" class="btn-primary" data-aos="fade-up" data-aos-delay="200" role="button">Contattaci ora</a>
+  <section id="contact" aria-label="Contatti" data-aos="fade-up">
+    <h2>Contattaci</h2>
+    <p>Ricevi un preventivo personalizzato per il tuo locale. Assistenza e aggiornamenti inclusi per 12 mesi.</p>
+    <a href="mailto:info@fabiodigital.com" class="btn-primary" role="button">Contattaci ora</a>
   </section>
 
   <!-- Footer -->
   <footer role="contentinfo">
     <p>DSFabio Digital Solutions – Tutti i diritti riservati © 2025</p>
     <p>
-      <a href="#why">Perché scegliere noi</a> · 
-      <a href="#faq">FAQ</a> · 
-      <a href="#privacy">Privacy Policy</a>
+      <a href="#why-choose">Perché scegliere noi</a> · 
+      <a href="#how-it-works">Come funziona</a> · 
+      <a href="#contact">Contatti</a>
     </p>
   </footer>
 
@@ -395,17 +498,7 @@
       duration: 900,
       once: true
     });
-
-    // Testimonial slider automatico
-    const testimonials = document.querySelectorAll('.testimonial');
-    let currentIndex = 0;
-    setInterval(() => {
-      testimonials[currentIndex].classList.remove('active');
-      currentIndex = (currentIndex + 1) % testimonials.length;
-      testimonials[currentIndex].classList.add('active');
-    }, 7000);
   </script>
-
 </body>
 </html>
 
