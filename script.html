@@ -1,0 +1,33 @@
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (window.matchMedia('(max-width: 700px)').matches) {
+    const cards = document.querySelectorAll('.flip-card .flip-inner');
+
+    function handleScroll() {
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        const cardMiddle = rect.top + rect.height / 2;
+        const inMiddle = cardMiddle > viewportHeight * 0.3 && cardMiddle < viewportHeight * 0.7;
+
+        if (inMiddle) {
+          card.classList.add('revealed');
+        } else {
+          card.classList.remove('revealed');
+        }
+      });
+    }
+
+    // Attacca lo scroll listener con debounce
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(handleScroll, 80);
+    });
+
+    // Esegui subito al primo caricamento
+    handleScroll();
+  }
+});
+</script>
