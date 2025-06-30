@@ -628,7 +628,6 @@
         .flip-icon { font-size: 1.1rem; }
       }
       </style>
-
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   if (window.matchMedia('(max-width: 700px)').matches) {
@@ -644,12 +643,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const prevMiddle = lastPositions.get(card) || currentMiddle;
         const wasRevealed = card.classList.contains('revealed');
 
-        const scrollingDown = currentMiddle > prevMiddle;
         const scrollingUp = currentMiddle < prevMiddle;
+        const scrollingDown = currentMiddle > prevMiddle;
 
-        if (!wasRevealed && scrollingDown && currentMiddle >= center) {
+        if (!wasRevealed && scrollingUp && currentMiddle <= center) {
           card.classList.add('revealed');
-        } else if (wasRevealed && scrollingUp && currentMiddle < center) {
+        } else if (wasRevealed && scrollingDown && currentMiddle > center) {
           card.classList.remove('revealed');
         }
 
@@ -658,10 +657,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // esecuzione iniziale
+    handleScroll(); // iniziale
   }
 });
-</script>      
+</script>
       
   <!-- Contact Section -->
   <section id="contact" aria-label="Contatti" data-aos="fade-up">
