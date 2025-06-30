@@ -629,35 +629,39 @@
       }
       </style>
 <script>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
   if (window.matchMedia('(max-width: 700px)').matches) {
     const cards = document.querySelectorAll('.flip-card .flip-inner');
+    const state = new WeakMap(); // traccia lo stato di ogni card
 
     function handleScroll() {
       cards.forEach(card => {
         const rect = card.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
+        const center = viewportHeight / 2;
+        const middle = rect.top + rect.height / 2;
 
-        const cardMiddle = rect.top + rect.height / 2;
-        const inMiddle = cardMiddle > viewportHeight * 0.3 && cardMiddle < viewportHeight * 0.7;
+        const wasRevealed = card.classList.contains('revealed');
+        const prevMiddle = state.get(card) || 0;
 
-        if (inMiddle) {
+        // Se stiamo scrollando in giù e la card supera il centro → si apre
+        if (middle >= center && prevMiddle < center && !wasRevealed) {
           card.classList.add('revealed');
-        } else {
+        }
+
+        // Se stiamo scrollando in su e la card torna sopra il centro → si chiude
+        if (middle < center && prevMiddle >= center && wasRevealed) {
           card.classList.remove('revealed');
         }
+
+        // Aggiorna lo stato corrente
+        state.set(card, middle);
       });
     }
 
-    // Attacca lo scroll listener con debounce
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(handleScroll, 80);
-    });
-
-    // Esegui subito al primo caricamento
-    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // iniziale
   }
 });
 </script>
