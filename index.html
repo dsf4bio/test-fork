@@ -476,28 +476,47 @@ document.getElementById('formCamera').onsubmit = function(e) {
     }
 
     // Calcolo prezzi camere con regole specifiche
-    function prezzoCamera(adulti, bambini, checkin, checkout) {
-      const { nottiAlta, nottiBassa } = contaGiorniAltaEBassa(checkin, checkout);
-      const prezzoAlta = 57;
-      const prezzoBassa = 45;
-      const totalePersone = adulti + bambini;
+function prezzoCamera(adulti, bambini, checkin, checkout) {
+  let dateIn = new Date(checkin);
+  let dateOut = new Date(checkout);
+  let nottiAlta = 0;
+  let nottiBassa = 0;
 
-      let totale = (prezzoAlta * nottiAlta) + (prezzoBassa * nottiBassa);
-      let supplemento = 0;
+  while (dateIn < dateOut) {
+    const giorno = dateIn.getDate();
+    const mese = dateIn.getMonth() + 1;
 
-      // Se 2 adulti + 2 bambini (4 persone) aggiungi supplemento
-      if (totalePersone === 4 && adulti === 2 && bambini === 2) {
-        supplemento = 11 * (nottiAlta + nottiBassa);
-        totale += supplemento;
-      }
+    const alta = (
+      (mese === 11) || (mese === 12) ||
+      (mese === 1)  || (mese === 2)  || 
+      (mese === 3 && giorno <= 31)
+    );
 
-      return {
-        prezzoBase: `${prezzoBassa}–${prezzoAlta}`,
-        totale,
-        alta: nottiAlta > 0,
-        supplemento
-      };
-    }
+    if (alta) nottiAlta++;
+    else nottiBassa++;
+
+    dateIn.setDate(dateIn.getDate() + 1);
+  }
+
+  const prezzoAlta = 57;
+  const prezzoBassa = 45;
+  const personeTotali = adulti + bambini;
+
+  let totale = (prezzoAlta * nottiAlta) + (prezzoBassa * nottiBassa);
+  let supplemento = 0;
+
+  if (personeTotali === 4 && adulti === 2 && bambini === 2) {
+    supplemento = 11 * (nottiAlta + nottiBassa);
+    totale += supplemento;
+  }
+
+  return {
+    prezzoBase: null, // non usato nel riepilogo
+    totale,
+    alta: nottiAlta > 0,
+    supplemento
+  };
+}
 
     // Funzione per sconto soggiorni lunghi (>=8 notti)
     function calcolaSconto(prezzo, giorni) {
