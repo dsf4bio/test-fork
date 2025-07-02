@@ -321,43 +321,53 @@ function isAltaStagione(dt) {
   return (m >= 11 || m <= 3);
 }
 // --- sostituisci solo questa funzione ---
-function prezzoGruppo(persone, giorni, checkin) {
-  const date = new Date(checkin);
-  const alta = isAltaStagione(date);
-  let prezzoBase = alta ? 29 : 22;
 
-  // ↑ MODIFICA → incremento sempre, in qualunque stagione
-  if (persone < 30) {
-    const gruppi4 = Math.floor((30 - persone) / 4);
-    prezzoBase = +(prezzoBase * Math.pow(1.12, gruppi4)).toFixed(2);
+function contaGiorniAltaEBassa(checkin, checkout) {
+  let dateIn = new Date(checkin);
+  let dateOut = new Date(checkout);
+  let nottiAlta = 0;
+  let nottiBassa = 0;
+
+  while (dateIn < dateOut) {
+    const m = dateIn.getMonth() + 1;
+    const alta = (m >= 11 || m <= 3);
+    if (alta) nottiAlta++;
+    else nottiBassa++;
+    dateIn.setDate(dateIn.getDate() + 1);
   }
 
-  return { prezzoBase, totale: prezzoBase * persone * giorni, alta };
+  return { nottiAlta, nottiBassa };
 }
 
-function prezzoCamera(adulti, bambini, giorni, checkin) {
-  const alta = isAltaStagione(new Date(checkin));
-  const prezzoFisso = alta ? 57 : 45;
-  const totalePersone = adulti + bambini;
 
-  // Prezzo fisso per 1-3 persone
-  let totale = prezzoFisso * giorni;
 
-  // Supplemento solo se 4 persone totali con 2 adulti + 2 bambini
-  let supplemento = 0;
-  if (totalePersone === 4 && adulti === 2 && bambini === 2) {
-    supplemento = 11 * giorni;
-    totale += supplemento;
+//prezzo gruppo----
+
+function prezzoGruppo(persone, checkin, checkout) {
+  const { nottiAlta, nottiBassa } = contaGiorniAltaEBassa(checkin, checkout);
+  let prezzoAlta = 29;
+  let prezzoBassa = 22;
+
+  // Incremento progressivo se meno di 30 persone
+  if (persone < 30) {
+    const gruppi4 = Math.floor((30 - persone) / 4);
+    prezzoAlta = +(prezzoAlta * Math.pow(1.12, gruppi4)).toFixed(2);
+    prezzoBassa = +(prezzoBassa * Math.pow(1.12, gruppi4)).toFixed(2);
   }
 
+  const totale = (prezzoAlta * nottiAlta + prezzoBassa * nottiBassa) * persone;
+
   return {
-    prezzoBase: prezzoFisso,
+    prezzoBase: `${prezzoBassa}–${prezzoAlta}`,
     totale,
-    alta,
-    supplemento
+    alta: nottiAlta > 0
   };
 }
 
+
+
+
+// prezzo camera coppie---
 
 function calcolaSconto(prezzo, giorni) {
   if (giorni >= 8) {
