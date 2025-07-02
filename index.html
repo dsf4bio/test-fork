@@ -442,19 +442,97 @@ document.getElementById('formCamera').onsubmit = function(e) {
   const result = document.getElementById('simResultCamera');
   result.innerHTML = '';
   loader.style.display = 'flex';
+
   setTimeout(() => {
     loader.style.display = 'none';
+
     if (!checkin || !checkout || adulti < 1 || adulti > 2 || bambini < 0 || bambini > 2) {
       result.innerHTML = '<span class="error-message" style="display:block;">Compila tutti i campi correttamente.</span>';
       return;
     }
-    const giorni = (new Date(checkout) - new Date(checkin)) / (1000*60*60*24);
+
+    const giorni = (new Date(checkout) - new Date(checkin)) / (1000 * 60 * 60 * 24);
     if (giorni < 1) {
       result.innerHTML = '<span class="error-message" style="display:block;">La data di check-out deve essere successiva al check-in.</span>';
       return;
     }
+
+    // Funzione che calcola notti in alta e bassa stagione
+    function contaGiorniAltaEBassa(checkin, checkout) {
+      let dateIn = new Date(checkin);
+      let dateOut = new Date(checkout);
+      let nottiAlta = 0;
+      let nottiBassa = 0;
+
+      while (dateIn < dateOut) {
+        const m = dateIn.getMonth() + 1;
+        const alta = (m >= 11 || m <= 3);
+        if (alta) nottiAlta++;
+        else nottiBassa++;
+        dateIn.setDate(dateIn.getDate() + 1);
+      }
+
+      return { nottiAlta, nottiBassa };
+    }
+
+    // Calcolo prezzi camere con regole specifiche
+    function prezzoCamera(adulti, bambini, checkin, checkout) {
+      const { nottiAlta, nottiBassa } = contaGiorniAltaEBassa(checkin, checkout);
+      const prezzoAlta = 57;
+      const prezzoBassa = 45;
+      const totalePersone = adulti + bambini;
+
+      let totale = (prezzoAlta * nottiAlta) + (prezzoBassa * nottiBassa);
+      let supplemento = 0;
+
+      // Se 2 adulti + 2 bambini (4 persone) aggiungi supplemento
+      if (totalePersone === 4 && adulti === 2 && bambini === 2) {
+        supplemento = 11 * (nottiAlta + nottiBassa);
+        totale += supplemento;
+      }
+
+      return {
+        prezzoBase: `${prezzoBassa}–${prezzoAlta}`,
+        totale,
+        alta: nottiAlta > 0,
+        supplemento
+      };
+    }
+
+    // Funzione per sconto soggiorni lunghi (>=8 notti)
+    function calcolaSconto(prezzo, giorni) {
+      if (giorni >= 8) {
+        const scontato = Math.round(prezzo * (1 - 0.046));
+        const risparmio = Math.round(prezzo * 0.046);
+        return { pieno: prezzo, scontato, risparmio };
+      } else {
+        return { pieno: prezzo, scontato: prezzo, risparmio: 0 };
+      }
+    }
+
+    // Funzioni helper per formattazione (puoi inserirle fuori)
+    function pluralize(n, sing, plur) {
+      return n === 1 ? sing : plur;
+    }
+    function formatEuro(x) {
+      return x.toLocaleString('it-IT', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 });
+    }
+    function formatDateEu(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('it-IT');
+    }
+
+    // Scroll a contatti
+    function scrollToContatti() {
+      document.getElementById('contatti').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Calcolo prezzi e sconto
     const { prezzoBase, totale, alta, supplemento } = prezzoCamera(adulti, bambini, checkin, checkout);
     const sconto = calcolaSconto(totale, giorni);
+
+    // Costruzione riepilogo HTML
     let riepilogo = `
       <div style="background:#fffbe6;border:2px solid #bb9457;padding:1.1rem 1rem 1.3rem 1rem;border-radius:1rem;">
         <div class="mb-2"><b style="color:#bb9457;">
@@ -467,7 +545,7 @@ document.getElementById('formCamera').onsubmit = function(e) {
         <div class="mb-2">Totale soggiorno: <b style="color:#bb9457;">${formatEuro(totale)}</b></div>
     `;
 
-    if(sconto.risparmio > 0) {
+    if (sconto.risparmio > 0) {
       riepilogo += `
         <div class="mb-2"><span class="strikethrough">${formatEuro(sconto.pieno)}</span>
         <span class="prezzo-sconto">${formatEuro(sconto.scontato)}</span>
@@ -486,7 +564,9 @@ document.getElementById('formCamera').onsubmit = function(e) {
       </ul>
       </div>
     `;
+
     result.innerHTML = riepilogo;
+
   }, 700);
 };
 
