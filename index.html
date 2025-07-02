@@ -1,725 +1,591 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DSFabio Digital – Soluzioni per Ristorazione</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-  <style>
-    /* Reset base */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #1f2937;
-      color: #fff;
-      scroll-behavior: smooth;
-      line-height: 1.6;
-      font-size: 16px;
-    }
-    a {
-      color: #facc15;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    a:hover, a:focus {
-      color: #eab308;
-      text-decoration: underline;
-      outline: none;
-    }
-
-    /* Pulsante */
-    .btn-primary {
-      background-color: #facc15;
-      color: #1f2937;
-      font-weight: 700;
-      padding: 1rem 1rem;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      box-shadow: 0 6px 15px rgb(250 204 21 / 0.5);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .btn-primary:hover, .btn-primary:focus {
-      background-color: #eab308;
-      box-shadow: 0 8px 25px rgb(234 179 8 / 0.7);
-      outline: none;
-    }
-
-    /* Hero Section (testata) */
-    header.hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: linear-gradient(135deg, #111827 40%, #374151 100%);
-      position: relative;
-      padding: 0 0.3rem;
-      overflow: hidden;
-    }
-    header.hero::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, #facc15 0%, transparent 70%);
-      opacity: 0.15;
-      animation: pulse 6s ease-in-out infinite;
-      z-index: 0;
-      border-radius: 50%;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.15; }
-      50% { transform: scale(1.3); opacity: 0.3; }
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
-      animation: slideInLeft 1.2s ease forwards;
-    }
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-40px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .logo {
-      font-size: 3rem;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 1rem;
-      user-select: none;
-    }
-    .logo span {
-      color: #facc15;
-      font-style: italic;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-    .hero-content h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      line-height: 1.1;
-    }
-    .hero-content p {
-      font-size: 1.3rem;
-      margin-bottom: 2.5rem;
-      color: #d1d5db;
-      line-height: 1.5;
-    }
-
-    /* Services Section */
-    section#services {
-      width: 100%;
-      background-color: #111827;
-      padding: 4rem 5vw;
-    }
-    section#services h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #facc15;
-      margin-bottom: 2.5rem;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
-      letter-spacing: 1.5px;
-      text-align: center;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.8rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .service-card {
-      background: #374151;
-      border-radius: 12px;
-      padding: 1rem;
-      box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
-      border: 1px solid rgba(250, 204, 21, 0.15); /* micro bordo sottilissimo */
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .service-card:hover, .service-card:focus-within {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 25px rgb(250 204 21 / 0.5);
-      outline: none;
-    }
-    .service-card img {
-      width: 100%;
-      height: 320px; /* immagine verticale, più alta della larghezza */
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      flex-shrink: 0;
-    }
-    .service-card h3 {
-      color: #facc15;
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
-    .service-card p {
-      color: #d1d5db;
-      flex-grow: 1;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      line-height: 1.4;
-    }
-    .service-card a {
-      font-weight: 600;
-      color: #facc15;
-      text-decoration: underline;
-      align-self: flex-start;
-      transition: color 0.3s ease;
-    }
-    .service-card a:hover, .service-card a:focus {
-      color: #eab308;
-      outline: none;
-    }
-
-    /* New Section: Perché scegliere DSFabio Digital */
-    section#why-choose {
-      background-color: #1f2937;
-      padding: 1rem 5vw;
-      text-align: center;
-      max-width: 1200px;
-      margin: 0 auto 1rem auto;
-    }
-    section#why-choose h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #facc15;
-      margin-bottom: 1rem;
-      letter-spacing: 1.5px;
-    }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-      text-align: left;
-    }
-    .why-item {
-      background: #374151;
-      border-radius: 12px;
-      padding: 1rem;
-      box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
-      transition: box-shadow 0.3s ease;
-      cursor: default;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .why-item:hover {
-      box-shadow: 0 8px 25px rgb(250 204 21 / 0.6);
-    }
-    .why-icon {
-      font-size: 3rem;
-      color: #facc15;
-      margin-bottom: 1rem;
-      animation: iconBounce 2s infinite;
-    }
-    @keyframes iconBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    .why-item h3 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-      color: #facc15;
-      text-align: center;
-    }
-    .why-item p {
-      color: #d1d5db;
-      font-size: 1rem;
-      line-height: 1.4;
-      text-align: center;
-    }
-
-    /* New Section: Come funziona */
-    section#how-it-works {
-      background-color: #111827;
-      padding: 1rem 5vw;
-      max-width: 1200px;
-      margin: 0 auto 1rem auto;
-      text-align: center;
-    }
-    section#how-it-works h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #facc15;
-      margin-bottom: 2rem;
-      letter-spacing: 1.5px;
-    }
-    .steps {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .step {
-      background: #374151;
-      border-radius: 12px;
-      padding: 2rem 1.5rem;
-      max-width: 280px;
-      box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
-      transition: box-shadow 0.3s ease;
-      cursor: default;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .step:hover {
-      box-shadow: 0 8px 25px rgb(250 204 21 / 0.6);
-    }
-    .step-icon {
-      font-size: 3.5rem;
-      color: #facc15;
-      margin-bottom: 1rem;
-      animation: iconPulse 2.5s infinite;
-    }
-    @keyframes iconPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-    .step h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #facc15;
-      text-align: center;
-    }
-    .step p {
-      color: #d1d5db;
-      font-size: 1rem;
-      line-height: 1.4;
-      text-align: center;
-    }
-
-    /* Contact Section */
-    section#contact {
-      width: 100%;
-      background-color: #111827;
-      padding: 1rem 5vw;
-      text-align: center;
-    }
-    section#contact h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #facc15;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1.2px;
-    }
-    section#contact p {
-      color: #d1d5db;
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.5;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #111827;
-      padding: 2rem 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #9ca3af;
-    }
-    footer a {
-      margin: 0 0.5rem;
-      color: #facc15;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    footer a:hover, footer a:focus {
-      color: #eab308;
-      outline: none;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      header.hero {
-        padding: 4rem 1.5rem;
-      }
-      .hero-content h1 {
-        font-size: 2.5rem;
-      }
-      .hero-content p {
-        font-size: 1.1rem;
-      }
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-      .service-card img {
-        height: 280px;
-      }
-      .why-grid, .steps {
-        grid-template-columns: 1fr !important;
-        display: block;
-      }
-      .why-item, .step {
-        max-width: 100% !important;
-        margin-bottom: 2rem;
-      }
-    }
-    @media (max-width: 480px) {
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      .btn-primary {
-        padding: 0.8rem 2rem;
-        font-size: 1rem;
-      }
-    }
-  </style>
-  <!-- Icone dinamiche tramite FontAwesome CDN -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🏡 Casa Vacanze Brasile</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap');
+  body { font-family: 'Poppins', sans-serif; background: #fef6f0; color: #4a3c31; }
+  .gallery { max-width: 1200px; margin: 40px auto 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+  .gallery-img { aspect-ratio: 4/3; width: 100%; object-fit: cover; border-radius: 1.1rem; border: 3px solid #f3e9d2; box-shadow: 0 4px 16px rgba(0,0,0,0.08); transition: transform .4s, box-shadow .3s, border-color .3s; cursor: zoom-in; background: #eee; }
+  .gallery-img:hover { transform: scale(1.07); box-shadow: 0 8px 32px rgba(187,148,87,0.20); border-color: #bb9457; }
+  .card { background: #fff; border-radius: 1rem; box-shadow: 0 8px 16px rgba(0,0,0,0.10); padding: 2.5rem; }
+  .form-title { text-align: center; font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; }
+  .success-message, .error-message { text-align: center; font-weight: 600; margin-top: 1rem; display: none; }
+  .success-message { color: #15803d; }
+  .error-message   { color: #b91c1c; }
+  .loader2 { display: flex; justify-content: center; align-items: center; margin: 1rem auto; }
+  .loader2 span { width: 44px; height: 44px; border: 5px solid #f3e9d2; border-top: 5px solid #bb9457; border-radius: 50%; display: inline-block; animation: spin 1s linear infinite; }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+  .strikethrough { text-decoration: line-through; color: #bb9457; font-weight: 600; margin-right: 10px; }
+  .prezzo-sconto { color: #15803d; font-size: 1.3rem; font-weight: 900; }
+  .risparmio { color: #c75aec; font-weight: 700; background: #ffe5e5; border-radius: .5rem; padding: .2rem .7rem; margin-left: 10px; font-size: 1.1rem; }
+  .cta { display: inline-block; margin-top: 1rem; padding: .6rem 1.2rem; background: #bb9457; color: #fef6f0; border-radius: .6rem; font-weight: 700; text-decoration: none; }
+  /* Carosello */
+  .carousel-container { max-width: 700px; margin: 40px auto 0; position: relative; }
+  .carousel-img { width: 100%; height: 370px; object-fit: cover; border-radius: 1.2rem; box-shadow: 0 4px 22px #bb9457a6; display: none; }
+  .carousel-img.active { display: block; animation: fadein .8s; }
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+  .carousel-dot { width: 12px; height: 12px; border-radius: 50%; background: #e6ccb2; cursor: pointer; transition: background .2s; }
+  .carousel-dot.active { background: #bb9457; }
+  input::placeholder, textarea::placeholder { font-size: 85%; font-weight: 400; }
+  #messaggio { width: 105%; max-width: 100%; resize: vertical; }
+  input:not([type="checkbox"]):not([type="radio"]), textarea { font-size: .95rem; font-weight: 400; color: #434040; }
+  .popup-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.55); display: none; justify-content: center; align-items: center; z-index: 20000; }
+  .popup-anim { background: #fff; padding: 2.2rem 2rem; border-radius: 1.1rem; text-align: center; box-shadow: 0 8px 40px #bb9457a6; position: relative; animation: popshow .45s cubic-bezier(.6, 2, .4, 1); }
+  @keyframes popshow { from { opacity: 0; transform: scale(.8); } to   { opacity: 1; transform: scale(1); } }
+  .close-popup-btn { position: absolute; top: 10px; right: 18px; font-size: 2rem; font-weight: 700; color: #bbb; cursor: pointer; transition: .2s; }
+  .close-popup-btn:hover { color: #bb9457; }
+</style>
 </head>
 <body>
-
-  <!-- Hero Section -->
-  <header class="hero" role="banner">
-    <div class="hero-content" data-aos="fade-right">
-      <div class="logo" aria-label="Logo Dsfabio Digital">DSFabio <span>digital</span></div>
-      <h1>Soluzioni smart per bar, ristoranti e locali</h1>
-      <p>Trasforma il tuo menu in uno strumento che semplifica gli ordini, <strong>aumenta le vendite</strong> e migliora l’esperienza dei clienti.</p>
-      <a href="#services" class="btn-primary" role="button">Scopri i servizi</a>
-    </div>
-  </header>
-
-  <!-- Services Section -->
-  <section id="services" aria-label="Sezione servizi">
-    <h2 data-aos="fade-up">I Nostri Servizi</h2>
-    <div class="services-grid">
-      <article class="service-card" data-aos="zoom-in" tabindex="0" role="region" aria-label="Menu Digitale Base">
-        <img src="https://i.postimg.cc/tTyqHvb2/con-ordine.jpg" alt="Menu Digitale Base" />
-        <h3>Menu Digitale Base</h3>
-        <p>Menu consultabile da QR Code, facile e veloce, senza installazioni o complicazioni.</p>
-        <a href="servizio1.html">Scopri di più</a>
-      </article>
-      <article class="service-card" data-aos="zoom-in" tabindex="0" role="region" aria-label="Ordini via WhatsApp">
-        <img src="https://i.postimg.cc/tTyqHvb2/con-ordine.jpg" alt="Ordini WhatsApp" />
-        <h3>Ordini via WhatsApp</h3>
-        <p>I clienti ordinano direttamente dal tavolo via WhatsApp. Semplice per loro, efficiente per te.</p>
-        <a href="ordini-whatsapp.html">Scopri di più</a>
-      </article>
-      <article class="service-card" data-aos="zoom-in" tabindex="0" role="region" aria-label="Ordini + Upsell">
-        <img src="https://i.postimg.cc/tTyqHvb2/con-ordine.jpg" alt="Upsell Smart" />
-        <h3>Ordini + Upsell</h3>
-        <p>Offri suggerimenti intelligenti (es. bevanda + snack) per aumentare lo scontrino medio.</p>
-        <a href="upsell-smart.html">Scopri di più</a>
-      </article>
-    </div>
-  </section>
-
-  <!-- Why Choose Section -->
-  <section id="why-choose" aria-label="Perché scegliere DSFabio Digital" data-aos="fade-up">
-    <h2>Perché scegliere DSFabio Digital</h2>
-    <div class="why-grid">
-      <div class="why-item" tabindex="0">
-        <div class="why-icon"><i class="fas fa-bolt"></i></div>
-        <h3>Soluzioni Veloci</h3>
-        <p>Implementazioni rapide e senza complicazioni per iniziare subito a migliorare il tuo servizio.</p>
-      </div>
-      <div class="why-item" tabindex="0">
-        <div class="why-icon"><i class="fas fa-chart-line"></i></div>
-        <h3>Aumento Vendite</h3>
-        <p>Strumenti intelligenti per incrementare lo scontrino medio e fidelizzare i clienti.</p>
-      </div>
-      <div class="why-item" tabindex="0">
-        <div class="why-icon"><i class="fas fa-headset"></i></div>
-        <h3>Assistenza Dedicata</h3>
-        <p>Supporto continuo e aggiornamenti per garantirti sempre la migliore esperienza.</p>
-      </div>
-      <div class="why-item" tabindex="0">
-        <div class="why-icon"><i class="fas fa-mobile-alt"></i></div>
-        <h3>Design Responsive</h3>
-        <p>Accesso facile e veloce da qualsiasi dispositivo, per te e i tuoi clienti.</p>
-      </div>
-    </div>
-  </section>
-
-  
- 
-  <section id="testimonials" aria-label="Testimonianze clienti" style="background:#111827; padding:4rem 5vw; max-width:1200px; margin:0 auto 4rem; color:#d1d5db; text-align:center;">
-  <h2 style="color:#facc15; font-size:2rem; font-weight:700; margin-bottom:2rem;">Cosa dicono i nostri clienti</h2>
-  <div style="display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;">
-    <blockquote style="background:#374151; border-radius:12px; padding:1.5rem; max-width:350px; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-      <p>"Da quando abbiamo installato il menu digitale di DSFabio, gli ordini sono più veloci e lo scontrino medio è aumentato del 25%. Consigliatissimo!"</p>
-      <footer style="margin-top:1rem; font-weight:600; color:#facc15;">— Luca B., Ristorante La Dolce Vita</footer>
-    </blockquote>
-    <blockquote style="background:#374151; border-radius:12px; padding:1.5rem; max-width:350px; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-      <p>"L'ordinazione via WhatsApp ha semplificato il lavoro del nostro staff e migliorato la soddisfazione dei clienti."</p>
-      <footer style="margin-top:1rem; font-weight:600; color:#facc15;">— Martina P., Bar Centrale</footer>
-    </blockquote>
+<!-- HERO SECTION -->
+<section style="width:100vw; height:420px; overflow:hidden; border-radius:0 0 28px 28px; box-shadow:0 6px 18px rgba(0,0,0,0.18); position:relative;">
+  <img src="https://i.postimg.cc/BQqXMQTr/porto-seguro.jpg" alt="Spiaggia tropicale a Porto Seguro Bahia Brasile" style="width:100vw; height:100%; object-fit:cover; display:block;" loading="eager" />
+  <div style="position:absolute; bottom:24px; left:36px; background:rgba(0,0,0,0.34); color:#fff; padding:1.2rem 2.4rem; border-radius:1.2rem; box-shadow:0 2px 8px rgba(0,0,0,0.18);">
+    <h1 style="font-size:2.2rem; font-weight:900; letter-spacing:-1px;">Casa Vacanze a Porto Seguro</h1>
+    <div style="font-size:1.2rem; margin-top:8px;">Il tuo rifugio esclusivo tra spiagge, palme e relax in Brasile</div>
   </div>
 </section>
 
-  <section id="stats" aria-label="Statistiche di successo" style="background:#1f2937; padding:3rem 5vw; max-width:1200px; margin:0 auto 4rem; color:#fff; text-align:center;">
-  <h2 style="color:#facc15; font-size:2rem; font-weight:700; margin-bottom:2rem;">Risultati concreti per i nostri clienti</h2>
-  <div style="display:flex; justify-content:center; gap:3rem; flex-wrap:wrap;">
-    <div style="flex:1; min-width:180px;">
-      <div style="font-size:3rem; font-weight:800; color:#facc15;">+25%</div>
-      <div style="font-size:1.2rem; margin-top:0.5rem;">Aumento dello scontrino medio</div>
+<!-- DESCRIZIONE -->
+<section class="max-w-3xl mx-auto my-10 px-4">
+  <h2 class="text-xl font-bold mb-2">Vivi l'Incanto di Porto Seguro</h2>
+  <p>
+    Lasciati avvolgere dall’atmosfera magica di <strong>Porto Seguro</strong>, dove la storia del Brasile prende vita tra <strong>spiagge dorate</strong>, tramonti mozzafiato e la vibrante energia della Passarela do Álcool. Qui ogni serata si trasforma in un’esperienza indimenticabile, tra <strong>musica dal vivo, artigianato locale e sapori autentici</strong>.<br><br>
+    Regalati il privilegio di soggiornare in una <strong>villa privata esclusiva</strong>, immersa nel verde di un <strong>residence di lusso</strong>, con <strong>videosorveglianza 24h</strong> e <strong>accesso controllato</strong> per garantirti la <strong>massima sicurezza, privacy e tranquillità</strong>. Perfetta per gruppi, coppie o famiglie, la tua vacanza sarà sinonimo di <strong>relax assoluto</strong> e libertà.<br><br>
+    <strong>Il Brasile più autentico ti aspetta:</strong> lasciati sorprendere, emozionare e coccolare. Porto Seguro non è solo una meta, è un’esperienza che rimarrà nel cuore.
+  </p>
+</section>
+
+
+<!-- GALLERIA 1 -->
+<section class="gallery">
+  <img src="https://i.postimg.cc/qMZXdmdw/Whats-App-Image-2025-06-17-at-21-06-32.jpg" class="gallery-img" alt="Casa retro">
+  <img src="https://i.postimg.cc/hPnNdtJ6/Whats-App-Image-2025-06-17-at-20-34-59-2.jpg" class="gallery-img" alt="Giardino fronte">
+  <img src="https://i.postimg.cc/bvg7ycYW/Whats-App-Image-2025-06-18-at-18-57-16.jpg" class="gallery-img" alt="Casa fronte">
+  <img src="https://i.postimg.cc/QdT5ZhmN/Whats-App-Image-2025-06-17-at-21-06-31-5.jpg" class="gallery-img" alt="piscina">
+  <img src="https://i.postimg.cc/ZnnB7S0S/Whats-App-Image-2025-06-17-at-21-06-39-2.jpg" class="gallery-img" alt="piscina di notte">
+  <img src="https://i.postimg.cc/J4tYJHrT/Whats-App-Image-2025-06-17-at-20-35-03-4.jpg" class="gallery-img" alt="giardino">
+  <img src="https://i.postimg.cc/BvSc2tHY/Whats-App-Image-2025-06-26-at-00-36-15.jpg" class="gallery-img" alt="entrata">
+  <img src="https://i.postimg.cc/T110rB6y/Whats-App-Image-2025-06-17-at-21-06-39-3.jpg" class="gallery-img" alt="piscina notte">
+  <img src="https://i.postimg.cc/wBbQ90Jg/Whats-App-Image-2025-06-17-at-21-06-35.jpg" class="gallery-img" alt="palme">
+</section>
+
+<!-- SERVIZI -->
+<section class="max-w-3xl mx-auto my-10 px-4">
+  <h2 class="text-xl font-bold mb-2">I Servizi della Casa</h2>
+  <p>
+    🛏️ <strong>12 camere spaziose </strong>, perfette per ospitare gruppi grandi o piccoli con il massimo comfort.<br>
+    🚿 <strong>10 bagni </strong> che garantiscono privacy e comodità a ogni ospite.<br>
+    🏊‍♀️ <strong>Piscina privata con luci a LED</strong>, ideale per rilassarsi e godersi momenti magici anche di sera.<br>
+    🔥 <strong>Area gourmet con barbecue</strong>, il luogo perfetto per cene conviviali all’aperto, tra sapori e risate.<br>
+    🍽️ <strong>Cucina attrezzata</strong> per preparare i tuoi piatti preferiti in totale autonomia.<br>
+    🛋️ <strong>Spazi comuni ampi e accoglienti</strong>, per condividere momenti speciali senza rinunciare al relax.<br>
+    🌿 <strong>Giardino curato</strong>, un’oasi verde dove rigenerarsi.<br>
+    📶 <strong>Wi-Fi </strong> per restare sempre connessi, anche in vacanza.<br>
+    ❄️ <strong>Aria condizionata in tutte le stanze</strong>, per un comfort perfetto in ogni stagione.<br>
+    📺 <strong>TV, lavatrice e tutti i comfort essenziali</strong> per sentirsi davvero a casa.<br>
+    🧼 <strong>Servizio di pulizia su richiesta</strong>, per una vacanza senza pensieri.<br>
+    ☕ <strong>Colazioni disponibili su richiesta</strong>, per chi vuole iniziare la giornata con gusto e comodità.
+  </p>
+</section>
+
+
+<!-- Lightbox -->
+<div id="lightbox" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.85);display:none;justify-content:center;align-items:center;z-index:10000;">
+  <img src="" alt="Foto ingrandita" style="max-width:92vw;max-height:88vh;border-radius:1rem;box-shadow:0 4px 32px #000;">
+  <button class="close-btn" style="position:absolute;top:24px;right:38px;font-size:2.8rem;font-weight:700;color:#fff;background:none;border:none;cursor:pointer;">&times;</button>
+</div>
+
+<!-- SIMULATORE PREZZI -->
+<section id="simulatore" class="my-12">
+  <div class="card max-w-2xl mx-auto">
+    <div class="form-title">Simulatore prezzi</div>
+    <div class="flex gap-2 mb-5 justify-center">
+      <button type="button" id="btnGruppi" class="px-3 py-1 rounded font-bold bg-[#bb9457] text-white border-2 border-[#bb9457]">Gruppi numerosi</button>
+      <button type="button" id="btnCamera" class="px-3 py-1 rounded font-bold bg-gray-200 text-[#bb9457] border-2 border-[#bb9457]">Coppie/Famiglie</button>
     </div>
-    <div style="flex:1; min-width:180px;">
-      <div style="font-size:3rem; font-weight:800; color:#facc15;">+40%</div>
-      <div style="font-size:1.2rem; margin-top:0.5rem;">Ordini gestiti più velocemente</div>
+    <!-- Form Gruppi -->
+    <form id="formGruppi" class="flex flex-col gap-3">
+      <label class="flex flex-col font-semibold text-sm">
+        Persone (5–30):
+        <input type="number" id="people" min="5" max="30" value="30" placeholder="Inserisci numero persone"
+          class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Check‑in:
+        <input type="date" id="checkin" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Check‑out:
+        <input type="date" id="checkout" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <button type="submit"
+        class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">
+        Calcola
+      </button>
+      <div class="loader2" id="loaderGruppi" style="display:none;"><span></span></div>
+      <div class="result mt-2 simResultGruppi font-semibold" id="simResultGruppi"></div>
+    </form>
+    <!-- Form Camera -->
+    <form id="formCamera" class="flex flex-col gap-3 hidden">
+      <label class="flex flex-col font-semibold text-sm">
+        Adulti (1-2):
+        <input type="number" id="adulti" min="1" max="2" value="2" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Bambini (0-12 anni):
+        <input type="number" id="bambini" min="0" max="2" value="0" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Check‑in:
+        <input type="date" id="checkinCam" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Check‑out:
+        <input type="date" id="checkoutCam" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <button type="submit"
+        class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">
+        Calcola
+      </button>
+      <div class="loader2" id="loaderCamera" style="display:none;"><span></span></div>
+      <div class="result mt-2 simResultCamera font-semibold" id="simResultCamera"></div>
+    </form>
+    <div class="text-center mt-2"><small>📢 Prenota 8+ notti e risparmia subito!</small></div>
+  </div>
+</section>
+
+<!-- RECENSIONI -->
+<section id="recensioni" class="my-12 max-w-3xl mx-auto">
+  <h2 class="text-2xl font-bold mb-4 text-center">Recensioni degli ospiti</h2>
+  <div class="space-y-6">
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Giulia R.</span></div>
+      <p>Vacanza perfetta! La casa è spaziosa, pulitissima e in una zona sicura. Ci siamo sentiti subito a casa. Consigliatissima per famiglie numerose!</p>
     </div>
-    <div style="flex:1; min-width:180px;">
-      <div style="font-size:3rem; font-weight:800; color:#facc15;">+50</div>
-      <div style="font-size:1.2rem; margin-top:0.5rem;">Clienti soddisfatti</div>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Marco e Laura</span></div>
+      <p>Abbiamo adorato la piscina privata e la tranquillità del residence. L'assistenza italiana è stata un vero valore aggiunto. Torneremo sicuramente!</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Sofia B.</span></div>
+      <p>Esperienza indimenticabile! Spiagge da sogno a pochi minuti e tanti servizi a disposizione. Tutto curato nei minimi dettagli.</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★★</span><span class="font-semibold">Alessandro M.</span></div>
+      <p>Location top, ottima per gruppi di amici! Ampi spazi, barbecue e relax totale. Host sempre disponibile per ogni esigenza.</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★☆</span><span class="font-semibold">Francesca D.</span></div>
+      <p>Casa davvero bella e comoda, unica piccola pecca la connessione Wi-Fi a volte lenta. Ma nel complesso vacanza super positiva, torneremo!</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★☆</span><span class="font-semibold">Giorgio T.</span></div>
+      <p>Il soggiorno è stato ottimo, anche se avremmo gradito qualche utensile da cucina in più. Però l'host è stato gentilissimo e la posizione è fantastica!</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-5">
+      <div class="flex items-center mb-2"><span class="text-yellow-400 text-xl mr-2">★★★★☆</span><span class="font-semibold">Valentina P.</span></div>
+      <p>Struttura molto accogliente, forse la piscina un po' piccola per gruppi grandi, ma pulizia e comfort eccellenti. Esperienza positiva!</p>
     </div>
   </div>
 </section>
 
-    <!-- Demo Section -->
- 
-    <section id="demo-session" style="background:linear-gradient(135deg,#facc15 0%,#111827 100%);padding:3.5rem 0;">
-        <h2 style="color:#1f2937;font-size:2rem;font-weight:800;text-align:center;letter-spacing:1.2px;margin-bottom:2.5rem;">Prova i Modelli Demo</h2>
-        <div class="demo-flip-grid">
-          <!-- Card 1 -->
-          <div class="flip-card">
-            <div class="flip-inner">
-              <div class="flip-front">
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=facearea&w=80&h=80&facepad=2&q=80" alt="Menu Digitale" class="flip-avatar" />
-                <h3>Menu Digitale</h3>
-              </div>
-              <div class="flip-back">
-                <div class="flip-icon"><i class="fas fa-qrcode"></i></div>
-                <p>Menu consultabile da QR Code, semplice e veloce.</p>
-                <a href="demo-menu-digitale.html" class="btn-primary">Prova il modello</a>
-              </div>
-            </div>
-          </div>
-          <!-- Card 2 -->
-          <div class="flip-card">
-            <div class="flip-inner">
-              <div class="flip-front">
-                <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=facearea&w=80&h=80&facepad=2&q=80" alt="WhatsApp" class="flip-avatar" />
-                <h3>Menu + WhatsApp</h3>
-              </div>
-              <div class="flip-back">
-                <div class="flip-icon"><i class="fab fa-whatsapp"></i></div>
-                <p>Ordina dal tavolo via WhatsApp, senza errori.</p>
-                <a href="demo-menu-whatsapp.html" class="btn-primary">Prova il modello</a>
-              </div>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="flip-card">
-            <div class="flip-inner">
-              <div class="flip-front">
-                <img src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=facearea&w=80&h=80&facepad=2&q=80" alt="Upsell" class="flip-avatar" />
-                <h3>Menu + Upsell</h3>
-              </div>
-              <div class="flip-back">
-                <div class="flip-icon"><i class="fas fa-lightbulb"></i></div>
-                <p>Suggerimenti smart per aumentare lo scontrino medio.</p>
-                <a href="demo-menu-upsell.html" class="btn-primary">Prova il modello</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <style>
-      .demo-flip-grid {
-        display: flex;
-        gap: 2.5rem;
-        justify-content: center;
-        max-width: 1000px;
-        margin: 0 auto;
-        flex-wrap: nowrap;
-      }
-      .flip-card {
-        background: transparent;
-        width: 320px;
-        height: 340px;
-        perspective: 1000px;
-        flex-shrink: 0;
-      }
-      .flip-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        transition: transform 1.2s cubic-bezier(.4,2,.6,1);
-        transform-style: preserve-3d;
-      }
-      .flip-card:hover .flip-inner,
-      .flip-card:focus-within .flip-inner {
-        transform: rotateY(180deg);
-      }
-      @media (max-width: 700px) {
-        .demo-flip-grid {
-          flex-direction: column;
-          gap: 1.5rem;
-          max-width: 90vw;
-          align-items: center;
-        }
-        .flip-card {
-          width: 100%;
-          max-width: 320px;
-          height: 180px;
-        }
-        .flip-card .flip-inner.revealed {
-          transform: rotateY(180deg);
-        }
-      }
-      .flip-front, .flip-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
-        border-radius: 18px;
-        box-shadow: 0 4px 24px rgba(31,41,55,0.08);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      .flip-front {
-        background: #fff;
-        color: #1f2937;
-        border: 2px solid #1f2937;
-        padding-top: 1.5rem;
-      }
-      .flip-avatar {
-        width: 96px;
-        height: 96px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-bottom: 1.1rem;
-        border: 3px solid #facc15;
-        box-shadow: 0 2px 8px rgba(250,204,21,0.15);
-        background: #fff;
-        transition: width 0.3s, height 0.3s;
-      }
-      .flip-front h3 {
-        font-size: 1.25rem;
-        font-weight: 800;
-        margin: 0;
-        text-align: center;
-      }
-      .flip-back {
-        background: #1f2937;
-        color: #facc15;
-        border: 2px solid #fff;
-        transform: rotateY(180deg);
-        padding: 2rem 1rem;
-        text-align: center;
-        justify-content: center;
-      }
-      .flip-icon {
-        font-size: 2.5rem;
-        color: #facc15;
-        margin-bottom: 1.2rem;
-      }
-      .flip-back p {
-        font-size: 1rem;
-        margin-bottom: 1.2rem;
-      }
-      .btn-primary {
-        background-color: #facc15;
-        color: #1f2937;
-        font-weight: 700;
-        padding: 0.7rem 1.3rem;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        font-size: 1rem;
-        box-shadow: 0 2px 8px rgb(31 41 55 / 0.08);
-        transition: background-color 0.3s, box-shadow 0.3s;
-        text-decoration: none;
-        display: inline-block;
-      }
-      .btn-primary:hover, .btn-primary:focus {
-        background-color: #eab308;
-        color: #1f2937;
-        box-shadow: 0 8px 25px rgb(250 204 21 / 0.15);
-        outline: none;
-      }
-      @media (max-width: 900px) {
-        .flip-card { width: 240px; height: 210px; }
-        .flip-avatar { width: 72px; height: 72px; }
-        .flip-icon { font-size: 1.5rem; }
-      }
-      @media (max-width: 700px) {
-        .flip-card { width: 90vw; max-width: 320px; height: 170px; }
-        .flip-avatar { width: 57px; height: 57px; }
-        .flip-icon { font-size: 1.1rem; }
-      }
-      </style>
+<!-- GALLERIA 2 -->
+<section class="gallery">
+  <img src="https://i.postimg.cc/ZRpBXcxf/Whats-App-Image-2025-06-17-at-20-27-12-4.jpg" class="gallery-img" alt="letto firenze">
+  <img src="https://i.postimg.cc/25TXhQZK/Whats-App-Image-2025-06-23-at-21-23-34-2.jpg" class="gallery-img" alt="">
+  <img src="https://i.postimg.cc/HxrDLZh2/Whats-App-Image-2025-06-23-at-21-26-40-3.jpg" class="gallery-img" alt="">
+  <img src="https://i.postimg.cc/W3Nzfvt4/Whats-App-Image-2025-06-17-at-20-27-13.jpg" class="gallery-img" alt="">
+  <img src="https://i.postimg.cc/sftyMzyZ/Whats-App-Image-2025-06-23-at-21-23-35.jpg" class="gallery-img" alt="">
+  <img src="https://i.postimg.cc/Mp39G62C/Whats-App-Image-2025-06-17-at-21-06-32-5.jpg" class="gallery-img" alt="">
+  <img src="https://i.postimg.cc/K8y5v0zy/Whats-App-Image-2025-06-26-at-00-35-32.jpg" class="gallery-img" alt="">
+  <img src="https://i.postimg.cc/nhYGsqj9/Whats-App-Image-2025-06-26-at-00-36-16.jpg" class="gallery-img" alt="">
+  <img src="https://i.postimg.cc/zXZZJkSC/Whats-App-Image-2025-06-23-at-21-26-41-3.jpg" class="gallery-img" alt="terrazza">
+</section>
+
+<!-- ASSISTENZA -->
+<section class="max-w-3xl mx-auto my-10 px-4">
+  <h2 class="text-xl font-bold mb-2">Assistenza Italiana Prima, Durante e Dopo il Viaggio 🇮🇹✈️🇧🇷</h2>
+  <p>
+    <strong>Non sarai mai solo:</strong> vivo in Italia da oltre 25 anni e conosco profondamente le esigenze di chi parte dall’Italia verso il Brasile. Per questo offro un <strong>supporto completo e affidabile</strong>, che ti accompagna <strong>prima della partenza</strong> e durante tutto il soggiorno, garantendoti serenità e sicurezza.<br><br>
+    🤝 Parlo fluentemente italiano e portoghese e, con il giusto preavviso, posso <strong>accompagnarti personalmente dall’Italia fino all’arrivo nella tua casa a Porto Seguro</strong>, curando ogni dettaglio del viaggio. Un servizio pensato per chi desidera viaggiare senza pensieri, con una <strong>guida esperta e sempre presente</strong>.<br><br>
+    💼 Il costo di questo servizio è da concordare in base al periodo e al tipo di accompagnamento richiesto, ma rappresenta un <strong>vero valore aggiunto</strong>:<br>
+    ✔️ Compagnia preziosa durante tutto il viaggio<br>
+    ✔️ Supporto pratico in ogni fase<br>
+    ✔️ Sicurezza di avere accanto una persona di fiducia, esperta di entrambe le culture<br><br>
+    💡 Inoltre, dividendo la spesa tra i partecipanti, il costo per persona diventa davvero contenuto rispetto alla comodità e tranquillità offerte.<br><br>
+    👉 Per chi preferisce viaggiare in autonomia, l’accoglienza in Brasile sarà comunque <strong>calorosa, attenta e disponibile</strong>. L’host sarà pronto a offrirti <strong>assistenza immediata</strong> per garantirti un soggiorno sereno e perfettamente organizzato.
+  </p>
+  <p class="mt-6 text-center">
+    <strong>Pronto a vivere un’esperienza senza pensieri?</strong><br>
+    Contattaci subito per ricevere tutte le informazioni e organizzare il tuo viaggio su misura.<br>
+    <a href="#contatti" class="text-blue-600 font-semibold underline">Scrivici ora</a> e inizia la tua avventura a Porto Seguro!
+  </p>
+</section>
+
+<!-- GALLERIA 2 -->
+<section class="gallery">
+  <img src="https://i.postimg.cc/CKZmB3wz/Whats-App-Image-2025-06-18-at-18-56-37.jpg" class="gallery-img" alt="BARBEQUE">
+  <img src="https://i.postimg.cc/XN91g6d5/Whats-App-Image-2025-06-18-at-19-00-09.jpg" class="gallery-img" alt="">
+
+</section>
+
+
+
+<!-- CONTATTI -->
+<section id="contatti" class="my-12">
+  <div class="card max-w-2xl mx-auto">
+    <div class="form-title">Contatti</div>
+    <form id="contactForm" class="flex flex-col gap-3" autocomplete="off">
+      <label class="flex flex-col font-semibold text-sm">
+        Nome*
+        <input type="text" id="nome" name="nome" required placeholder="Il tuo nome" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Email*
+        <input type="email" id="email" name="email" required placeholder="La tua email" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base" />
+      </label>
+      <label class="flex flex-col font-semibold text-sm">
+        Messaggio*
+        <textarea id="messaggio" name="messaggio" required placeholder="Scrivi qui il tuo messaggio..." rows="4" class="mt-1 rounded border border-gray-300 px-3 py-2 text-base"></textarea>
+      </label>
+      <button type="submit" class="bg-[#bb9457] text-white rounded-lg px-4 py-2 font-bold hover:bg-[#a67c52] transition text-base">Invia</button>
+      <div class="loader2" id="loaderContatti" style="display:none;"><span></span></div>
+      <div class="success-message" id="successContatti">Messaggio inviato con successo!</div>
+      <div class="error-message" id="errorContatti">Si è verificato un errore. Riprova.</div>
+    </form>
+  </div>
+</section>
+
+<!-- CAROSELLO IMMAGINI IN FONDO -->
+<div class="carousel-container" id="carousel">
+  <div id="carousel-images"></div>
+  <div class="carousel-dots" id="carousel-dots"></div>
+</div>
+
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  if (window.matchMedia('(max-width: 700px)').matches) {
-    const cards = document.querySelectorAll('.flip-card .flip-inner');
-    const lastPositions = new WeakMap();
-
-    function handleScroll() {
-      cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const center = window.innerHeight / 2;
-        const currentMiddle = rect.top + rect.height / 2;
-
-        const prevMiddle = lastPositions.get(card) || currentMiddle;
-        const wasRevealed = card.classList.contains('revealed');
-
-        const scrollingUp = currentMiddle < prevMiddle;
-        const scrollingDown = currentMiddle > prevMiddle;
-
-        if (!wasRevealed && scrollingUp && currentMiddle <= center) {
-          card.classList.add('revealed');
-        } else if (wasRevealed && scrollingDown && currentMiddle > center) {
-          card.classList.remove('revealed');
-        }
-
-        lastPositions.set(card, currentMiddle);
-      });
-    }
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // iniziale
+// --- Lightbox immagini ---
+document.querySelectorAll('.gallery-img').forEach(img => {
+  img.onclick = () => {
+    document.getElementById('lightbox').style.display = 'flex';
+    document.querySelector('#lightbox img').src = img.src;
   }
 });
+document.querySelector('.close-btn').onclick = () => {
+  document.getElementById('lightbox').style.display = 'none';
+};
+
+// --- Simulatore prezzi logica aggiornata ---
+function pluralize(n, sing, plur) {
+  return n === 1 ? sing : plur;
+}
+
+
+function formatEuro(x) {
+  return x.toLocaleString('it-IT', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 });
+}
+function formatDateEu(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('it-IT');
+}
+function setTab(tab) {
+  if(tab === "gruppi") {
+    document.getElementById('formGruppi').classList.remove('hidden');
+    document.getElementById('formCamera').classList.add('hidden');
+    document.getElementById('btnGruppi').classList.add('bg-[#bb9457]','text-white');
+    document.getElementById('btnGruppi').classList.remove('bg-gray-200','text-[#bb9457]');
+    document.getElementById('btnCamera').classList.remove('bg-[#bb9457]','text-white');
+    document.getElementById('btnCamera').classList.add('bg-gray-200','text-[#bb9457]');
+  } else {
+    document.getElementById('formGruppi').classList.add('hidden');
+    document.getElementById('formCamera').classList.remove('hidden');
+    document.getElementById('btnCamera').classList.add('bg-[#bb9457]','text-white');
+    document.getElementById('btnCamera').classList.remove('bg-gray-200','text-[#bb9457]');
+    document.getElementById('btnGruppi').classList.remove('bg-[#bb9457]','text-white');
+    document.getElementById('btnGruppi').classList.add('bg-gray-200','text-[#bb9457]');
+  }
+}
+document.getElementById('btnGruppi').onclick = () => setTab("gruppi");
+document.getElementById('btnCamera').onclick = () => setTab("camera");
+setTab("gruppi");
+
+function isAltaStagione(dt) {
+  // Alta stagione: novembre (11) a marzo (3)
+  const m = dt.getMonth() + 1;
+  return (m >= 11 || m <= 3);
+}
+// --- sostituisci solo questa funzione ---
+function prezzoGruppo(persone, giorni, checkin) {
+  const date = new Date(checkin);
+  const alta = isAltaStagione(date);
+  let prezzoBase = alta ? 29 : 22;
+
+  // ↑ MODIFICA → incremento sempre, in qualunque stagione
+  if (persone < 30) {
+    const gruppi4 = Math.floor((30 - persone) / 4);
+    prezzoBase = +(prezzoBase * Math.pow(1.12, gruppi4)).toFixed(2);
+  }
+
+  return { prezzoBase, totale: prezzoBase * persone * giorni, alta };
+}
+function prezzoCamera(adulti, bambini, giorni, checkin) {
+  const alta = isAltaStagione(new Date(checkin));
+  const prezzoBasePerAdulto = alta ? 56 : 44;
+  // Prezzo base proporzionato solo sugli adulti
+  const prezzoBaseTotale = prezzoBasePerAdulto * adulti;
+  // Supplemento fisso per ogni bambino
+  const supplementoBambini = 9 * bambini * giorni;
+  const totale = (prezzoBaseTotale * giorni) + supplementoBambini;
+  return {
+    prezzoBase: prezzoBasePerAdulto,
+    totale,
+    alta,
+    supplemento: supplementoBambini
+  };
+}
+
+
+function calcolaSconto(prezzo, giorni) {
+  if (giorni >= 8) {
+    const scontato = Math.round(prezzo * (1 - 0.046));
+    const risparmio = Math.round(prezzo * 0.046);
+    return { pieno: prezzo, scontato, risparmio };
+  } else {
+    return { pieno: prezzo, scontato: prezzo, risparmio: 0 };
+  }
+}
+function scrollToContatti() {
+  document.getElementById('contatti').scrollIntoView({ behavior: 'smooth' });
+}
+document.getElementById('formGruppi').onsubmit = function(e) {
+  e.preventDefault();
+  const persone = parseInt(document.getElementById('people').value, 10);
+  const checkin = document.getElementById('checkin').value;
+  const checkout = document.getElementById('checkout').value;
+  const loader = document.getElementById('loaderGruppi');
+  const result = document.getElementById('simResultGruppi');
+  result.innerHTML = '';
+  loader.style.display = 'flex';
+  setTimeout(() => {
+    loader.style.display = 'none';
+    if (!checkin || !checkout || persone < 5 || persone > 30) {
+      result.innerHTML = '<span class="error-message" style="display:block;">Compila tutti i campi correttamente.</span>';
+      return;
+    }
+    const giorni = (new Date(checkout) - new Date(checkin)) / (1000*60*60*24);
+    if (giorni < 1) {
+      result.innerHTML = '<span class="error-message" style="display:block;">La data di check-out deve essere successiva al check-in.</span>';
+      return;
+    }
+    const { prezzoBase, totale, alta } = prezzoGruppo(persone, giorni, checkin);
+    const sconto = calcolaSconto(totale, giorni);
+    let riepilogo = `
+      <div style="background:#fffbe6;border:2px solid #bb9457;padding:1.1rem 1rem 1.3rem 1rem;border-radius:1rem;">
+      <div class="mb-2"><b style="color:#bb9457;">${persone} ${pluralize(persone, "persona", "persone")}</b> | <b>${giorni} ${pluralize(giorni, "notte", "notti")}</b><br>
+        Dal <b>${formatDateEu(checkin)}</b> al <b>${formatDateEu(checkout)}</b></div>
+        <div class="mb-2">Prezzo a notte per persona: <b style="color:#15803d;">${formatEuro(prezzoBase)}</b> </div>
+        <div class="mb-2">Totale gruppo: <b style="color:#bb9457;">${formatEuro(totale)}</b></div>
+    `;
+    if(sconto.risparmio > 0) {
+      riepilogo += `
+        <div class="mb-2"><span class="strikethrough">${formatEuro(sconto.pieno)}</span>
+        <span class="prezzo-sconto">${formatEuro(sconto.scontato)}</span>
+        <div class="mb-2" style="color:#15803d;font-weight:700;">Offerta speciale per soggiorni lunghi!</div>
+      `;
+    }
+    riepilogo += `
+      <button type="button" class="cta" onclick="scrollToContatti()">Richiedi info senza impegno</button>
+      <ul style="text-align:left; margin:1rem auto 0; max-width:350px; font-size:1.05em; color:#15803d;">
+        <li>✔️ Residence videosorvegliato</li>
+        <li>✔️ Assistenza in lingua italiana</li>
+        <li>✔️ Piscina privata</li>
+        <li>✔️ Privacy e sicurezza</li>
+        <li>✔️ Offerta personalizzata</li>
+      </ul>
+      </div>
+    `;
+    result.innerHTML = riepilogo;
+  }, 700);
+};
+
+document.getElementById('formCamera').onsubmit = function(e) {
+  e.preventDefault();
+  const adulti = parseInt(document.getElementById('adulti').value, 10);
+  const bambini = parseInt(document.getElementById('bambini').value, 10);
+  const checkin = document.getElementById('checkinCam').value;
+  const checkout = document.getElementById('checkoutCam').value;
+  const loader = document.getElementById('loaderCamera');
+  const result = document.getElementById('simResultCamera');
+  result.innerHTML = '';
+  loader.style.display = 'flex';
+  setTimeout(() => {
+    loader.style.display = 'none';
+    if (!checkin || !checkout || adulti < 1 || adulti > 2 || bambini < 0 || bambini > 2) {
+      result.innerHTML = '<span class="error-message" style="display:block;">Compila tutti i campi correttamente.</span>';
+      return;
+    }
+    const giorni = (new Date(checkout) - new Date(checkin)) / (1000*60*60*24);
+    if (giorni < 1) {
+      result.innerHTML = '<span class="error-message" style="display:block;">La data di check-out deve essere successiva al check-in.</span>';
+      return;
+    }
+    const { prezzoBase, totale, alta, supplemento } = prezzoCamera(adulti, bambini, giorni, checkin);
+const sconto = calcolaSconto(totale, giorni);
+let riepilogo = `
+  <div style="background:#fffbe6;border:2px solid #bb9457;padding:1.1rem 1rem 1.3rem 1rem;border-radius:1rem;">
+    <div class="mb-2"><b style="color:#bb9457;">
+      ${adulti} ${pluralize(adulti, "adulto", "adulti")}
+      ${bambini > 0 ? ` + ${bambini} ${pluralize(bambini, "bambino", "bambini")}` : ""}
+    </b> | <b>${giorni} ${pluralize(giorni, "notte", "notti")}</b><br>
+    Dal <b>${formatDateEu(checkin)}</b> al <b>${formatDateEu(checkout)}</b></div>
+    <div class="mb-2">Prezzo a notte per persona: <b style="color:#15803d;">${formatEuro(prezzoBase)}</b></div>
+    <div class="mb-2">Totale soggiorno: <b style="color:#bb9457;">${formatEuro(totale)}</b></div>
+`;
+
+if(sconto.risparmio > 0) {
+  riepilogo += `
+    <div class="mb-2"><span class="strikethrough">${formatEuro(sconto.pieno)}</span>
+    <span class="prezzo-sconto">${formatEuro(sconto.scontato)}</span>
+    <div class="mb-2" style="color:#15803d;font-weight:700;">Offerta speciale per soggiorni lunghi!</div>
+  `;
+}
+
+riepilogo += `
+  <button type="button" class="cta" onclick="scrollToContatti()">Richiedi info senza impegno</button>
+  <ul style="text-align:left; margin:1rem auto 0; max-width:350px; font-size:1.05em; color:#15803d;">
+    <li>✔️ Residence videosorvegliato</li>
+    <li>✔️ Assistenza italiana</li>
+    <li>✔️ Piscina privata</li>
+    <li>✔️ Privacy e sicurezza</li>
+    <li>✔️ Offerta personalizzata</li>
+  </ul>
+  </div>
+`;
+result.innerHTML = riepilogo;
+  }, 700);
+};
+
+// --- Invio form contatti a Google Sheet e via email ---
+document.getElementById('contactForm').onsubmit = async function(e) {
+  e.preventDefault();
+  document.getElementById('loaderContatti').style.display = 'flex';
+  document.getElementById('successContatti').style.display = 'none';
+  document.getElementById('errorContatti').style.display = 'none';
+
+  // Raccogli dati
+  const nome = document.getElementById('nome').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const messaggio = document.getElementById('messaggio').value.trim();
+
+  // Cambia con il tuo URL Apps Script (foglio Google)
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyqGsD1bQ-VcweqXUmjZBzOoP3g6ctMOcUECALxg6ok3RbGxkcX6qNiAGJpoNsQF3-Wjw/exec';
+
+  // Prepara dati
+  const data = new FormData();
+  data.append('nome', nome);
+  data.append('email', email);
+  data.append('messaggio', messaggio);
+
+  try {
+    const response = await fetch(scriptURL, { method: 'POST', body: data });
+    const text = await response.text();
+    document.getElementById('loaderContatti').style.display = 'none';
+    if (text.toLowerCase().includes('ok')) {
+      document.getElementById('successContatti').style.display = 'block';
+      e.target.reset();
+    } else {
+      document.getElementById('errorContatti').style.display = 'block';
+    }
+  } catch (err) {
+    document.getElementById('loaderContatti').style.display = 'none';
+    document.getElementById('errorContatti').style.display = 'block';
+  }
+};
+
+// --- Carosello immagini automatico in fondo ---
+(function() {
+  const imgs = Array.from(document.querySelectorAll('.gallery-img'));
+  const carouselImages = document.getElementById('carousel-images');
+  const carouselDots = document.getElementById('carousel-dots');
+  if (!imgs.length) return;
+  imgs.forEach((img, i) => {
+    const cimg = document.createElement('img');
+    cimg.src = img.src;
+    cimg.alt = img.alt || '';
+    cimg.className = 'carousel-img' + (i === 0 ? ' active' : '');
+    carouselImages.appendChild(cimg);
+    const dot = document.createElement('span');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => showSlide(i);
+    carouselDots.appendChild(dot);
+  });
+  let current = 0;
+  function showSlide(idx) {
+    const slides = carouselImages.querySelectorAll('.carousel-img');
+    const dots = carouselDots.querySelectorAll('.carousel-dot');
+    slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    current = idx;
+  }
+  setInterval(() => {
+    let next = (current + 1) % imgs.length;
+    showSlide(next);
+  }, 3000);
+})();
+
 </script>
-      
-  <!-- Contact Section -->
-  <section id="contact" aria-label="Contatti" data-aos="fade-up">
-    <h2>Contattaci</h2>
-    <p>Ricevi un preventivo personalizzato per il tuo locale. Assistenza e aggiornamenti inclusi per 12 mesi.</p>
-    <a href="mailto:info@fabiodigital.com" class="btn-primary" role="button">Contattaci ora</a>
-  </section>
+<!-- Footer sintetico con CTA, WhatsApp e mail copiabile -->
+<footer style="background:linear-gradient(90deg,#bb9457 0%,#e6ccb2 100%);" class="text-[#4a3c31] pt-10 pb-6 mt-12 rounded-t-3xl shadow-[0_-8px_32px_rgba(187,148,87,0.10)]">
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:justify-between gap-8 px-6">
+    <!-- Testo + CTA -->
+    <div class="text-center md:text-left space-y-3">
+      <h2 class="text-3xl font-extrabold tracking-tight">Pronto a partire per il Brasile?</h2>
+      <p class="text-base text-[#5c4936]">Scrivici: ti risponderemo al volo e ti daremo tutti i dettagli per la tua vacanza a Porto&nbsp;Seguro.</p>
+      <a href="#contatti" class="inline-block bg-[#4a3c31] hover:bg-[#382d24] text-white rounded-lg text-base font-bold py-3 px-6 shadow-md shadow-[#bb9457a8] transition">Contattaci ora</a>
+    </div>
 
-  <!-- Footer -->
-  <footer role="contentinfo">
-    <p>DSFabio Digital Solutions – Tutti i diritti riservati © 2025</p>
-    <p>
-      <a href="#why-choose">Perché scegliere noi</a> · 
-      <a href="#how-it-works">Come funziona</a> · 
-      <a href="#contact">Contatti</a>
-    </p>
-  </footer>
+    <!-- Contatti -->
+    <div class="flex flex-col items-center gap-4">
+      <div class="flex gap-4 text-3xl">
+        <!-- WhatsApp -->
+        <a href="https://wa.me/393440301412" target="_blank" rel="noopener" aria-label="Chat su WhatsApp" class="text-[#25d366] hover:text-[#1eb154]">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163A11.945 11.945 0 010 11.945 11.944 11.944 0 0111.945 0c3.181 0 6.167 1.24 8.413 3.488a11.89 11.89 0 013.488 8.412c0 6.59-5.355 11.945-11.945 11.945a11.95 11.95 0 01-5.642-1.448L.057 24zm6.54-3.987l.399.237a9.842 9.842 0 004.949 1.33c5.448 0 9.886-4.438 9.886-9.886 0-2.64-1.029-5.122-2.896-6.988A9.825 9.825 0 0011.945 2.06c-5.448 0-9.886 4.438-9.886 9.886 0 1.99.584 3.951 1.688 5.637l-.999 3.637 3.849-.963zM17.984 14.549c-.197-.098-1.174-.578-1.356-.644-.182-.067-.314-.098-.446.098-.133.197-.512.644-.627.777-.115.133-.23.148-.427.05-.197-.098-.832-.307-1.586-.981-.587-.522-.98-1.168-1.096-1.365-.115-.197-.012-.304.086-.401.089-.088.197-.23.296-.345.099-.115.132-.197.198-.33.066-.132.033-.247-.016-.345-.049-.098-.446-1.077-.611-1.475-.161-.387-.323-.334-.446-.34-.115-.006-.247-.007-.38-.007-.132 0-.346.049-.527.246-.182.197-.69.676-.69 1.646 0 .97.707 1.906.807 2.039.099.132 1.392 2.125 3.377 2.897.472.162.84.258 1.127.33.474.12.905.103 1.246.063.38-.045 1.174-.479 1.34-.942.165-.463.165-.86.115-.942-.049-.082-.182-.132-.38-.23z"/></svg>
+        </a>
+      </div>
 
-  <!-- Script animazioni -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <!-- Email + Copy Icon -->
+      <div class="flex items-center gap-2 text-base">
+        <span id="emailValue" class="font-medium select-text">casaitaly25@gmail.com</span>
+        <button id="copyEmailBtn" aria-label="Copia email" class="text-[#bb9457] hover:text-[#a68663] focus:outline-none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.103 0-2 .897-2 2v12h2V3h12V1z"></path><path d="M19 5H8c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h11c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2zm0 16H8V7h11v14z"></path></svg>
+        </button>
+      </div>
+      <span class="text-sm text-[#4a3c31]">Risposta rapida garantita</span>
+    </div>
+  </div>
+
+  <p class="text-center text-sm text-[#7c6e5c] mt-8">© 2025 Casa Vacanze Brasile · Porto Seguro · Tutti i diritti riservati</p>
+
+  <!-- Script copia negli appunti -->
   <script>
-    AOS.init({
-      duration: 900,
-      once: true
-    });
+    (function() {
+      const btn = document.getElementById('copyEmailBtn');
+      const email = document.getElementById('emailValue').textContent.trim();
+
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(email).then(() => {
+          btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.103 0-2 .897-2 2v12h2V3h12V1z"></path><path d="M19 5H8c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h11c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2zm0 16H8V7h11v14z"></path></svg>';
+        });
+      });
+    })();
   </script>
+</footer>
+
 </body>
 </html>
