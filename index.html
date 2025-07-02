@@ -401,7 +401,7 @@ document.getElementById('formGruppi').onsubmit = function(e) {
       result.innerHTML = '<span class="error-message" style="display:block;">La data di check-out deve essere successiva al check-in.</span>';
       return;
     }
-    const { prezzoBase, totale, alta } = prezzoGruppo(persone, giorni, checkin);
+const { prezzoBase, totale, alta } = prezzoGruppo(persone, checkin, checkout);
     const sconto = calcolaSconto(totale, giorni);
     let riepilogo = `
       <div style="background:#fffbe6;border:2px solid #bb9457;padding:1.1rem 1rem 1.3rem 1rem;border-radius:1rem;">
