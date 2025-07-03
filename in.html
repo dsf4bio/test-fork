@@ -1,534 +1,207 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bar Dozza - Menu Completo</title>
-<style>
-:root {
-    --primary: #0A1A2F;
-    --secondary: #D4AF37;
-    --light: #F5E6C8;
-    --white: #FFFFFF;
-    --gray: #E0E0E0;
-    --whatsapp: #25D366;
-    --footer-bg: #1A2F4F;
-}
-body { background: var(--primary); color: var(--white); font-family: 'Montserrat', sans-serif; margin:0; }
-header {
-    background: linear-gradient(to right, var(--primary), #1A2F4F);
-    color: var(--secondary);
-    text-align: center;
-    padding: 2rem 1rem 2rem 1rem;
-    border-bottom: 3px solid var(--secondary);
-}
-.logo { font-size: 2.8rem; font-weight: 700; letter-spacing: 3px; margin-bottom: 0.5rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);}
-.slogan { color: var(--light); font-style: italic; font-size: 1.1rem;}
-.menu-container { max-width: 1200px; margin: 2rem auto; padding: 1rem;}
-.category-title {
-    text-align: center; margin: 3rem 0 2rem; font-size: 1.8rem; color: var(--secondary);
-    text-transform: uppercase; letter-spacing: 2px; position: relative;
-}
-.category-title:after {
-    content: ""; display: block; width: 100px; height: 3px; background: var(--secondary); margin: 0.5rem auto;
-}
-.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;}
-.menu-item {
-    background-color: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden;
-    border: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.3s; backdrop-filter: blur(5px);
-}
-.menu-item:hover {
-    transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); border-color: var(--secondary);
-}
-.item-image { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid var(--secondary);}
-.item-details { padding: 1.5rem;}
-.item-name { font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--secondary);}
-.item-type {
-    display: inline-block; background: rgba(212, 175, 55, 0.2); color: var(--light);
-    padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 0.8rem; border: 1px solid var(--secondary);
-}
-.item-description { color: var(--gray); margin-bottom: 1.5rem; font-size: 0.95rem;}
-.item-footer { display: flex; justify-content: space-between; align-items: center;}
-.item-price { font-weight: bold; font-size: 1.3rem; color: var(--secondary);}
-.order-btn {
-    background-color: transparent; color: var(--secondary); border: 2px solid var(--secondary);
-    padding: 0.5rem 1.5rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; font-weight: 600;
-}
-.order-btn:hover { background-color: var(--secondary); color: var(--primary);}
-.qty-selector {
-    width: 60px;
-    padding: 0.3em 0.6em;
-    border-radius: 6px;
-    border: 1px solid var(--secondary);
-    background: rgba(255,255,255,0.10);
-    color: var(--white);
-    margin-right: 0.5em;
-    font-size: 1em;
-}
-#cartBtn {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    z-index: 1100;
-    background: var(--secondary);
-    color: var(--primary);
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.09);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    padding: 0;
-}
-#cartBtn .cart-count {
-    background: #fff;
-    color: var(--secondary);
-    border-radius: 50%;
-    padding: 0.1em 0.5em;
-    font-size: 0.95rem;
-    margin-left: 0.1em;
-    min-width: 1.6em;
-    text-align: center;
-    font-weight: bold;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    border: 1.5px solid var(--secondary);
-}
-#cartBtn.shake {
-    animation: shake-cart 0.5s;
-}
-@keyframes shake-cart {
-    0% { transform: translateX(0);}
-    20% { transform: translateX(-4px);}
-    40% { transform: translateX(4px);}
-    60% { transform: translateX(-4px);}
-    80% { transform: translateX(4px);}
-    100% { transform: translateX(0);}
-}
-.modal {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(10, 26, 47, 0.95); z-index: 1000; justify-content: center; align-items: center; animation: fadeIn 0.3s;
-}
-@keyframes fadeIn { from { opacity: 0;} to { opacity: 1;} }
-.modal-content {
-    background: linear-gradient(135deg, var(--primary) 80%, var(--secondary) 100%);
-    width: 95%; max-width: 420px; padding: 2.2rem 1.1rem 2.5rem 1.1rem; border-radius: 18px;
-    border: 2px solid var(--secondary); box-shadow: 0 5px 25px 0 rgba(0,0,0,0.35); position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-.close-modal {
-    color: var(--secondary); position: absolute; top: 18px; right: 24px; font-size: 2.2rem;
-    cursor: pointer; transition: all 0.3s;
-}
-.close-modal:hover { transform: rotate(90deg) scale(1.15);}
-.modal-title {
-    margin-bottom: 1.1rem; color: var(--secondary); font-size: 1.5rem; text-align: center; font-weight: 700;
-}
-.order-summary {
-    background: rgba(255,255,255,0.10);
-    color: var(--white);
-    border-radius: 8px;
-    padding: 0.5rem 0.6rem;
-    margin-bottom: 1.2rem;
-    font-size: 0.98rem;
-    font-weight: 500;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
-    min-width: 240px;
-    max-width: 100%;
-}
-.order-summary table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95em;
-}
-.order-summary th, .order-summary td {
-    padding: 0.28em 0.3em;
-    text-align: left;
-}
-.order-summary th {
-    color: var(--secondary);
-    font-size: 1em;
-    font-weight: 700;
-    border-bottom: 1px solid var(--secondary);
-}
-.order-summary td {
-    color: var(--light);
-}
-.order-summary .totale {
-    color: #D4AF37;
-    font-weight: bold;
-    font-size: 1.08em;
-    border-top: 1px solid var(--secondary);
-}
-.order-summary .remove-btn {
-    background: none;
-    border: none;
-    color: #ff6b6b;
-    font-size: 1.1em;
-    cursor: pointer;
-}
-@media (max-width: 480px) {
-    .order-summary { font-size: 0.93rem; }
-    #cartBtn { width: 40px; height: 40px; font-size: 1rem; }
-    #cartBtn .cart-count { font-size: 0.85rem; min-width: 1.1em; }
-}
-.form-group {
-    margin-bottom: 1.3rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    text-align: left;
-}
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--light);
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-align: left;
-    width: 100%;
-}
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    background-color: rgba(255,255,255,0.08);
-    border: 1px solid var(--secondary);
-    color: var(--white);
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.2s;
-    text-align: left;
-    box-sizing: border-box;
-}
-.form-group textarea {
-    min-height: 60px;
-    max-height: 120px;
-    resize: vertical;
-}
-#notesCounter {
-    color: #D4AF37;
-    font-size: 0.9em;
-    text-align: right;
-    width: 100%;
-    margin-top: 0.2rem;
-}
-.error-message { color: #ff6b6b; font-size: 0.85rem; margin-top: 0.3rem; display: none;}
-#send-whatsapp {
-    background-color: var(--whatsapp); color: var(--white); border: none; padding: 1rem; width: 100%;
-    border-radius: 5px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;
-    display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-top: 1.2rem;
-    box-shadow: 0 2px 6px 0 rgba(37,211,102,0.15);
-}
-#send-whatsapp:hover { background-color: #128C7E; transform: translateY(-2px) scale(1.03);}
-.whatsapp-icon { width: 24px; height: 24px;}
-#thankYouMsg {
-    display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:2000;
-    background:rgba(10,26,47,0.93); color:#fff; align-items:center; justify-content:center;
-    font-size:2rem; font-weight:600; text-align:center; flex-direction:column;
-}
-#thankYouMsg .big { color:#D4AF37;font-size:2.2rem; margin-bottom:1rem;}
-#thankYouMsg .small { font-size:1.2rem; color:#F5E6C8;}
-footer {
-    background: linear-gradient(90deg, var(--footer-bg) 60%, var(--secondary) 100%);
-    color: var(--white); font-size: 1rem; padding: 2.5rem 0 1.2rem 0; margin-top: 3.5rem;
-    border-top: 3px solid var(--secondary); position: relative; text-align: center;
-}
-.footer-content { max-width: 700px; margin: 0 auto; font-size: 1.15rem; letter-spacing: 0.5px; line-height: 1.7;}
-.footer-logo { font-size: 1.6rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.5rem; display: inline-block;}
-.footer-slogan { color: var(--light); font-style: italic; font-size: 1rem; margin-bottom: 0.8rem; display: block;}
-.footer-bar { margin: 1.2rem auto 0.5rem auto; width: 80px; height: 4px; border-radius: 4px; background: var(--secondary);}
-.footer-icons { margin-top: 0.8rem;}
-.footer-icons img { width: 30px; margin: 0 10px; vertical-align: middle; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12)); transition: transform 0.2s;}
-.footer-icons img:hover { transform: scale(1.18) rotate(-10deg);}
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ordini via WhatsApp – DSFabio Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #1f2937;
+      color: #fff;
+      line-height: 1.6;
+    }
+    a { color: #facc15; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .btn {
+      display: inline-block;
+      background-color: #facc15;
+      color: #1f2937;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s, box-shadow 0.3s;
+      box-shadow: 0 6px 15px rgba(250,204,21,0.4);
+    }
+    .btn:hover {
+      background-color: #eab308;
+      box-shadow: 0 8px 20px rgba(234,179,8,0.6);
+    }
+    header {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #111827 40%, #374151 100%);
+    }
+    header h1 {
+      font-size: 2.8rem;
+      color: #facc15;
+      margin-bottom: 1rem;
+    }
+    header p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.25rem;
+      color: #d1d5db;
+    }
+    .content-section {
+      max-width: 1100px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    .content-section h2 {
+      font-size: 2rem;
+      color: #facc15;
+      margin-bottom: 1.5rem;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .feature {
+      background: #374151;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .feature h3 {
+      color: #facc15;
+      margin-bottom: 0.5rem;
+    }
+    .feature p {
+      color: #d1d5db;
+    }
+    .video-container {
+      margin: 3rem auto;
+      max-width: 800px;
+      aspect-ratio: 16/9;
+    }
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+    }
+    .image-section {
+      text-align: center;
+      margin: 4rem auto;
+    }
+    .image-section img {
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    form {
+      background: #374151;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 3rem auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    form h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #facc15;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    form button {
+      background-color: #facc15;
+      color: #1f2937;
+      padding: 0.8rem 2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #eab308;
+    }
+    .whatsapp-section {
+      text-align: center;
+      margin: 4rem auto;
+    }
+    .whatsapp-section p {
+      font-size: 1.2rem;
+      color: #d1d5db;
+      margin-bottom: 1rem;
+    }
+    footer {
+      text-align: center;
+      color: #9ca3af;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      .btn { padding: 0.8rem 1.5rem; font-size: 1rem; }
+    }
+  </style>
 </head>
 <body>
-<header>
-    <div class="logo">BAR DOZZA</div>
-    <p class="slogan">Ordina comodamente dal tuo tavolo via WhatsApp</p>
-</header>
-<button id="cartBtn" aria-label="Visualizza carrello">
-    <span style="font-size:1.4em;">🛒</span>
-    <span class="cart-count">0</span>
-</button>
-<div class="menu-container">
-    <h2 class="category-title">Birre Artigianali & Cocktail</h2>
-    <div class="menu-grid" id="menuGrid"></div>
-</div>
-<div class="modal" id="orderModal">
-    <div class="modal-content">
-        <span class="close-modal" id="closeModal">&times;</span>
-        <div class="modal-title">Riepilogo Ordine</div>
-        <div class="order-summary" id="orderSummary"></div>
-        <form id="orderForm" autocomplete="off">
-            <div class="form-group">
-                <label for="customerName">Nome <span style="color:#ff6b6b">*</span></label>
-                <input type="text" id="customerName" name="customerName" required placeholder="Il tuo nome">
-                <div class="error-message" id="nameError">Inserisci il tuo nome.</div>
-            </div>
-            <div class="form-group">
-                <label for="tableNumber">Numero Tavolo <span style="color:#ff6b6b">*</span></label>
-                <input type="text" id="tableNumber" name="tableNumber" required placeholder="Es: 12">
-                <div class="error-message" id="tableError">Inserisci il numero del tavolo.</div>
-            </div>
-            <div class="form-group">
-                <label for="notes">Note</label>
-                <textarea id="notes" name="notes" maxlength="200" placeholder="Non vedo l’ora di gustare il mio ordine!"></textarea>
-                <div id="notesCounter">200 caratteri rimasti</div>
-            </div>
-            <button type="submit" id="send-whatsapp">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon" alt="WhatsApp"> Invia Ordine su WhatsApp
-            </button>
-        </form>
+
+  <header>
+    <h1>Ordini via WhatsApp</h1>
+    <p>Semplifica gli ordini, riduci gli errori e migliora l’esperienza al tavolo. Il cliente scansiona il QR Code e ordina direttamente dal suo smartphone via WhatsApp.</p>
+  </header>
+
+  <section class="content-section">
+    <h2>Perché scegliere questa soluzione</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>Facile per i clienti</h3>
+        <p>Non serve app, né registrazione. Tutti sanno usare WhatsApp, anche i meno esperti.</p>
+      </div>
+      <div class="feature">
+        <h3>Zero errori negli ordini</h3>
+        <p>Niente più comande scritte male: tutto arriva chiaro e organizzato su WhatsApp.</p>
+      </div>
+      <div class="feature">
+        <h3>Più tavoli serviti</h3>
+        <p>Risparmi tempo, riduci l’attesa e puoi gestire più clienti contemporaneamente.</p>
+      </div>
     </div>
-</div>
-<div id="thankYouMsg">
-    <span class="big">Grazie per aver scelto Bar Dozza! 🥂</span>
-    <span class="small">Il tuo ordine è in arrivo.</span>
-</div>
-<footer>
-    <div class="footer-content">
-        <span class="footer-logo">BAR DOZZA</span>
-        <span class="footer-bar"></span>
-        <span class="footer-slogan">Il piacere dell'artigianale, la comodità del digitale.</span>
-        <br>
-        <span>Ordina dal tuo tavolo, rilassati e goditi l’esperienza.<br>Per info o richieste speciali chiedi pure al nostro staff!</span>
-        <div class="footer-icons">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Facebook_Logo.png" alt="Facebook">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-        </div>
-    </div>
-</footer>
-<script>
-// Lista prodotti
-const prodotti = [
-    {
-        nome: "Moretti",
-        tipo: "Lager Italiana",
-        descrizione: "Birra bionda dal gusto equilibrato con note di malto e un delicato aroma di luppolo.",
-        prezzo: 5.50,
-        img: "https://i.postimg.cc/7PRg8vd9/moretti.webp"
-    },
-    {
-        nome: "Messina",
-        tipo: "Bionda Artigianale",
-        descrizione: "Prodotta in Sicilia con malti italiani e luppoli pregiati. Gusto fresco con retrogusto amarognolo.",
-        prezzo: 6.00,
-        img: "https://i.postimg.cc/W3bMjssW/messina.jpg"
-    },
-    {
-        nome: "Ichnusa",
-        tipo: "Sarda - Non Filtrata",
-        descrizione: "Il fiore all'occhiello della Sardegna. Gusto pieno con sentori di cereali e schiuma cremosa.",
-        prezzo: 5.80,
-        img: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-    },
-    {
-        nome: "Peroni Nastro Azzurro",
-        tipo: "Premium Lager",
-        descrizione: "Birra dall'oro chiaro e brillante con un gusto fresco e leggero, perfetta per ogni occasione.",
-        prezzo: 5.20,
-        img: "https://i.postimg.cc/VLbXzGc8/peroni.jpg"
-    },
-    {
-        nome: "Heineken",
-        tipo: "Lager Olandese",
-        descrizione: "Birra dal colore dorato con un gusto equilibrato e un leggero retrogusto amarognolo.",
-        prezzo: 5.30,
-        img: "https://i.postimg.cc/Sxg9rw6c/hininkk.png"
-    },
-    {
-        nome: "Guinness",
-        tipo: "Stout Irlandese",
-        descrizione: "Birra scura dal gusto ricco e cremoso, con note di caffè e cioccolato.",
-        prezzo: 6.50,
-        img: "https://i.postimg.cc/vmyrqWkd/giness.jpg"
-    },
-    {
-        nome: "Corona Extra",
-        tipo: "Lager Messicana",
-        descrizione: "Birra chiara e rinfrescante, tradizionalmente servita con una fetta di lime.",
-        prezzo: 5.70,
-        img: "https://i.postimg.cc/d3gd8drp/corona.png"
-    },
-    {
-        nome: "Mojito",
-        tipo: "Cocktail",
-        descrizione: "Mojito 40cl: rum bianco, lime fresco, zucchero di canna, menta e soda. Un cocktail fresco, aromatico e dissetante perfetto per ogni momento.",
-        prezzo: 6.20,
-        img: "https://i.postimg.cc/HxZbkFxp/mojito-500x500.jpg"
-    },
-    {
-        nome: "Caipiroska alla Maracuja",
-        tipo: "Cocktail",
-        descrizione: "Caipiroska alla Maracuja 40cl: vodka, maracuja fresca, lime e zucchero di canna. Un mix tropicale, intenso e fruttato, perfetto per chi ama i sapori esotici.",
-        prezzo: 6.50,
-        img: "https://i.postimg.cc/6QhdD8x4/Maracuja-870x490.jpg"
-    },
-    {
-        nome: "Spritz",
-        tipo: "Cocktail",
-        descrizione: "Spritz 40cl: Aperol, Prosecco e soda, servito con ghiaccio e fetta d’arancia. Il classico aperitivo italiano, fresco, vivace e leggermente bitter.",
-        prezzo: 6.00,
-        img: "https://i.postimg.cc/br6PMH3V/spritz.webp"
-    }
-];
-// Stato del carrello
-let cart = [];
-// Genera menu con selettore quantità
-const menuGrid = document.getElementById('menuGrid');
-prodotti.forEach((p, idx) => {
-    const div = document.createElement('div');
-    div.className = "menu-item";
-    div.innerHTML = `
-        <img src="${p.img}" alt="${p.nome}" class="item-image">
-        <div class="item-details">
-            <h3 class="item-name">${p.nome}</h3>
-            <span class="item-type">${p.tipo}</span>
-            <p class="item-description">${p.descrizione}</p>
-            <div class="item-footer">
-                <span class="item-price">€${p.prezzo.toFixed(2)}</span>
-                <input type="number" min="1" max="20" value="1" class="qty-selector" id="qty-${idx}">
-                <button class="order-btn" data-idx="${idx}">Aggiungi</button>
-            </div>
-        </div>
-    `;
-    menuGrid.appendChild(div);
-});
-// Aggiungi al carrello
-document.querySelectorAll('.order-btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const idx = parseInt(this.getAttribute('data-idx'));
-        const qty = parseInt(document.getElementById('qty-' + idx).value);
-        const prod = prodotti[idx];
-        const cartIdx = cart.findIndex(item => item.nome === prod.nome);
-        if (cartIdx > -1) {
-            cart[cartIdx].qty += qty;
-        } else {
-            cart.push({ ...prod, qty });
-        }
-        updateCartCount();
-        shakeCart();
-    });
-});
-function updateCartCount() {
-    document.querySelector('.cart-count').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
-}
-function shakeCart() {
-    const btn = document.getElementById('cartBtn');
-    btn.classList.add('shake');
-    setTimeout(() => btn.classList.remove('shake'), 500);
-}
-// Gestione modale ordine
-const orderModal = document.getElementById('orderModal');
-document.getElementById('cartBtn').onclick = function() {
-    renderOrderSummary();
-    orderModal.style.display = 'flex';
-};
-document.getElementById('closeModal').onclick = function() {
-    orderModal.style.display = 'none';
-};
-window.onclick = function(event) {
-    if (event.target == orderModal) orderModal.style.display = 'none';
-};
-// Riepilogo ordine
-function renderOrderSummary() {
-    const orderSummary = document.getElementById('orderSummary');
-    if (cart.length === 0) {
-        orderSummary.innerHTML = "<p>Il carrello è vuoto.</p>";
-        return;
-    }
-    let html = '<table><thead><tr><th>Prodotto</th><th>Qtà</th><th>Prezzo</th><th></th></tr></thead><tbody>';
-    let totale = 0;
-    cart.forEach((item, idx) => {
-        html += `<tr>
-            <td>${item.nome}</td>
-            <td>${item.qty}</td>
-            <td>€${(item.prezzo * item.qty).toFixed(2)}</td>
-            <td><button class="remove-btn" data-idx="${idx}">✕</button></td>
-        </tr>`;
-        totale += item.prezzo * item.qty;
-    });
-    html += `</tbody><tfoot>
-        <tr><td colspan="2"></td><td class="totale">Totale</td><td class="totale">€${totale.toFixed(2)}</td></tr>
-    </tfoot></table>`;
-    orderSummary.innerHTML = html;
-    document.querySelectorAll('.remove-btn').forEach(btn => {
-        btn.onclick = function() {
-            cart.splice(parseInt(this.getAttribute('data-idx')), 1);
-            updateCartCount();
-            renderOrderSummary();
-        };
-    });
-}
-// Gestione campo note (max 200 caratteri)
-const notes = document.getElementById('notes');
-const notesCounter = document.getElementById('notesCounter');
-notes.addEventListener('input', function() {
-    const max = 200;
-    const len = notes.value.length;
-    if (len > max) notes.value = notes.value.substring(0, max);
-    notesCounter.textContent = (max - notes.value.length) + " caratteri rimasti";
-});
-// Invio ordine su WhatsApp
-document.getElementById('orderForm').onsubmit = function(e) {
-    e.preventDefault();
-    const name = document.getElementById('customerName').value.trim();
-    const table = document.getElementById('tableNumber').value.trim();
-    const notesVal = notes.value.trim();
-    let valid = true;
-    if (!name) {
-        document.getElementById('nameError').style.display = 'block';
-        valid = false;
-    } else document.getElementById('nameError').style.display = 'none';
-    if (!table) {
-        document.getElementById('tableError').style.display = 'block';
-        valid = false;
-    } else document.getElementById('tableError').style.display = 'none';
-    if (!valid) return;
+  </section>
 
-    // Genera il riepilogo ordine
-    let msg = `*Nuovo ordine dal tavolo ${table}*\n👤 Nome: ${name}\n\n*Ordine:*\n`;
-    let totale = 0;
-    cart.forEach(item => {
-        msg += `- ${item.nome} x${item.qty} = €${(item.prezzo * item.qty).toFixed(2)}\n`;
-        totale += item.prezzo * item.qty;
-    });
-    msg += `\n*Totale: €${totale.toFixed(2)}*`;
-    if (notesVal) msg += `\n\n*Note:* ${notesVal}`;
+  <section class="video-container">
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Demo Ordini WhatsApp" allowfullscreen></iframe>
+  </section>
 
-    // Numero WhatsApp di destinazione (sostituisci con il tuo)
-    const numero = "3440301412"; // <-- Sostituisci qui!
+  <div class="whatsapp-section">
+    <p>Prova subito il menu in versione WhatsApp:</p>
+    <a href="demo-menu-whatsapp.html" class="btn">Prova la demo</a>
+  </div>
 
-    // Codifica e apri WhatsApp
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
+  <section class="image-section">
+    <img src="https://i.postimg.cc/tTyqHvb2/con-ordine.jpg" alt="Ordine via WhatsApp" />
+  </section>
 
-    // Reset e chiudi modale (opzionale)
-    document.getElementById('orderModal').style.display = 'none';
-    setTimeout(() => {
-        cart = [];
-        updateCartCount();
-        renderOrderSummary();
-        document.getElementById('orderForm').reset();
-        notesCounter.textContent = "200 caratteri rimasti";
-    }, 1000);
-};
-</script>
+  <form>
+    <h2>Richiedi informazioni</h2>
+    <input type="text" name="nome" placeholder="Nome*" required />
+    <input type="email" name="email" placeholder="Email*" required />
+    <textarea name="messaggio" rows="5" placeholder="Scrivi il tuo messaggio (max 700 caratteri)" maxlength="700"></textarea>
+    <button type="submit">Invia richiesta</button>
+  </form>
+
+  <section class="whatsapp-section">
+    <p>Vuoi partire subito? Ti realizzo il menu completo in 2 giorni:</p>
+    <a href="https://wa.me/393440301412" class="btn">Scrivimi su WhatsApp</a>
+  </section>
+
+  <footer>
+    © 2025 DSFabio Digital – Tutti i diritti riservati
+  </footer>
+
 </body>
 </html>
-
