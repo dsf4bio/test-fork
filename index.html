@@ -357,11 +357,14 @@ function prezzoGruppo(persone, checkin, checkout) {
 
   const totale = (prezzoAlta * nottiAlta + prezzoBassa * nottiBassa) * persone;
 
-  return {
-    prezzoBase: `${prezzoBassa}–${prezzoAlta}`,
-    totale,
-    alta: nottiAlta > 0
-  };
+  const nottiTotali = nottiAlta + nottiBassa;
+const prezzoMedio = nottiTotali > 0 ? Math.round((prezzoAlta * nottiAlta + prezzoBassa * nottiBassa) / nottiTotali) : 0;
+
+return {
+  prezzoBase: prezzoMedio,
+  totale,
+  alta: nottiAlta > 0
+};
 }
 
 
@@ -510,12 +513,16 @@ function prezzoCamera(adulti, bambini, checkin, checkout) {
     totale += supplemento;
   }
 
-  return {
-    prezzoBase: null, // non usato nel riepilogo
-    totale,
-    alta: nottiAlta > 0,
-    supplemento
-  };
+  const nottiTotali = nottiAlta + nottiBassa;
+const prezzoBase = nottiTotali > 0 ? Math.round(totale / nottiTotali) : 0;
+
+return {
+  prezzoBase,
+  totale,
+  alta: nottiAlta > 0,
+  supplemento
+};
+
 }
 
     // Funzione per sconto soggiorni lunghi (>=8 notti)
@@ -560,7 +567,7 @@ function prezzoCamera(adulti, bambini, checkin, checkout) {
         </b> | <b>${giorni} ${pluralize(giorni, "notte", "notti")}</b><br>
         Dal <b>${formatDateEu(checkin)}</b> al <b>${formatDateEu(checkout)}</b></div>
         <div class="mb-2">Prezzo a notte: <b style="color:#15803d;">${prezzoBase} €</b></div>
-        ${supplemento > 0 ? `<div class="mb-2">Supplemento extra: <b style="color:#15803d;">${formatEuro(supplemento)}</b></div>` : ""}
+        ${supplemento > 0 ? `<div class="mb-2">Supplemento 2 bambini: <b style="color:#15803d;">${formatEuro(supplemento)}</b></div>` : ""}
         <div class="mb-2">Totale soggiorno: <b style="color:#bb9457;">${formatEuro(totale)}</b></div>
     `;
 
