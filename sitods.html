@@ -82,7 +82,7 @@
     }
     .hero-content {
       position: relative;
-      z-index: 1;
+      z-index: 1.5;
       max-width: 700px;
       animation: slideInLeft 1.2s ease forwards;
     }
@@ -105,12 +105,12 @@
     .hero-content h1 {
       font-size: 3.5rem;
       font-weight: 800;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       line-height: 1.1;
     }
     .hero-content p {
       font-size: 1.3rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1rem;
       color: #d1d5db;
       line-height: 1.5;
     }
@@ -119,13 +119,13 @@
     section#services {
       width: 100%;
       background-color: #111827;
-      padding: 4rem 5vw;
+      padding: 1.5rem 5vw;
     }
     section#services h2 {
       font-size: 2rem;
       font-weight: 700;
       color: #facc15;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
@@ -135,16 +135,16 @@
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.8rem;
+      gap: 2rem;
       max-width: 1200px;
       margin: 0 auto;
     }
     .service-card {
       background: #374151;
       border-radius: 12px;
-      padding: 1rem;
-      box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
-      border: 1px solid rgba(250, 204, 21, 0.15); /* micro bordo sottilissimo */
+      padding: 3rem;
+      box-shadow:  2px 8px rgb(0 0 0 / 0.2);
+      border: 1px solid rgba(250, 204, 21, 1); /* micro bordo sottilissimo */
       display: flex;
       flex-direction: column;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -157,7 +157,7 @@
     }
     .service-card img {
       width: 100%;
-      height: 320px; /* immagine verticale, più alta della larghezza */
+      height: 350px; /* immagine verticale, più alta della larghezza */
       object-fit: cover;
       border-radius: 8px;
       margin-bottom: 1rem;
@@ -191,7 +191,7 @@
     /* New Section: Perché scegliere DSFabio Digital */
     section#why-choose {
       background-color: #1f2937;
-      padding: 4rem 5vw;
+      padding: 0.3rem 6vw;
       text-align: center;
       max-width: 1200px;
       margin: 0 auto 4rem auto;
@@ -247,12 +247,12 @@
       text-align: center;
     }
 
-    /* New Section: Come funziona */
+    /* New Section: Perche scegere un menu */
     section#how-it-works {
-      background-color: #111827;
-      padding: 4rem 5vw;
+      background-color: #1f2937;
+      padding: 3rem 5vw;
       max-width: 1200px;
-      margin: 0 auto 4rem auto;
+      margin: 0 auto 1rem auto;
       text-align: center;
     }
     section#how-it-works h2 {
@@ -266,13 +266,13 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem;
+      gap: 1rem;
     }
     .step {
       background: #374151;
       border-radius: 12px;
-      padding: 2rem 1.5rem;
-      max-width: 280px;
+      padding: 1rem 3rem;
+      max-width: 300px;
       box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
       transition: box-shadow 0.3s ease;
       cursor: default;
@@ -286,7 +286,7 @@
     .step-icon {
       font-size: 3.5rem;
       color: #facc15;
-      margin-bottom: 1rem;
+      margin-bottom:1rem;
       animation: iconPulse 2.5s infinite;
     }
     @keyframes iconPulse {
@@ -310,8 +310,8 @@
     /* Contact Section */
     section#contact {
       width: 100%;
-      background-color: #111827;
-      padding: 4rem 5vw;
+      background-color: #1f2937;
+      padding: 5rem 1vw;
       text-align: center;
     }
     section#contact h2 {
@@ -325,7 +325,7 @@
       color: #d1d5db;
       font-size: 1.1rem;
       max-width: 600px;
-      margin: 0 auto 2.5rem;
+      margin: 0 auto 2rem;
       line-height: 1.5;
     }
 
@@ -350,7 +350,7 @@
     }
 
     /* Responsive */
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
       header.hero {
         padding: 4rem 1.5rem;
       }
@@ -375,7 +375,7 @@
         margin-bottom: 2rem;
       }
     }
-    @media (max-width: 480px) {
+    @media (max-width: 700px) {
       .hero-content h1 {
         font-size: 2rem;
       }
@@ -448,49 +448,280 @@
         <div class="why-icon"><i class="fas fa-mobile-alt"></i></div>
         <h3>Design Responsive</h3>
         <p>Accesso facile e veloce da qualsiasi dispositivo, per te e i tuoi clienti.</p>
-      </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
-  <section id="how-it-works" aria-label="Come funziona DSFabio Digital" data-aos="fade-up">
-    <h2>Come funziona</h2>
-    <div class="steps">
-      <div class="step" tabindex="0">
-        <div class="step-icon"><i class="fas fa-qrcode"></i></div>
-        <h3>1. Scansiona il QR Code</h3>
-        <p>I clienti accedono al menu digitale direttamente dal tavolo, senza installazioni.</p>
-      </div>
-      <div class="step" tabindex="0">
-        <div class="step-icon"><i class="fas fa-mobile-alt"></i></div>
-        <h3>2. Ordina via WhatsApp</h3>
-        <p>Ordini semplici e veloci direttamente dal telefono, senza errori.</p>
-      </div>
-      <div class="step" tabindex="0">
-        <div class="step-icon"><i class="fas fa-chart-pie"></i></div>
-        <h3>3. Aumenta le vendite</h3>
-        <p>Offri suggerimenti intelligenti per incrementare lo scontrino medio.</p>
-      </div>
-    </div>
-  </section>
+    <!-- Demo Section -->
+ 
+    <section id="demo-session" style="background:linear-gradient(135deg,#facc15 0%,#111827 100%);padding:2.5rem 0;">
+        <h2 style="color:#1f2937;font-size:2rem;font-weight:800;text-align:center;letter-spacing:1.2px;margin-bottom:1.5rem;">Prova i Modelli Demo</h2>
+        <div class="demo-flip-grid">
+          <!-- Card 1 -->
+          <div class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img src="https://i.postimg.cc/kg0MTXpr/menu-base.jpg" alt="Menu Digitale" class="flip-avatar" />
+                <h3>Menu Digitale</h3>
+              </div>
+              <div class="flip-back">
+                <div class="flip-icon"><i class="fas fa-qrcode"></i></div>
+                <p>Menu consultabile da QR Code, semplice e veloce.</p>
+                <a href="demo-menu-digitale.html" class="btn-primary">Prova il modello</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img src="https://i.postimg.cc/0Q7fH4rn/mennn.jpg" alt="WhatsApp" class="flip-avatar" />
+                <h3>Menu + WhatsApp</h3>
+              </div>
+              <div class="flip-back">
+                <div class="flip-icon"><i class="fab fa-whatsapp"></i></div>
+                <p>Ordina dal tavolo via WhatsApp, senza errori.</p>
+                <a href="demo-menu-whatsapp.html" class="btn-primary">Prova il modello</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <img src="https://i.postimg.cc/W40NCLBd/upsell.webp" alt="Upsell" class="flip-avatar" />
+                <h3>Menu + Upsell</h3>
+              </div>
+              <div class="flip-back">
+                <div class="flip-icon"><i class="fas fa-lightbulb"></i></div>
+                <p>Suggerimenti smart per aumentare lo scontrino medio.</p>
+                <a href="demo-menu-upsell.html" class="btn-primary">Prova il modello</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <style>
+    .demo-flip-grid {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      padding: 2rem;
+    }
 
-  <!-- Contact Section -->
-  <section id="contact" aria-label="Contatti" data-aos="fade-up">
-    <h2>Contattaci</h2>
-    <p>Ricevi un preventivo personalizzato per il tuo locale. Assistenza e aggiornamenti inclusi per 12 mesi.</p>
-    <a href="mailto:info@fabiodigital.com" class="btn-primary" role="button">Contattaci ora</a>
-  </section>
+    .flip-card {
+      background: transparent;
+      width: 320px;
+      height: 200px;
+      perspective: 1000px;
+      flex-shrink: 0;
+    }
 
-  <!-- Footer -->
-  <footer role="contentinfo">
-    <p>DSFabio Digital Solutions – Tutti i diritti riservati © 2025</p>
-    <p>
-      <a href="#why-choose">Perché scegliere noi</a> · 
-      <a href="#how-it-works">Come funziona</a> · 
-      <a href="#contact">Contatti</a>
-    </p>
-  </footer>
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 1s ease;
+      transform-style: preserve-3d;
+    }
 
+    .flip-inner.revealed {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .flip-front {
+      background: #ffffff;
+      color: #1f2937;
+      border: 2px solid #1f2937;
+    }
+
+    .flip-avatar {
+      width: 135px;
+      height: 135px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 0.7rem;
+      border: 2px solid #facc15;
+      box-shadow: 0 2px 8px rgba(250,204,21,0.15);
+      background: #fff;
+    }
+
+    .flip-front h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0;
+      text-align: center;
+    }
+
+    .flip-back {
+      background: #1f2937;
+      color: #facc15;
+      border: 2px solid #fff;
+      transform: rotateY(180deg);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .flip-icon {
+      font-size: 2rem;
+      color: #facc15;
+      margin-bottom: 1rem;
+    }
+
+    .flip-back p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+      background-color: #facc15;
+      color: #1f2937;
+      font-weight: 700;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 8px rgb(31 41 55 / 0.08);
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-primary:hover, .btn-primary:focus {
+      background-color: #eab308;
+      box-shadow: 0 8px 20px rgba(250,204,21,0.2);
+      outline: none;
+    }
+
+    @media (max-width: 768px) {
+      .flip-card {
+        width: 90vw;
+        max-width: 320px;
+        height: 220px;
+      }
+
+      .flip-avatar {
+        width: 135px;
+        height: 135px;
+      }
+
+      .flip-front h3 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.flip-card');
+
+      function handleScroll() {
+        const centerY = window.innerHeight / 2;
+
+        cards.forEach(card => {
+          const inner = card.querySelector('.flip-inner');
+          const rect = card.getBoundingClientRect();
+          const middleY = rect.top + rect.height / 2;
+
+          if (middleY < centerY) {
+            inner.classList.add('revealed');
+          } else {
+            inner.classList.remove('revealed');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', handleScroll);
+      window.addEventListener('load', handleScroll);
+});
+</script>
+
+  <!-- Perché scegliere un menu digitale? -->
+
+  <section id="benefici" aria-label="Perché scegliere un menu digitale"
+  style="background-color:#111827; padding:2rem 5vw; width:100%; margin: 0 0 4rem 0; color:#fff; font-family: 'Inter', sans-serif;">
+  <h2 style="color:#facc15; font-weight: 800; font-size: 2.25rem; margin-bottom:2.5rem; letter-spacing:1.5px; text-align:center;">
+    Perché scegliere un menu digitale?
+  </h2>
+  <ul style="list-style:none; padding:0; max-width:900px; margin:0 auto; font-size:1.15rem; line-height:1.7; font-weight: 500;">
+    <li style="display:flex; align-items:flex-start; margin-bottom:1.8rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-right:1rem;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 6L9 17L4 12" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <strong style="font-weight: 700;">Aumenti lo scontrino medio</strong><br />
+        Suggerimenti automatici che invogliano il cliente ad aggiungere prodotti, aumentando i guadagni senza fatica.
+      </div>
+    </li>
+    <li style="display:flex; align-items:flex-start; margin-bottom:1.8rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-right:1rem;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 6L9 17L4 12" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <strong style="font-weight: 700;">Riduci i tempi di attesa</strong><br />
+        Il cliente ordina subito dal telefono, permettendoti di servire più tavoli con meno stress.
+      </div>
+    </li>
+    <li style="display:flex; align-items:flex-start; margin-bottom:1.8rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-right:1rem;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 6L9 17L4 12" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <strong style="font-weight: 700;">Modifichi il menu in tempo reale</strong><br />
+        Cambi piatti e prezzi in un clic, senza ristampe o errori.
+      </div>
+    </li>
+    <li style="display:flex; align-items:flex-start; margin-bottom:1.8rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-right:1rem;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 6L9 17L4 12" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <strong style="font-weight: 700;">Offri un’esperienza digitale accattivante</strong><br />
+        Un menu moderno e coinvolgente che conquista e fidelizza i clienti.
+      </div>
+    </li>
+    <li style="display:flex; align-items:flex-start; margin-bottom:1.8rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-right:1rem;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 6L9 17L4 12" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <strong style="font-weight: 700;">Distinguiti dalla concorrenza</strong><br />
+        Un locale innovativo e tecnologico attira più clienti e fa parlare bene di te.
+      </div>
+    </li>
+  </ul>
+</section>
+<section style="background: #1f2937; color: #facc15; padding: 3rem 1rem; text-align: center;">
+  <h2 style="font-size: 2rem; margin-bottom: 1rem;">Contattami ora</h2>
+  <p style="margin: 0 auto 2rem auto; max-width: 500px; font-size: 1rem;">
+Vuoi un menu moderno, elegante e pronto a farti vendere di più? Lo creo per te in soli 2 giorni.
+  </p>
+  
+  
+  <a href="https://wa.me/393440301412" class="btn-primary">Scrivimi su WhatsApp</a>
+</section>
+
+<section style="height: 100px; background: linear-gradient(to top, #1f2937, transparent);"></section>
+<footer style="text-align: center; padding: 2rem 1rem; font-size: 0.9rem; color: #888;">
+  © 2025 DSFabio digital - Tutti i diritti riservati
+</footer>
   <!-- Script animazioni -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
@@ -499,6 +730,7 @@
       once: true
     });
   </script>
+
+
 </body>
 </html>
-
