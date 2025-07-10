@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cerca Auto - Responsive</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -24,12 +24,6 @@
       flex-direction: column;
       min-height: 100vh;
       overflow-x: hidden;
-    }
-    body > .overlay,
-    .container,
-    .reviews-wrapper,
-    footer {
-      margin-top: -0.8cm;
     }
     .overlay {
       position: fixed;
@@ -92,6 +86,7 @@
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-4px); }
     }
+
     .counters {
       display: flex;
       justify-content: center;
@@ -100,7 +95,7 @@
       margin-bottom: 50px;
     }
     .counter-box {
-      background: rgba(255 255 255 / 0.08);
+      background: rgba(255, 255, 255, 0.08);
       padding: 14px 16px;
       border-radius: 14px;
       flex: 1 1 40%;
@@ -118,32 +113,39 @@
       margin-bottom: 4px;
     }
     .label { font-size: 0.95rem; }
+
     .reviews-wrapper {
       position: relative;
       z-index: 2;
-      padding: 0 calc(var(--padding-mobile) + var(--side-expand)) 60px;
-      max-width: calc(700px + var(--side-expand)*2);
-      margin: 0 auto;
-    }
-    .reviews {
-      min-height: 100px;
-      position: absolute;
+      max-width: 800px;
+      margin: 0 auto 60px;
+      height: 140px;
       overflow: hidden;
-      font-style: italic;
-      font-weight: 500;
-      font-size: 1rem;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.7);
-      text-align: center;
-      line-height: 1.5;
     }
     .review {
       position: absolute;
-      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 0.8s ease;
+      text-align: center;
+      font-style: italic;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.6;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.7);
     }
-    .review.active { opacity: 1; position: relative; }
-    .author { margin-top: 6px; font-weight: 700; display: block; }
+    .review.active {
+      opacity: 1;
+      position: relative;
+    }
+    .author {
+      display: block;
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
     footer {
       background: var(--dark-bg);
       color: var(--text-light);
@@ -172,9 +174,10 @@
       font-weight: 500;
       cursor: pointer;
     }
+
     @media (max-width: 480px) {
       .container {
-        padding: 48px calc(var(--padding-mobile) + 0px) 48px;
+        padding: 48px var(--padding-mobile) 48px;
       }
       h1 { font-size: 2.4rem; }
       .cta-btn {
@@ -188,6 +191,7 @@
         height: 80px;
       }
     }
+
     #modal {
       display: none;
       position: fixed;
@@ -212,22 +216,19 @@
       padding: 24px 32px;
       box-shadow: 0 0 20px rgba(0,255,231,0.5);
       color: #fff;
-      font-family: 'Poppins', sans-serif;
-      position: relative;
       font-size: 0.9rem;
+      position: relative;
     }
     .modal-content h2 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      font-weight: 800;
-      font-size: 1.4rem;
       text-align: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-top: 0;
     }
     .modal-content label {
       display: block;
       margin-top: 12px;
       font-weight: 600;
-      font-size: 1rem;
     }
     .modal-content input,
     .modal-content select,
@@ -255,7 +256,6 @@
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      font-weight: 600;
     }
     .cambio-group input[type="checkbox"] {
       width: 18px;
@@ -308,13 +308,13 @@
       </div>
     </div>
   </div>
+
   <div class="reviews-wrapper">
-    <div class="reviews" aria-live="polite">
-      <div class="review active">“Il modo più semplice e veloce per trovare la mia nuova auto, ottimo servizio.”<br><span class="author">– Alessandra T.</span></div>
-      <div class="review">“Assistenza impeccabile e vasta scelta di modelli, consigliatissimo.”<br><span class="author">– Marco L.</span></div>
-      <div class="review">“Esperienza personalizzata e risparmio assicurato, super soddisfatto.”<br><span class="author">– Chiara P.</span></div>
-    </div>
+    <div class="review active">“Il modo più semplice e veloce per trovare la mia nuova auto, ottimo servizio.”<br><span class="author">– Alessandra T.</span></div>
+    <div class="review">“Assistenza impeccabile e vasta scelta di modelli, consigliatissimo.”<br><span class="author">– Marco L.</span></div>
+    <div class="review">“Esperienza personalizzata e risparmio assicurato, super soddisfatto.”<br><span class="author">– Chiara P.</span></div>
   </div>
+
   <footer>
     <div class="footer-top">
       <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -322,29 +322,29 @@
       <a href="#"><i class="fab fa-whatsapp"></i></a>
     </div>
     <div class="footer-bottom">
-      © 2025 Cerca Auto – Tutti i diritti riservati · <a href="#" onclick="alert('Modale privacy in arrivo')">Privacy</a>
+      © 2025 Cerca Auto – Tutti i diritti riservati · <a href="#">Privacy</a>
     </div>
   </footer>
 
-  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+  <div id="modal">
     <div class="modal-content">
-      <button id="closeModalBtn" aria-label="Chiudi modale">&times;</button>
-      <h2 id="modalTitle">Invia la tua richiesta</h2>
+      <button id="closeModalBtn">&times;</button>
+      <h2>Invia la tua richiesta</h2>
       <form id="requestForm" autocomplete="off">
         <label for="nome">Nome *</label>
-        <input type="text" id="nome" name="nome" required placeholder="Il tuo nome" />
+        <input type="text" id="nome" name="nome" required />
         <label for="email">Email *</label>
-        <input type="email" id="email" name="email" required placeholder="la tua email" />
+        <input type="email" id="email" name="email" required />
         <label for="cellulare">Cellulare</label>
-        <input type="tel" id="cellulare" name="cellulare" placeholder="il tuo numero di tel." />
+        <input type="tel" id="cellulare" name="cellulare" />
         <label for="marca">Marca *</label>
-        <input type="text" id="marca" name="marca" required placeholder="Es. fiat" />
+        <input type="text" id="marca" name="marca" required />
         <label for="modello">Modello *</label>
-        <input type="text" id="modello" name="modello" required placeholder="Es. 500" />
+        <input type="text" id="modello" name="modello" required />
         <label for="anno">Anno *</label>
-        <input type="number" id="anno" name="anno" min="1900" required placeholder="Es. 2019" />
+        <input type="number" id="anno" name="anno" min="1900" required />
         <label for="cilindrata">Cilindrata *</label>
-        <input type="number" id="cilindrata" name="cilindrata" min="800" required placeholder="Es. 1200" />
+        <input type="number" id="cilindrata" name="cilindrata" min="800" required />
         <label for="carburante">Tipo carburante *</label>
         <select id="carburante" name="carburante" required>
           <option value="">-- Seleziona --</option>
@@ -365,38 +365,28 @@
           <input type="number" name="km_max" placeholder="a" min="0" style="flex:1" />
         </div>
         <label for="budget">Budget massimo (€)</label>
-        <input
-          type="range"
-          id="budget"
-          name="budget"
-          min="1000"
-          max="55000"
-          step="500"
-          oninput="budgetOutput.value = this.value"
-        />
+        <input type="range" id="budget" name="budget" min="1000" max="55000" step="500" oninput="budgetOutput.value = this.value" />
         <output id="budgetOutput">1000</output>
         <label for="note">Nota extra</label>
-        <textarea id="note" name="note" placeholder="Scrivi qui il tuo messaggio..."></textarea>
+        <textarea id="note" name="note"></textarea>
         <button type="submit">Invia richiesta</button>
       </form>
     </div>
   </div>
 
   <script>
-    // Set max anno a quello corrente
+    // Imposta anno massimo attuale
     document.getElementById("anno").max = new Date().getFullYear();
 
-    // Contatori con animazione corretta
+    // Contatori numerici
     const counters = document.querySelectorAll(".counter");
-    counters.forEach((counter) => {
+    counters.forEach(counter => {
       const updateCount = () => {
         const target = +counter.getAttribute("data-target");
         let count = +counter.innerText;
         const increment = target / 100;
-
         if (count < target) {
-          count = Math.min(count + increment, target);
-          counter.innerText = Math.ceil(count);
+          counter.innerText = Math.ceil(count + increment);
           setTimeout(updateCount, 20);
         } else {
           counter.innerText = target;
@@ -405,62 +395,53 @@
       updateCount();
     });
 
-    // Controllo km no negativi e min <= max
-    const kmMinInput = document.querySelector('input[name="km_min"]');
-    const kmMaxInput = document.querySelector('input[name="km_max"]');
+    // Recensioni auto-fade
+    const reviews = document.querySelectorAll(".review");
+    let currentReview = 0;
+    setInterval(() => {
+      reviews[currentReview].classList.remove("active");
+      currentReview = (currentReview + 1) % reviews.length;
+      reviews[currentReview].classList.add("active");
+    }, 5000);
 
-    [kmMinInput, kmMaxInput].forEach((input) => {
+    // KM logica
+    const kmMin = document.querySelector('input[name="km_min"]');
+    const kmMax = document.querySelector('input[name="km_max"]');
+    [kmMin, kmMax].forEach(input => {
       input.addEventListener("input", () => {
-        let kmMin = parseInt(kmMinInput.value) || 0;
-        let kmMax = parseInt(kmMaxInput.value) || 0;
-
-        if (kmMin < 0) kmMinInput.value = 0;
-        if (kmMax < 0) kmMaxInput.value = 0;
-
-        if (kmMin > kmMax && kmMax !== 0) {
-          kmMinInput.value = kmMax;
-        }
+        const min = parseInt(kmMin.value) || 0;
+        const max = parseInt(kmMax.value) || 0;
+        if (min < 0) kmMin.value = 0;
+        if (max < 0) kmMax.value = 0;
+        if (min > max && max !== 0) kmMin.value = max;
       });
     });
 
-    // Checkbox unica selezione cambio
-    document.querySelectorAll('input[name="cambio"]').forEach((box) => {
-      box.addEventListener("change", () => {
-        if (box.checked) {
-          document.querySelectorAll('input[name="cambio"]').forEach((other) => {
-            if (other !== box) other.checked = false;
+    // Cambio singolo
+    document.querySelectorAll('input[name="cambio"]').forEach(checkbox => {
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+          document.querySelectorAll('input[name="cambio"]').forEach(other => {
+            if (other !== checkbox) other.checked = false;
           });
         }
       });
     });
 
-    // Apertura modale
-    document.getElementById("openModalBtn")?.addEventListener("click", () => {
+    // Modale
+    document.getElementById("openModalBtn").addEventListener("click", () => {
       document.getElementById("modal").classList.add("show");
       document.body.style.overflow = "hidden";
     });
-
-    // Chiusura modale bottone
-    document.getElementById("closeModalBtn")?.addEventListener("click", () => {
+    document.getElementById("closeModalBtn").addEventListener("click", () => {
       document.getElementById("modal").classList.remove("show");
       document.body.style.overflow = "";
     });
-
-    // Chiusura modale clic esterno
-    document.getElementById("modal")?.addEventListener("click", (e) => {
-      if (e.target === document.getElementById("modal")) {
+    document.getElementById("modal").addEventListener("click", e => {
+      if (e.target === e.currentTarget) {
         document.getElementById("modal").classList.remove("show");
         document.body.style.overflow = "";
       }
-    });
-
-    // Submit form (alert e reset)
-    document.getElementById("requestForm")?.addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert("Richiesta inviata! Grazie.");
-      document.getElementById("modal").classList.remove("show");
-      document.body.style.overflow = "";
-      e.target.reset();
     });
   </script>
 </body>
