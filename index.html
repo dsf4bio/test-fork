@@ -105,8 +105,8 @@
       border-radius: 14px;
       flex: 1 1 40%;
       box-shadow: 0 3px 12px rgba(0,200,255,0.5);
-      min-width: 120px;
-      height: 90px;
+      min-width: 110px;
+      height: 80px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -127,7 +127,7 @@
     }
     .reviews {
       min-height: 100px;
-      position: relative;
+      position: absolute;
       overflow: hidden;
       font-style: italic;
       font-weight: 500;
@@ -264,7 +264,7 @@
       cursor: pointer;
     }
     .modal-content button[type="submit"] {
-      margin-top: 20px;
+      margin-top: 18px;
       background: var(--accent);
       color: #000;
       font-weight: 700;
@@ -281,7 +281,7 @@
     }
     #closeModalBtn {
       position: absolute;
-      top: 12px;
+      top: 14px;
       right: 12px;
       background: none;
       border: none;
@@ -332,17 +332,17 @@
       <h2 id="modalTitle">Invia la tua richiesta</h2>
       <form id="requestForm" autocomplete="off">
         <label for="nome">Nome *</label>
-        <input type="text" id="nome" name="nome" required placeholder="Mario Rossi" />
+        <input type="text" id="nome" name="nome" required placeholder="Il tuo nome" />
         <label for="email">Email *</label>
-        <input type="email" id="email" name="email" required placeholder="email@example.com" />
+        <input type="email" id="email" name="email" required placeholder="la tua email" />
         <label for="cellulare">Cellulare</label>
-        <input type="tel" id="cellulare" name="cellulare" placeholder="320 1234567" />
+        <input type="tel" id="cellulare" name="cellulare" placeholder="il tuo numero di tel." />
         <label for="marca">Marca *</label>
-        <input type="text" id="marca" name="marca" required placeholder="Es. Fiat" />
+        <input type="text" id="marca" name="marca" required placeholder="Es. fiat" />
         <label for="modello">Modello *</label>
-        <input type="text" id="modello" name="modello" required placeholder="Es. Panda" />
+        <input type="text" id="modello" name="modello" required placeholder="Es. 500" />
         <label for="anno">Anno *</label>
-        <input type="number" id="anno" name="anno" min="1900" required placeholder="Es. 2020" />
+        <input type="number" id="anno" name="anno" min="1900" required placeholder="Es. 2019" />
         <label for="cilindrata">Cilindrata *</label>
         <input type="number" id="cilindrata" name="cilindrata" min="800" required placeholder="Es. 1200" />
         <label for="carburante">Tipo carburante *</label>
@@ -359,7 +359,7 @@
           <label><input type="checkbox" name="cambio" value="Manuale" /> Manuale</label>
           <label><input type="checkbox" name="cambio" value="Automatico" /> Automatico</label>
         </div>
-        <label for="km_range">Chilometraggio desiderato (da - a km)</label>
+        <label for="km_range">Chilometraggio desiderato</label>
         <div style="display:flex; gap:10px;">
           <input type="number" name="km_min" placeholder="da" min="0" style="flex:1" />
           <input type="number" name="km_max" placeholder="a" min="0" style="flex:1" />
@@ -370,14 +370,14 @@
           id="budget"
           name="budget"
           min="1000"
-          max="300000"
+          max="55000"
           step="500"
           oninput="budgetOutput.value = this.value"
         />
         <output id="budgetOutput">1000</output>
-        <label for="note">Note extra</label>
+        <label for="note">Scrivi qui il tuo messaggio...</label>
         <textarea id="note" name="note" placeholder="Descrizione aggiuntiva"></textarea>
-        <button type="submit">Invia</button>
+        <button type="submit">Invia richiesta</button>
       </form>
     </div>
   </div>
