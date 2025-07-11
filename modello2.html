@@ -106,6 +106,7 @@
       box-shadow: 0 0 14px rgba(0,0,0,0.15);
       scrollbar-width: none;
       -ms-overflow-style: none;
+      border: 1.5px solid var(--accent);
     }
     .modal-content::-webkit-scrollbar { display: none; }
 
@@ -155,21 +156,20 @@
       flex-wrap: wrap;
     }
 
-    /* Label testo a sinistra, checkbox a destra */
+    /* Allineamento label e checkbox */
     .cambio-group label {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      width: 130px;
-      font-weight: normal;
+      gap: 6px;
       cursor: pointer;
+      font-weight: normal;
+      user-select: none;
     }
     .cambio-group input[type="checkbox"] {
-      margin-left: 8px;
-      order: 2;
-    }
-    .cambio-group label > span {
-      order: 1;
+      margin: 0;
+      padding: 0;
+      width: 18px;
+      height: 18px;
     }
 
     .budget-range-wrapper {
@@ -288,8 +288,8 @@
         <fieldset class="row-cambio">
           <legend>Tipo di cambio *</legend>
           <div class="cambio-group">
-            <label><span>Manuale</span><input type="checkbox" name="cambio" value="Manuale" /></label>
-            <label><span>Automatico</span><input type="checkbox" name="cambio" value="Automatico" /></label>
+            <label><input type="checkbox" name="cambio" value="Manuale" /> Manuale</label>
+            <label><input type="checkbox" name="cambio" value="Automatico" /> Automatico</label>
           </div>
         </fieldset>
 
@@ -350,4 +350,5 @@
 
 </body>
 </html>
+
 
