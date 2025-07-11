@@ -11,7 +11,11 @@
       --accent: #e84a5f;
       --text: #122334;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     html, body {
       height: 100%;
       font-family: 'Rubik', sans-serif;
@@ -42,7 +46,7 @@
       font-size: 1.15rem;
       max-width: 600px;
       line-height: 1.6;
-      color: #fff;
+      color: #ffffff;
     }
     .cta-btn {
       margin-top: 30px;
@@ -96,7 +100,7 @@
       width: 100%;
       max-width: 500px;
       max-height: 90vh;
-      padding: 26px 22px;
+      padding: 24px;
       overflow-y: auto;
       position: relative;
       box-shadow: 0 0 14px rgba(0,0,0,0.15);
@@ -111,11 +115,13 @@
       color: var(--accent);
       margin-bottom: 20px;
     }
+
     .modal-content label {
       font-weight: 600;
       display: block;
-      margin-top: 14px;
+      margin-top: 16px;
     }
+
     .modal-content input,
     .modal-content select,
     .modal-content textarea {
@@ -126,23 +132,29 @@
       border: 1px solid #ccc;
       font-size: 1rem;
     }
+
     .modal-content textarea {
       min-height: 80px;
       resize: vertical;
     }
 
-    .row-cambio {
+    fieldset.row-cambio {
       margin-top: 18px;
+      border: none;
+      padding: 0;
     }
-    .row-cambio legend {
+
+    fieldset.row-cambio legend {
       font-weight: 600;
       margin-bottom: 8px;
     }
+
     .cambio-group {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
     }
+
     .cambio-group label {
       display: flex;
       align-items: center;
@@ -162,6 +174,7 @@
       width: 100%;
       cursor: pointer;
     }
+
     #closeModalBtn {
       position: absolute;
       top: 12px;
@@ -174,7 +187,10 @@
     }
 
     @media (max-width: 480px) {
-      .cambio-group { flex-direction: column; gap: 8px; }
+      .cambio-group {
+        flex-direction: column;
+        gap: 8px;
+      }
     }
   </style>
 </head>
