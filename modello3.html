@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cerca Auto - Variante 3 Modale Aggiornata</title>
+  <title>Cerca Auto - Richiesta</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
@@ -20,7 +20,7 @@
     }
     header {
       min-height: 60vh;
-      background: rgba(255,255,255,0.30);
+      background: rgba(255,255,255,0.3);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -121,15 +121,15 @@
       max-width: 500px;
       width: 100%;
       padding: 28px 24px;
+      max-height: 85vh;
       overflow-y: auto;
       position: relative;
-      max-height: 85vh;
       box-shadow: 0 0 14px rgba(0,0,0,0.15);
       border: 1px solid var(--accent);
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
     }
     .modal-content::-webkit-scrollbar {
-      display: none; /* Chrome, Safari */
+      display: none;
     }
     .modal-content h2 {
       font-size: 1.4rem;
@@ -156,6 +156,8 @@
       min-height: 80px;
       resize: vertical;
     }
+
+    /* Cambio */
     fieldset.row-cambio {
       margin-top: 14px;
       border: none;
@@ -167,25 +169,39 @@
     }
     .cambio-group {
       display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      font-weight: normal;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
     }
-    /* Label testo a sinistra, checkbox a destra */
     .cambio-group label {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      width: 130px;
+      gap: 10px;
+      font-weight: normal;
       cursor: pointer;
     }
     .cambio-group input[type="checkbox"] {
-      order: 2;
-      margin-left: 8px;
+      margin: 0;
+      accent-color: var(--accent);
     }
-    .cambio-group label > span {
-      order: 1;
+
+    /* Slider budget */
+    .slider-budget {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
     }
+    .slider-budget input[type="range"] {
+      flex: 1;
+      accent-color: var(--accent);
+    }
+    .slider-budget span {
+      min-width: 90px;
+      text-align: right;
+      font-weight: 600;
+    }
+
     .modal-content button[type="submit"] {
       margin-top: 24px;
       background: var(--accent);
@@ -207,19 +223,9 @@
       color: var(--accent);
       cursor: pointer;
     }
+
     @media (max-width: 480px) {
       .steps { flex-direction: column; align-items: center; }
-      fieldset.row-cambio {
-        display: block;
-      }
-      .cambio-group {
-        flex-direction: column;
-        gap: 10px;
-        width: auto;
-      }
-      .cambio-group label {
-        width: auto;
-      }
     }
   </style>
 </head>
@@ -291,10 +297,16 @@
         <fieldset class="row-cambio">
           <legend>Tipo di cambio *</legend>
           <div class="cambio-group">
-            <label><span>Manuale</span><input type="checkbox" name="cambio" value="Manuale" /></label>
-            <label><span>Automatico</span><input type="checkbox" name="cambio" value="Automatico" /></label>
+            <label><input type="checkbox" name="cambio" value="Manuale" /><span>Manuale</span></label>
+            <label><input type="checkbox" name="cambio" value="Automatico" /><span>Automatico</span></label>
           </div>
         </fieldset>
+
+        <label for="budgetRange">Budget massimo (€)</label>
+        <div class="slider-budget">
+          <input type="range" id="budgetRange" name="budget" min="1000" max="70000" value="20000" step="500">
+          <span id="budgetValue">20.000 €</span>
+        </div>
 
         <label>Note extra</label>
         <textarea placeholder="Scrivi qui qualsiasi dettaglio in più..."></textarea>
@@ -323,7 +335,7 @@
       }
     };
 
-    // Checkbox cambio: selezione singola
+    // Checkbox selezione singola
     document.querySelectorAll('input[name="cambio"]').forEach(cb => {
       cb.addEventListener('change', () => {
         if (cb.checked) {
@@ -333,8 +345,17 @@
         }
       });
     });
+
+    // Slider budget
+    const budgetSlider = document.getElementById("budgetRange");
+    const budgetValue = document.getElementById("budgetValue");
+    const formatEuro = value => new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", minimumFractionDigits: 0 }).format(value);
+    budgetSlider.addEventListener("input", () => {
+      budgetValue.textContent = formatEuro(budgetSlider.value);
+    });
   </script>
 
 </body>
 </html>
+
 
