@@ -128,9 +128,8 @@
       border: 1px solid var(--accent);
       scrollbar-width: none;
     }
-    .modal-content::-webkit-scrollbar {
-      display: none;
-    }
+    .modal-content::-webkit-scrollbar { display: none; }
+
     .modal-content h2 {
       font-size: 1.4rem;
       text-align: center;
@@ -157,7 +156,6 @@
       resize: vertical;
     }
 
-    /* Cambio */
     fieldset.row-cambio {
       margin-top: 14px;
       border: none;
@@ -168,24 +166,23 @@
       margin-bottom: 8px;
     }
     .cambio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.cambio-group label {
-  display: flex;
-  align-items: center;
-  font-weight: normal;
-  cursor: pointer;
-  gap: 10px;
-}
-.cambio-group input[type="checkbox"] {
-  margin: 0;
-  accent-color: var(--accent);
-}
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+    .cambio-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      cursor: pointer;
+      gap: 10px;
+    }
+    .cambio-group input[type="checkbox"] {
+      margin: 0;
+      accent-color: var(--accent);
+    }
 
-
-    /* Slider budget */
     .slider-budget {
       display: flex;
       align-items: center;
@@ -264,7 +261,6 @@
     © 2025 Cerca Auto – Tutti i diritti riservati · <a href="#">Privacy</a>
   </footer>
 
-  <!-- MODALE -->
   <div id="modal">
     <div class="modal-content">
       <button id="closeModalBtn" aria-label="Chiudi modale">&times;</button>
@@ -335,7 +331,7 @@
       }
     };
 
-    // Checkbox selezione singola
+    // Selezione singola per cambio
     document.querySelectorAll('input[name="cambio"]').forEach(cb => {
       cb.addEventListener('change', () => {
         if (cb.checked) {
