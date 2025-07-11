@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cerca Auto - Variante 3</title>
+  <title>Cerca Auto - Variante 3 Modale Aggiornata</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
@@ -19,7 +19,7 @@
       color: var(--text);
     }
     header {
-      min-height: 60vh; /* Altezza ridotta del 40% */
+      min-height: 60vh;
       background: rgba(255,255,255,0.30);
       display: flex;
       flex-direction: column;
@@ -125,6 +125,11 @@
       position: relative;
       max-height: 85vh;
       box-shadow: 0 0 14px rgba(0,0,0,0.15);
+      border: 1px solid var(--accent);
+      scrollbar-width: none; /* Firefox */
+    }
+    .modal-content::-webkit-scrollbar {
+      display: none; /* Chrome, Safari */
     }
     .modal-content h2 {
       font-size: 1.4rem;
@@ -151,23 +156,35 @@
       min-height: 80px;
       resize: vertical;
     }
-    .row-cambio {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+    fieldset.row-cambio {
       margin-top: 14px;
-      font-weight: 600;
+      border: none;
+      padding: 0;
     }
-    .row-cambio .cambio-group {
+    fieldset.row-cambio legend {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .cambio-group {
       display: flex;
       gap: 20px;
+      flex-wrap: wrap;
       font-weight: normal;
     }
+    /* Label testo a sinistra, checkbox a destra */
     .cambio-group label {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 6px;
+      width: 130px;
       cursor: pointer;
+    }
+    .cambio-group input[type="checkbox"] {
+      order: 2;
+      margin-left: 8px;
+    }
+    .cambio-group label > span {
+      order: 1;
     }
     .modal-content button[type="submit"] {
       margin-top: 24px;
@@ -190,103 +207,19 @@
       color: var(--accent);
       cursor: pointer;
     }
-    #modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.65);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-#modal.show { display: flex; }
-
-.modal-content {
-  background: #fff;
-  border: 1px solid var(--accent);
-  border-radius: 14px;
-  max-width: 500px;
-  width: 100%;
-  padding: 28px 24px;
-  max-height: 85vh;
-  overflow-y: scroll;
-  position: relative;
-  box-shadow: 0 0 14px rgba(0,0,0,0.15);
-  scrollbar-width: none; /* Firefox */
-}
-.modal-content::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
-}
-.modal-content h2 {
-  font-size: 1.4rem;
-  text-align: center;
-  color: var(--accent);
-  margin-bottom: 20px;
-}
-.modal-content label {
-  font-weight: 600;
-  display: block;
-  margin-top: 14px;
-}
-.modal-content input,
-.modal-content select,
-.modal-content textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-.modal-content textarea {
-  min-height: 80px;
-  resize: vertical;
-}
-.row-cambio {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-top: 14px;
-  font-weight: 600;
-}
-.row-cambio .cambio-group {
-  display: flex;
-  gap: 20px;
-  font-weight: normal;
-}
-.cambio-group label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-.modal-content button[type="submit"] {
-  margin-top: 24px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 32px;
-  padding: 12px;
-  width: 100%;
-  cursor: pointer;
-}
-#closeModalBtn {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  color: var(--accent);
-  cursor: pointer;
-}
-
-
     @media (max-width: 480px) {
       .steps { flex-direction: column; align-items: center; }
-      .row-cambio { flex-direction: column; align-items: flex-start; gap: 6px; }
+      fieldset.row-cambio {
+        display: block;
+      }
+      .cambio-group {
+        flex-direction: column;
+        gap: 10px;
+        width: auto;
+      }
+      .cambio-group label {
+        width: auto;
+      }
     }
   </style>
 </head>
@@ -326,88 +259,71 @@
   </footer>
 
   <!-- MODALE -->
-<div id="modal">
-  <div class="modal-content">
-    <button id="closeModalBtn">&times;</button>
-    <h2>Dicci che auto cerchi</h2>
-    <form>
-      <label>Nome *</label>
-      <input type="text" placeholder="Il tuo nome" required />
-      <label>Email *</label>
-      <input type="email" placeholder="La tua email" required />
-      <label>Cellulare</label>
-      <input type="tel" placeholder="Numero di telefono" />
-      <label>Marca *</label>
-      <input type="text" placeholder="Es. Fiat" required />
-      <label>Modello *</label>
-      <input type="text" placeholder="Es. Panda" required />
-      <label>Anno *</label>
-      <input type="number" placeholder="Es. 2018" min="1900" required />
-      <label>Cilindrata *</label>
-      <input type="number" placeholder="Es. 1400" required />
-      <label>Tipo carburante *</label>
-      <select required>
-        <option value="">-- Seleziona --</option>
-        <option>Benzina</option>
-        <option>Diesel</option>
-        <option>GPL</option>
-        <option>Elettrica</option>
-        <option>Ibrida</option>
-      </select>
-      <div class="row-cambio">
-        Tipo di cambio:
-        <div class="cambio-group">
-          <label><input type="checkbox" name="cambio" value="Manuale"> Manuale</label>
-          <label><input type="checkbox" name="cambio" value="Automatico"> Automatico</label>
-        </div>
-      </div>
-      <label>Note extra</label>
-      <textarea placeholder="Scrivi qui qualsiasi dettaglio in più..."></textarea>
-      <button type="submit">Invia richiesta</button>
-    </form>
+  <div id="modal">
+    <div class="modal-content">
+      <button id="closeModalBtn" aria-label="Chiudi modale">&times;</button>
+      <h2>Dicci che auto cerchi</h2>
+      <form>
+        <label>Nome *</label>
+        <input type="text" placeholder="Il tuo nome" required />
+        <label>Email *</label>
+        <input type="email" placeholder="La tua email" required />
+        <label>Cellulare</label>
+        <input type="tel" placeholder="Numero di telefono" />
+        <label>Marca *</label>
+        <input type="text" placeholder="Es. Fiat" required />
+        <label>Modello *</label>
+        <input type="text" placeholder="Es. Panda" required />
+        <label>Anno *</label>
+        <input type="number" placeholder="Es. 2018" min="1900" required />
+        <label>Cilindrata *</label>
+        <input type="number" placeholder="Es. 1400" required />
+        <label>Tipo carburante *</label>
+        <select required>
+          <option value="">-- Seleziona --</option>
+          <option>Benzina</option>
+          <option>Diesel</option>
+          <option>GPL</option>
+          <option>Elettrica</option>
+          <option>Ibrida</option>
+        </select>
+
+        <fieldset class="row-cambio">
+          <legend>Tipo di cambio *</legend>
+          <div class="cambio-group">
+            <label><span>Manuale</span><input type="checkbox" name="cambio" value="Manuale" /></label>
+            <label><span>Automatico</span><input type="checkbox" name="cambio" value="Automatico" /></label>
+          </div>
+        </fieldset>
+
+        <label>Note extra</label>
+        <textarea placeholder="Scrivi qui qualsiasi dettaglio in più..."></textarea>
+        <button type="submit">Invia richiesta</button>
+      </form>
+    </div>
   </div>
-</div>
 
   <script>
-    document.getElementById("openModalBtn").onclick = () => {
-  document.getElementById("modal").classList.add("show");
-  document.body.style.overflow = "hidden";
-};
-document.getElementById("closeModalBtn").onclick = () => {
-  document.getElementById("modal").classList.remove("show");
-  document.body.style.overflow = "";
-};
-document.getElementById("modal").onclick = e => {
-  if (e.target === e.currentTarget) {
-    document.getElementById("modal").classList.remove("show");
-    document.body.style.overflow = "";
-  }
-};
-// Checkbox esclusiva
-document.querySelectorAll('input[name="cambio"]').forEach(cb => {
-  cb.addEventListener('change', () => {
-    if (cb.checked) {
-      document.querySelectorAll('input[name="cambio"]').forEach(other => {
-        if (other !== cb) other.checked = false;
-      });
-    }
-  });
-});
+    const modal = document.getElementById("modal");
+    const openBtn = document.getElementById("openModalBtn");
+    const closeBtn = document.getElementById("closeModalBtn");
 
-    document.getElementById("openModalBtn").onclick = () => {
-      document.getElementById("modal").classList.add("show");
+    openBtn.onclick = () => {
+      modal.classList.add("show");
       document.body.style.overflow = "hidden";
     };
-    document.getElementById("closeModalBtn").onclick = () => {
-      document.getElementById("modal").classList.remove("show");
+    closeBtn.onclick = () => {
+      modal.classList.remove("show");
       document.body.style.overflow = "";
     };
-    document.getElementById("modal").onclick = e => {
-      if (e.target === e.currentTarget) {
-        document.getElementById("modal").classList.remove("show");
+    modal.onclick = e => {
+      if (e.target === modal) {
+        modal.classList.remove("show");
         document.body.style.overflow = "";
       }
     };
+
+    // Checkbox cambio: selezione singola
     document.querySelectorAll('input[name="cambio"]').forEach(cb => {
       cb.addEventListener('change', () => {
         if (cb.checked) {
@@ -421,3 +337,4 @@ document.querySelectorAll('input[name="cambio"]').forEach(cb => {
 
 </body>
 </html>
+
