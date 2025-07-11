@@ -157,10 +157,10 @@
 
     .cambio-group label {
       display: flex;
-      align-items: center;
-      gap: 6px;
+      gap: 8px;
       font-weight: normal;
       cursor: pointer;
+      align-items: center;
     }
 
     .modal-content button[type="submit"] {
@@ -257,13 +257,18 @@
         <fieldset class="row-cambio">
           <legend>Tipo di cambio *</legend>
           <div class="cambio-group">
-            <label><input type="checkbox" name="cambio" value="Manuale"> Manuale</label>
-            <label><input type="checkbox" name="cambio" value="Automatico"> Automatico</label>
+            <label><input type="checkbox" name="cambio" value="Manuale">Manuale</label>
+            <label><input type="checkbox" name="cambio" value="Automatico">Automatico</label>
           </div>
         </fieldset>
 
-        <label>Budget massimo *</label>
-        <input type="number" placeholder="Es. 15000" required />
+        <label>Budget massimo (€) *</label>
+        <select required>
+          <option value="">-- Seleziona budget --</option>
+          <!-- Generato da 1000 a 60000 -->
+          <!-- Puoi accorciare se vuoi meno opzioni -->
+          ${[...Array(60)].map((_, i) => `<option>${(i + 1) * 1000}</option>`).join('')}
+        </select>
 
         <label>Note aggiuntive</label>
         <textarea placeholder="Scrivi dettagli particolari come colore, accessori, preferenze..."></textarea>
@@ -274,6 +279,18 @@
   </div>
 
   <script>
+    // Inserisce dinamicamente le opzioni budget
+    document.addEventListener('DOMContentLoaded', () => {
+      const select = document.querySelector('select[required]:nth-of-type(2)');
+      for (let i = 1000; i <= 60000; i += 1000) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `€ ${i.toLocaleString('it-IT')}`;
+        select.appendChild(opt);
+      }
+    });
+
+    // Apertura e chiusura modale
     const modal = document.getElementById("modal");
     document.getElementById("openModalBtn").onclick = () => {
       modal.classList.add("show");
@@ -290,6 +307,7 @@
       }
     };
 
+    // Selezione unica cambio
     document.querySelectorAll('input[name="cambio"]').forEach(cb => {
       cb.addEventListener('change', () => {
         if (cb.checked) {
