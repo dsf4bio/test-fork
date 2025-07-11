@@ -155,12 +155,39 @@
       flex-wrap: wrap;
     }
 
+    /* Label testo a sinistra, checkbox a destra */
     .cambio-group label {
       display: flex;
-      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+      width: 130px;
       font-weight: normal;
       cursor: pointer;
-      align-items: center;
+    }
+    .cambio-group input[type="checkbox"] {
+      margin-left: 8px;
+      order: 2;
+    }
+    .cambio-group label > span {
+      order: 1;
+    }
+
+    .budget-range-wrapper {
+      margin-top: 18px;
+    }
+
+    .budget-range-wrapper input[type="range"] {
+      width: 100%;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+
+    .budget-value {
+      font-weight: 600;
+      margin-top: 6px;
+      text-align: center;
+      color: var(--accent);
+      user-select: none;
     }
 
     .modal-content button[type="submit"] {
@@ -190,6 +217,10 @@
       .cambio-group {
         flex-direction: column;
         gap: 8px;
+        width: auto;
+      }
+      .cambio-group label {
+        width: auto;
       }
     }
   </style>
@@ -216,7 +247,7 @@
   <!-- MODALE -->
   <div id="modal">
     <div class="modal-content">
-      <button id="closeModalBtn">&times;</button>
+      <button id="closeModalBtn" aria-label="Chiudi modale">&times;</button>
       <h2>Dicci che auto cerchi</h2>
       <form>
         <label>Nome *</label>
@@ -257,18 +288,16 @@
         <fieldset class="row-cambio">
           <legend>Tipo di cambio *</legend>
           <div class="cambio-group">
-            <label><input type="checkbox" name="cambio" value="Manuale">Manuale</label>
-            <label><input type="checkbox" name="cambio" value="Automatico">Automatico</label>
+            <label><span>Manuale</span><input type="checkbox" name="cambio" value="Manuale" /></label>
+            <label><span>Automatico</span><input type="checkbox" name="cambio" value="Automatico" /></label>
           </div>
         </fieldset>
 
-        <label>Budget massimo (€) *</label>
-        <select required>
-          <option value="">-- Seleziona budget --</option>
-          <!-- Generato da 1000 a 60000 -->
-          <!-- Puoi accorciare se vuoi meno opzioni -->
-          ${[...Array(60)].map((_, i) => `<option>${(i + 1) * 1000}</option>`).join('')}
-        </select>
+        <div class="budget-range-wrapper">
+          <label for="budget">Budget massimo (€) *</label>
+          <input type="range" id="budget" name="budget" min="1000" max="60000" step="1000" value="15000" required />
+          <div class="budget-value" id="budgetValue">€ 15.000</div>
+        </div>
 
         <label>Note aggiuntive</label>
         <textarea placeholder="Scrivi dettagli particolari come colore, accessori, preferenze..."></textarea>
@@ -279,19 +308,10 @@
   </div>
 
   <script>
-    // Inserisce dinamicamente le opzioni budget
-    document.addEventListener('DOMContentLoaded', () => {
-      const select = document.querySelector('select[required]:nth-of-type(2)');
-      for (let i = 1000; i <= 60000; i += 1000) {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = `€ ${i.toLocaleString('it-IT')}`;
-        select.appendChild(opt);
-      }
-    });
-
-    // Apertura e chiusura modale
     const modal = document.getElementById("modal");
+    const budgetInput = document.getElementById("budget");
+    const budgetValue = document.getElementById("budgetValue");
+
     document.getElementById("openModalBtn").onclick = () => {
       modal.classList.add("show");
       document.body.style.overflow = "hidden";
@@ -307,7 +327,7 @@
       }
     };
 
-    // Selezione unica cambio
+    // Checkbox cambio: selezione singola
     document.querySelectorAll('input[name="cambio"]').forEach(cb => {
       cb.addEventListener('change', () => {
         if (cb.checked) {
@@ -317,7 +337,17 @@
         }
       });
     });
+
+    // Aggiorna visualizzazione valore slider budget
+    function formatEuro(value) {
+      return '€ ' + Number(value).toLocaleString('it-IT');
+    }
+    budgetValue.textContent = formatEuro(budgetInput.value);
+    budgetInput.addEventListener('input', () => {
+      budgetValue.textContent = formatEuro(budgetInput.value);
+    });
   </script>
 
 </body>
 </html>
+
