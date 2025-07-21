@@ -6,23 +6,25 @@
   <title>Ordina Uova Fresche</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
+    /* Reset base */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    html,
-    body {
+    html, body {
       height: 100%;
       overflow-x: hidden;
-    }
-    body {
       font-family: 'Roboto', sans-serif;
       background: url('https://i.postimg.cc/QxrXHwmy/uova-cover.png') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+
+    /* Overlay contenuto */
     .overlay {
       background: rgba(255, 250, 230, 0.9);
       padding: 2rem;
@@ -31,8 +33,9 @@
       max-width: 700px;
       width: 90%;
       text-align: center;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
+
     h1 {
       font-size: 2rem;
       color: #3e2e14;
@@ -43,6 +46,8 @@
       margin-bottom: 1.5rem;
       color: #5c4a2e;
     }
+
+    /* Steps */
     .steps {
       display: flex;
       justify-content: space-between;
@@ -64,6 +69,8 @@
       height: 60px;
       margin-bottom: 0.5rem;
       animation: bounce 2s infinite;
+      user-select: none;
+      pointer-events: none;
     }
     .step span {
       font-size: 0.9rem;
@@ -82,6 +89,8 @@
         font-size: 0.75rem;
       }
     }
+
+    /* Slider container */
     .slider-container {
       margin-bottom: 2rem;
     }
@@ -90,6 +99,7 @@
       display: block;
       margin-bottom: 0.5rem;
       color: #3e2e14;
+      user-select: none;
     }
     input[type='range'] {
       width: 100%;
@@ -99,6 +109,12 @@
       appearance: none;
       outline: none;
       cursor: pointer;
+
+      /* TOUCH OPTIMIZATION */
+      touch-action: pan-x;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
     }
     input[type='range']::-webkit-slider-thumb {
       appearance: none;
@@ -107,13 +123,31 @@
       background: #d0803b;
       border-radius: 50%;
       border: 2px solid #fff;
+      cursor: pointer;
+      touch-action: none;
+      -webkit-touch-callout: none;
+      user-select: none;
     }
+    input[type='range']::-moz-range-thumb {
+      width: 20px;
+      height: 24px;
+      background: #d0803b;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      cursor: pointer;
+      touch-action: none;
+      user-select: none;
+    }
+
     .quantity-display {
       font-size: 1.5rem;
       color: #7d5b38;
       margin-top: 0.5rem;
       font-weight: bold;
+      user-select: none;
     }
+
+    /* Button */
     .btn {
       background: #e0a96d;
       color: white;
@@ -123,21 +157,32 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s;
+      user-select: none;
     }
-    .btn:hover {
+    .btn:hover, .btn:focus {
       background: #c8884d;
+      outline: none;
     }
+
+    /* Modal e overlay blur */
     .modal {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.6);
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 100;
+      -webkit-overflow-scrolling: touch;
+    }
+    #backgroundBlur {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.1);
+      z-index: 90;
+      display: none;
     }
     .modal-content {
       background: #fffaf0;
@@ -145,11 +190,12 @@
       border-radius: 12px;
       width: 90%;
       max-width: 500px;
-      position: relative;
       max-height: 80vh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
     }
     .modal-body {
       overflow-y: auto;
@@ -157,13 +203,16 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
       flex-grow: 1;
+      user-select: text;
     }
     .modal-body::-webkit-scrollbar {
       display: none;
     }
+
     .modal-content h2 {
       margin-bottom: 1rem;
       color: #4e3b21;
+      user-select: none;
     }
     .modal-content label {
       display: block;
@@ -171,6 +220,7 @@
       text-align: left;
       font-weight: 500;
       color: #3b2d19;
+      user-select: none;
     }
     .modal-content input,
     .modal-content select,
@@ -181,7 +231,9 @@
       border-radius: 6px;
       border: 1px solid #ccc;
       font-size: 1rem;
+      font-family: inherit;
     }
+
     .close-btn {
       position: absolute;
       top: 10px;
@@ -191,7 +243,14 @@
       border: none;
       color: #666;
       cursor: pointer;
+      user-select: none;
+      line-height: 1;
     }
+    .close-btn:hover, .close-btn:focus {
+      color: #333;
+      outline: none;
+    }
+
     .modal-content button[type='submit'] {
       margin-top: 1.5rem;
       background: #86b049;
@@ -202,13 +261,18 @@
       font-size: 1rem;
       cursor: pointer;
       width: 100%;
+      user-select: none;
     }
-    .modal-content button[type='submit']:hover {
+    .modal-content button[type='submit']:hover,
+    .modal-content button[type='submit']:focus {
       background: #6f9638;
+      outline: none;
     }
+
     #address-group {
       display: none;
     }
+
     .sliders-wrapper {
       display: flex;
       gap: 1rem;
@@ -217,6 +281,7 @@
     .slider-box {
       flex: 1 1 45%;
     }
+
     #orderSummary {
       margin-top: 1rem;
       display: flex;
@@ -225,6 +290,7 @@
       font-weight: 600;
       font-size: 1rem;
       color: #3b2d19;
+      user-select: none;
     }
     #orderSummary span {
       display: flex;
@@ -233,11 +299,13 @@
     #orderSummary strong {
       color: #d0803b;
     }
+
     footer {
       margin-top: auto;
       padding: 2rem;
       text-align: center;
       background: rgba(255, 250, 230, 0.85);
+      user-select: none;
     }
     footer .social-icons {
       display: flex;
@@ -248,371 +316,326 @@
     footer .social-icons a img {
       width: 32px;
       height: 32px;
+      pointer-events: none;
+      user-select: none;
     }
     footer p {
       color: #4e3b21;
       font-size: 0.9rem;
     }
 
-    #toast {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  pointer-events: none;
-}
-
-.toast-message {
-  background: #333;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 6px;
-  font-weight: bold;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-  pointer-events: auto;
-  animation: fadeInOut 3.5s ease forwards;
-}
-
-.toast-message.success { background-color: #4caf50; }
-.toast-message.error { background-color: #f44336; }
-.toast-message.info { background-color: #2196f3; }
-
-@keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(-10px); }
-  10% { opacity: 1; transform: translateY(0); }
-  90% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-10px); }
-}
-/* Overlay blur sullo sfondo */
-#backgroundBlur {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  background: rgba(0,0,0,0.1); /* leggera tonalità scura */
-  z-index: 90; /* sotto la modale */
-  display: none;
-}
-
+    /* Toast */
+    #toast-container {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toast-message {
+      background: #333;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      pointer-events: auto;
+      animation: fadeInOut 3.5s ease forwards;
+      user-select: none;
+    }
+    .toast-message.success { background-color: #4caf50; }
+    .toast-message.error { background-color: #f44336; }
+    .toast-message.info { background-color: #2196f3; }
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateY(-10px); }
+      10% { opacity: 1; transform: translateY(0); }
+      90% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-10px); }
+    }
   </style>
 </head>
 <body>
-    <div id="toast-container" aria-live="assertive"></div>
-    <div id="backgroundBlur" aria-hidden="true"></div>
+  <div id="toast-container" aria-live="assertive"></div>
+  <div id="backgroundBlur" aria-hidden="true"></div>
 
-  
-    <div class="overlay">
-      <h1>La casa delle galline uova fresche</h1>
-      <p>Uova genuine da galline libere, nutrite in modo naturale e allevate in 4.000 mq di verde recintato, direttamente dal produttore.</p>
-  
-      <div class="steps">
-        <div class="step">
-          <img src="https://i.postimg.cc/Gtm6yPB9/Pngtree-fresh-chicken-eggs-in-woven-13140306.png" alt="Seleziona quantità" />
-          <span>Scegli quantità</span>
-        </div>
-        <div class="step">
-          <img src="https://i.postimg.cc/vHpSYwv4/Pngtree-businessman-user-avatar-free-vector-4827807.png" alt="Inserisci dati" />
-          <span>Inserisci dati</span>
-        </div>
-        <div class="step">
-          <img src="https://i.postimg.cc/Jnmf1CMN/Pngtree-3d-message-bubble-icon-20969361.png" alt="Invia ordine" />
-          <span>Invia ordine</span>
-        </div>
+  <main class="overlay" role="main">
+    <h1>La casa delle galline uova fresche</h1>
+    <p>Uova genuine da galline libere, nutrite in modo naturale e allevate in 4.000 mq di verde recintato, direttamente dal produttore.</p>
+
+    <section class="steps" aria-label="Passaggi ordine">
+      <div class="step">
+        <img src="https://i.postimg.cc/Gtm6yPB9/Pngtree-fresh-chicken-eggs-in-woven-13140306.png" alt="Seleziona quantità" />
+        <span>Scegli quantità</span>
       </div>
-  
-      <div class="slider-container">
-        <label for="eggQuantity">Seleziona quantità</label>
-        <input type="range" id="eggQuantity" min="6" max="60" value="12" step="1" />
-        <div class="quantity-display"><span id="qtyDisplay">12</span> uova gallina</div>
+      <div class="step">
+        <img src="https://i.postimg.cc/vHpSYwv4/Pngtree-businessman-user-avatar-free-vector-4827807.png" alt="Inserisci dati" />
+        <span>Inserisci dati</span>
       </div>
-      <button class="btn" id="openBtn">Ordina Ora</button>
-    </div>
-  
-    <div class="modal" id="orderModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
-      <div class="modal-content">
-        <button class="close-btn" id="closeBtn" aria-label="Chiudi modale">&times;</button>
-        <h2 id="modalTitle">Modulo d'ordine uova</h2>
-        <div class="modal-body">
-          <form id="orderForm" novalidate>
-            <label for="name">Il tuo nome</label>
-            <input type="text" id="name" placeholder="il tuo nome" required autocomplete="name" />
-  
-            <div class="sliders-wrapper">
-              <div class="slider-box">
-                <label for="quantitySlider"></label>
-                <input type="range" id="quantitySlider" min="6" max="60" value="12" step="1" />
-                <div class="quantity-display">
-                  <span id="qtyDisplayModal">12</span> uova gallina
-                </div>
-              </div>
-  
-              <div class="slider-box">
-                <label for="quantitySliderDuck"></label>
-                <input type="range" id="quantitySliderDuck" min="0" max="60" value="0" step="1" />
-                <div class="quantity-display">
-                  <span id="qtyDisplayModalDuck">0</span> uova papera
-                </div>
+      <div class="step">
+        <img src="https://i.postimg.cc/Jnmf1CMN/Pngtree-3d-message-bubble-icon-20969361.png" alt="Invia ordine" />
+        <span>Invia ordine</span>
+      </div>
+    </section>
+
+    <section class="slider-container">
+      <label for="eggQuantity">Seleziona quantità</label>
+      <input type="range" id="eggQuantity" min="6" max="60" value="12" step="1" aria-valuemin="6" aria-valuemax="60" aria-valuenow="12" aria-label="Quantità uova gallina" />
+      <div class="quantity-display" aria-live="polite" aria-atomic="true"><span id="qtyDisplay">12</span> uova gallina</div>
+    </section>
+
+    <button class="btn" id="openBtn" aria-haspopup="dialog" aria-controls="orderModal">Ordina Ora</button>
+  </main>
+
+  <div class="modal" id="orderModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+    <div class="modal-content">
+      <button class="close-btn" id="closeBtn" aria-label="Chiudi modale">&times;</button>
+      <h2 id="modalTitle">Modulo d'ordine uova</h2>
+      <div class="modal-body">
+        <form id="orderForm" novalidate>
+          <label for="name">Il tuo nome</label>
+          <input type="text" id="name" placeholder="il tuo nome" required autocomplete="name" />
+
+          <div class="sliders-wrapper">
+            <div class="slider-box">
+              <label for="quantitySlider">Uova gallina</label>
+              <input type="range" id="quantitySlider" min="6" max="60" value="12" step="1" aria-label="Quantità uova gallina" />
+              <div class="quantity-display" aria-live="polite" aria-atomic="true">
+                <span id="qtyDisplayModal">12</span> uova gallina
               </div>
             </div>
-  
-            <div class="summary" id="orderSummary" aria-live="polite">
-              <span>Uova gallina <strong><span id="summaryGallina">12</span></strong></span>
-              <span>Uova papera <strong><span id="summaryPapera">0</span></strong></span>
-              <span>Totale  € <strong><span id="summaryTotal">4.20</span></strong></span>
+
+            <div class="slider-box">
+              <label for="quantitySliderDuck">Uova papera</label>
+              <input type="range" id="quantitySliderDuck" min="0" max="60" value="0" step="1" aria-label="Quantità uova papera" />
+              <div class="quantity-display" aria-live="polite" aria-atomic="true">
+                <span id="qtyDisplayModalDuck">0</span> uova papera
+              </div>
             </div>
-  
-            <label for="delivery">Modalità di consegna</label>
-            <select id="delivery">
-              <option value="ritiro">Ritiro a mano</option>
-              <option value="domicilio">Consegna a domicilio</option>
-            </select>
-            <div id="address-group" style="display:none;">
-              <label for="address">Indirizzo per la consegna</label>
-              <input type="text" id="address" placeholder="Via, numero, città" autocomplete="street-address" />
-            </div>
-  
-            <label for="note">Note aggiuntive</label>
-            <textarea id="note" maxlength="250" placeholder="Es. orario preferito per ritiro o consegna..." rows="3"></textarea>
-  
-            <button type="submit">Invia via WhatsApp</button>
-          </form>
-        </div>
+          </div>
+
+          <div class="summary" id="orderSummary" aria-live="polite" aria-atomic="true">
+            <span>Uova gallina <strong><span id="summaryGallina">12</span></strong></span>
+            <span>Uova papera <strong><span id="summaryPapera">0</span></strong></span>
+            <span>Totale  € <strong><span id="summaryTotal">4.20</span></strong></span>
+          </div>
+
+          <label for="delivery">Modalità di consegna</label>
+          <select id="delivery" aria-required="true">
+            <option value="ritiro">Ritiro a mano</option>
+            <option value="domicilio">Consegna a domicilio</option>
+          </select>
+
+          <div id="address-group">
+            <label for="address">Indirizzo per la consegna</label>
+            <input type="text" id="address" placeholder="Via, numero, città" autocomplete="street-address" />
+          </div>
+
+          <label for="note">Note aggiuntive</label>
+          <textarea id="note" maxlength="250" placeholder="Es. orario preferito per ritiro o consegna..." rows="3"></textarea>
+
+          <button type="submit">Invia via WhatsApp</button>
+        </form>
       </div>
     </div>
-  
-    <footer>
-      <div class="social-icons">
-        <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" /></a>
-        <a href="https://www.instagram.com/lacasa.dellegalline/"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" /></a>
-      </div>
-      <p>&copy; 2025 La casa delle galline - Tutti i diritti riservati</p>
-    </footer>
-  
-    <style>
-      #toast-container {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+  </div>
+
+  <footer>
+    <div class="social-icons">
+      <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" /></a>
+      <a href="https://www.instagram.com/lacasa.dellegalline/" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" /></a>
+    </div>
+    <p>&copy; 2025 La casa delle galline - Tutti i diritti riservati</p>
+  </footer>
+
+  <script>
+    const priceGallina = 0.35;
+    const pricePapera = 0.45;
+
+    const openBtn = document.getElementById('openBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const modal = document.getElementById('orderModal');
+    const eggQuantity = document.getElementById('eggQuantity');
+    const quantitySlider = document.getElementById('quantitySlider');
+    const quantitySliderDuck = document.getElementById('quantitySliderDuck');
+
+    const qtyDisplay = document.getElementById('qtyDisplay');
+    const qtyDisplayModal = document.getElementById('qtyDisplayModal');
+    const qtyDisplayModalDuck = document.getElementById('qtyDisplayModalDuck');
+
+    const summaryGallina = document.getElementById('summaryGallina');
+    const summaryPapera = document.getElementById('summaryPapera');
+    const summaryTotal = document.getElementById('summaryTotal');
+
+    const deliverySelect = document.getElementById('delivery');
+    const addressGroup = document.getElementById('address-group');
+    const addressInput = document.getElementById('address');
+
+    // Scroll position storage for modal open/close
+    let scrollPosition = 0;
+
+    function disableScroll() {
+      scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPosition}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    }
+
+    function enableScroll() {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollPosition);
+    }
+
+    // Toast
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast-message ${type}`;
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.remove();
+      }, 3500);
+    }
+
+    // Sincronizza slider e visualizzazioni
+    function updateDisplays() {
+      const gallina = Number(quantitySlider.value);
+      const papera = Number(quantitySliderDuck.value);
+
+      qtyDisplay.textContent = gallina;
+      qtyDisplayModal.textContent = gallina;
+      qtyDisplayModalDuck.textContent = papera;
+
+      summaryGallina.textContent = gallina;
+      summaryPapera.textContent = papera;
+
+      const total = (gallina * priceGallina + papera * pricePapera).toFixed(2);
+      summaryTotal.textContent = total;
+    }
+
+    // Sincronizza slider esterno e modale
+    function syncSlidersFromMain() {
+      const val = eggQuantity.value;
+      quantitySlider.value = val;
+      qtyDisplayModal.textContent = val;
+      updateDisplays();
+    }
+    function syncSlidersToMain() {
+      eggQuantity.value = quantitySlider.value;
+      qtyDisplay.textContent = quantitySlider.value;
+    }
+
+    // Mostra/nascondi indirizzo
+    function toggleAddressField() {
+      if (deliverySelect.value === 'domicilio') {
+        addressGroup.style.display = 'block';
+        addressInput.required = true;
+      } else {
+        addressGroup.style.display = 'none';
+        addressInput.required = false;
+        addressInput.value = '';
       }
-      .toast-message {
-        background: #333;
-        color: #fff;
-        padding: 12px 18px;
-        border-radius: 6px;
-        font-weight: bold;
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-        animation: fadein 0.5s, fadeout 0.5s 3s;
+    }
+
+    // Apri modale
+    openBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      document.getElementById('backgroundBlur').style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+      disableScroll();
+      // Sincronizza slider modale con esterno
+      quantitySlider.value = eggQuantity.value;
+      qtyDisplayModal.textContent = eggQuantity.value;
+      quantitySliderDuck.value = 0;
+      qtyDisplayModalDuck.textContent = '0';
+      updateDisplays();
+      toggleAddressField();
+      document.getElementById('name').focus();
+    });
+
+    // Chiudi modale
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      document.getElementById('backgroundBlur').style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      enableScroll();
+    });
+
+    // Sincronizza slider modale con esterno
+    quantitySlider.addEventListener('input', () => {
+      syncSlidersToMain();
+      updateDisplays();
+    });
+    quantitySliderDuck.addEventListener('input', () => {
+      updateDisplays();
+    });
+
+    // Sincronizza slider esterno con modale (per comodità)
+    eggQuantity.addEventListener('input', () => {
+      qtyDisplay.textContent = eggQuantity.value;
+    });
+
+    // Cambio modalità consegna
+    deliverySelect.addEventListener('change', toggleAddressField);
+
+    // Gestione form invio WhatsApp
+    document.getElementById('orderForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const gallina = Number(quantitySlider.value);
+      const papera = Number(quantitySliderDuck.value);
+      const delivery = deliverySelect.value;
+      const address = addressInput.value.trim();
+      const note = document.getElementById('note').value.trim();
+
+      if (!name) {
+        showToast('Inserisci il tuo nome', 'error');
+        return;
       }
-      .toast-message.success { background-color: #28a745; }
-      .toast-message.error { background-color: #dc3545; }
-      @keyframes fadein {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
+      if (gallina < 6) {
+        showToast('Quantità minima uova gallina è 6', 'error');
+        return;
       }
-      @keyframes fadeout {
-        from { opacity: 1; transform: translateY(0); }
-        to { opacity: 0; transform: translateY(-10px); }
+      if (delivery === 'domicilio' && !address) {
+        showToast('Inserisci l\'indirizzo per la consegna', 'error');
+        return;
       }
-    </style>
-  
-    <script>
-      const priceGallina = 0.35;
-      const pricePapera = 0.45;
-  
-      const openBtn = document.getElementById('openBtn');
-      const closeBtn = document.getElementById('closeBtn');
-      const modal = document.getElementById('orderModal');
-      const eggQuantity = document.getElementById('eggQuantity');
-      const quantitySlider = document.getElementById('quantitySlider');
-      const quantitySliderDuck = document.getElementById('quantitySliderDuck');
-  
-      const qtyDisplay = document.getElementById('qtyDisplay');
-      const qtyDisplayModal = document.getElementById('qtyDisplayModal');
-      const qtyDisplayModalDuck = document.getElementById('qtyDisplayModalDuck');
-  
-      const summaryGallina = document.getElementById('summaryGallina');
-      const summaryPapera = document.getElementById('summaryPapera');
-      const summaryTotal = document.getElementById('summaryTotal');
-  
-      const deliverySelect = document.getElementById('delivery');
-      const addressGroup = document.getElementById('address-group');
-      const addressInput = document.getElementById('address');
-  
-      function updateSummary() {
-        const gallina = parseInt(quantitySlider.value, 10);
-        const papera = parseInt(quantitySliderDuck.value, 10);
-  
-        qtyDisplayModal.textContent = gallina;
-        qtyDisplayModalDuck.textContent = papera;
-        qtyDisplay.textContent = gallina;
-        quantitySlider.value = gallina;
-        eggQuantity.value = gallina;
-  
-        summaryGallina.textContent = gallina;
-        summaryPapera.textContent = papera;
-  
-        const total = (gallina * priceGallina + papera * pricePapera).toFixed(2);
-        summaryTotal.textContent = total;
+
+      let message = `Ordine uova fresche:%0A`;
+      message += `Nome: ${encodeURIComponent(name)}%0A`;
+      message += `Uova gallina: ${gallina}%0A`;
+      message += `Uova papera: ${papera}%0A`;
+      message += `Modalità di consegna: ${delivery === 'ritiro' ? 'Ritiro a mano' : 'Consegna a domicilio'}%0A`;
+      if (delivery === 'domicilio') {
+        message += `Indirizzo: ${encodeURIComponent(address)}%0A`;
       }
-  
-      openBtn.addEventListener('click', () => {
-        quantitySlider.value = eggQuantity.value;
-        quantitySliderDuck.value = 0;
-        updateSummary();
-        modal.style.display = 'flex';
-        modal.setAttribute('aria-hidden', 'false');
-        document.getElementById('name').focus();
-      });
-  
-      closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        modal.setAttribute('aria-hidden', 'true');
-        openBtn.focus();
-      });
-  
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.style.display = 'none';
-          modal.setAttribute('aria-hidden', 'true');
-          openBtn.focus();
-        }
-      });
-  
-      quantitySlider.addEventListener('input', updateSummary);
-      quantitySliderDuck.addEventListener('input', updateSummary);
-      eggQuantity.addEventListener('input', (e) => {
-        const val = e.target.value;
-        qtyDisplay.textContent = val;
-      });
-  
-      deliverySelect.addEventListener('change', () => {
-        if (deliverySelect.value === 'domicilio') {
-          addressGroup.style.display = 'block';
-          addressInput.setAttribute('required', 'required');
-        } else {
-          addressGroup.style.display = 'none';
-          addressInput.removeAttribute('required');
-          addressInput.value = '';
-        }
-      });
-  
-      document.getElementById('orderForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-  
-        const nome = document.getElementById('name').value.trim();
-        if (!nome) {
-          showToast("Il nome è obbligatorio", "error");
-          document.getElementById('name').focus();
-          return;
-        }
-  
-        const gallina = parseInt(quantitySlider.value, 10);
-        const papera = parseInt(quantitySliderDuck.value, 10);
-        if (gallina + papera < 6) {
-          showToast("Minimo 6 uova totali", "error");
-          return;
-        }
-  
-        const delivery = deliverySelect.value;
-        const indirizzo = addressInput.value.trim();
-        if (delivery === 'domicilio' && !indirizzo) {
-          showToast("Inserisci l'indirizzo", "error");
-          addressInput.focus();
-          return;
-        }
-  
-        const note = document.getElementById('note').value.trim();
-        const total = (gallina * priceGallina + papera * pricePapera).toFixed(2);
-  
-        let messaggio = `*HAI UN NUOVO ORDINE 🎉*\n\n`;
-        messaggio += `• Nome: *${nome}*\n`;
-        messaggio += `• Uova gallina: *${gallina}*\n`;
-        messaggio += `• Uova papera: *${papera}*\n`;
-        messaggio += `• Consegna: *${delivery === 'domicilio' ? 'A domicilio' : 'Ritiro a mano'}*\n\n`;
-        if (delivery === 'domicilio') messaggio += `• Indirizzo: *${indirizzo}*\n`;
-        if (note) messaggio += `• Note: _${note}_\n\n`;
-        messaggio += `• Totale: *€ ${total}*\n`;
-  
-        const url = `https://wa.me/393440301412?text=${encodeURIComponent(messaggio)}`;
-        window.open(url, '_blank');
-  
-        showToast("Ordine inviato su WhatsApp!", "success");
-      });
-  
-      window.addEventListener('load', () => {
-        if (deliverySelect.value === 'domicilio') {
-          addressGroup.style.display = 'block';
-          addressInput.setAttribute('required', 'required');
-        } else {
-          addressGroup.style.display = 'none';
-          addressInput.removeAttribute('required');
-        }
-        updateSummary();
-        qtyDisplay.textContent = eggQuantity.value;
-      });
-      let toastTimeout;
+      if (note) {
+        message += `Note: ${encodeURIComponent(note)}%0A`;
+      }
+      const whatsappUrl = `https://wa.me/?text=${message}`;
 
-function showToast(message, type = "success") {
-  const container = document.getElementById("toast-container");
+      showToast('Apro WhatsApp...', 'info');
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+      }, 1000);
+    });
 
-  // Se c'è già un toast, lo rimuoviamo subito e resettiamo il timeout
-  if (container.firstChild) {
-    clearTimeout(toastTimeout);
-    container.firstChild.remove();
-  }
-
-  const toast = document.createElement("div");
-  toast.className = `toast-message ${type}`;
-  toast.textContent = message;
-  container.appendChild(toast);
-
-  // Impostiamo il timeout per rimuovere il toast dopo 3.5 secondi
-  toastTimeout = setTimeout(() => {
-    toast.remove();
-  }, 3500);
-}
-
-openBtn.addEventListener('click', () => {
-  quantitySlider.value = eggQuantity.value;
-  quantitySliderDuck.value = 0;
-  updateSummary();
-  modal.style.display = 'flex';
-  modal.setAttribute('aria-hidden', 'false');
-
-  // mostra overlay sfocato e blocca scroll
-  document.getElementById('backgroundBlur').style.display = 'block';
-  document.body.style.overflow = 'hidden';
-
-  document.getElementById('name').focus();
-});
-function closeModal() {
-  modal.style.display = 'none';
-  modal.setAttribute('aria-hidden', 'true');
-
-  // nascondi overlay sfocato e sblocca scroll
-  document.getElementById('backgroundBlur').style.display = 'none';
-  document.body.style.overflow = '';
-
-  openBtn.focus();
-}
-
-closeBtn.addEventListener('click', closeModal);
-
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    closeModal();
-  }
-});
-
-
-    </script>
-  </body>
-  
+    // Inizializza visualizzazioni
+    updateDisplays();
+    toggleAddressField();
+  </script>
+</body>
 </html>
+
 
 
