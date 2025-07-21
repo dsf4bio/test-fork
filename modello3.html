@@ -284,11 +284,23 @@
   90% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(-10px); }
 }
+/* Overlay blur sullo sfondo */
+#backgroundBlur {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.1); /* leggera tonalità scura */
+  z-index: 90; /* sotto la modale */
+  display: none;
+}
 
   </style>
 </head>
 <body>
     <div id="toast-container" aria-live="assertive"></div>
+    <div id="backgroundBlur" aria-hidden="true"></div>
+
   
     <div class="overlay">
       <h1>La casa delle galline uova fresche</h1>
@@ -565,8 +577,42 @@ function showToast(message, type = "success") {
   }, 3500);
 }
 
+openBtn.addEventListener('click', () => {
+  quantitySlider.value = eggQuantity.value;
+  quantitySliderDuck.value = 0;
+  updateSummary();
+  modal.style.display = 'flex';
+  modal.setAttribute('aria-hidden', 'false');
+
+  // mostra overlay sfocato e blocca scroll
+  document.getElementById('backgroundBlur').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('name').focus();
+});
+function closeModal() {
+  modal.style.display = 'none';
+  modal.setAttribute('aria-hidden', 'true');
+
+  // nascondi overlay sfocato e sblocca scroll
+  document.getElementById('backgroundBlur').style.display = 'none';
+  document.body.style.overflow = '';
+
+  openBtn.focus();
+}
+
+closeBtn.addEventListener('click', closeModal);
+
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+
+
     </script>
   </body>
   
 </html>
+
 
