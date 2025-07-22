@@ -229,7 +229,7 @@
       display: block;
       margin-top: 1rem;
       text-align: left;
-      font-weight: 500;
+      font-weight: 400;
       color: #3b2d19;
       user-select: none;
     }
@@ -404,26 +404,26 @@
   <div class="modal" id="orderModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
     <div class="modal-content">
       <button class="close-btn" id="closeBtn" aria-label="Chiudi modale">&times;</button>
-      <h2 id="modalTitle">Modulo d'ordine uova</h2>
+      <h2 id="modalTitle">Modulo d'ordine</h2>
       <div class="modal-body">
         <form id="orderForm" novalidate>
           <label for="name">Il tuo nome</label>
-          <input type="text" id="name" placeholder="il tuo nome" required autocomplete="name" />
+          <input type="text" id="name" placeholder="Il tuo nome" required autocomplete="name" />
 
           <div class="sliders-wrapper">
             <div class="slider-box">
-              <label for="quantitySlider">Uova gallina</label>
+              <label for="quantitySlider">Prezzo 0,35/unità</label>
               <input type="range" id="quantitySlider" min="6" max="60" value="12" step="1" aria-label="Quantità uova gallina" />
               <div class="quantity-display" aria-live="polite" aria-atomic="true">
-                <span id="qtyDisplayModal">12</span> uova gallina
+                <span id="qtyDisplayModal">12</span> Uova gallina
               </div>
             </div>
 
             <div class="slider-box">
-              <label for="quantitySliderDuck">Uova papera</label>
+              <label for="quantitySliderDuck">Prezzo 0,45/unità</label>
               <input type="range" id="quantitySliderDuck" min="0" max="60" value="0" step="1" aria-label="Quantità uova papera" />
               <div class="quantity-display" aria-live="polite" aria-atomic="true">
-                <span id="qtyDisplayModalDuck">0</span> uova papera
+                <span id="qtyDisplayModalDuck">0</span> Uova papera
               </div>
             </div>
           </div>
