@@ -326,12 +326,16 @@ body.modal-open {
 <body>
 <main>
   <div class="hero">
-    <h1>Uova fresche dal campo alla tua tavola</h1>
+    <h1>La Casa delle Galline - Uova fresche dal campo alla tua tavola</h1>
   </div>
 
   <header>
-    <h2>La Casa delle Galline</h2>
-    <p>Uova genuine da galline libere, nutrite in modo naturale e allevate in 4.000 mq di verde recintato, direttamente dal produttore.</p>
+    <p>
+      <strong>Uova genuine</strong> di <strong>galline</strong> e <strong>papere libere e felici</strong>, 
+      nutrite in modo <strong>naturale</strong> e allevate in <strong>4.000 mq di verde recintato</strong>, 
+      direttamente dal <strong>produttore</strong>.
+    </p>
+    
   </header>
 
   <section class="guide">
@@ -350,7 +354,7 @@ body.modal-open {
   </section>
 
   <section class="prices">
-    <p>🥚 Gallina: <strong>0.35€</strong> cad. &nbsp; | &nbsp; 🦆 Papera: <strong>0.45€</strong> cad.</p>
+    <p>🥚 Gallina: <strong>0.35€</strong> &nbsp; | &nbsp; 🦆 Papera: <strong>0.45€</strong></p>
   </section>
 
   <div class="cta">
@@ -410,11 +414,16 @@ body.modal-open {
 
 <footer>
   <div class="social-icons">
-    <a href="https://facebook.com" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
-    <a href="https://instagram.com" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
+    <a href="https://facebook.com" target="_blank">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
+    </a>
+    <a href="https://instagram.com" target="https://www.instagram.com/lacasa.dellegalline?igsh=eGd3ZmF4M3hscWR1">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+    </a>
   </div>
-  <p>© 2025 La Casa delle Galline - Tutti i diritti riservati</p>
+  <p style="font-size: 0.75rem;">© 2025 La Casa delle Galline - Tutti i diritti riservati</p>
 </footer>
+
 
 <script>
   const modal = document.getElementById('orderModal');
@@ -467,12 +476,12 @@ body.modal-open {
   paperaRange.oninput = updateSummary;
 
   function sendOrder() {
-    const name = document.getElementById('name').value.trim();
-    const address = document.getElementById('address').value.trim();
-    const notes = document.getElementById('notes').value.trim();
+    const name = document.getElementById("name").value.trim();
     const g = +gallinaRange.value;
     const p = +paperaRange.value;
     const mode = delivery.value;
+    const address = document.getElementById("address").value.trim();
+    const notes = document.getElementById("notes").value.trim();
 
     if (!name || (mode === 'domicilio' && !address) || (g === 0 && p === 0)) {
       alert("❌ Compila nome, quantità e indirizzo se richiesto");
@@ -480,13 +489,23 @@ body.modal-open {
     }
 
     const total = (g * 0.35 + p * 0.45).toFixed(2);
-    const msg = `Ordine da ${name}%0AGallina: ${g}%0APapera: ${p}%0ATotale: €${total}%0AModo: ${mode === 'domicilio' ? 'A domicilio – ' + address : 'Ritiro a mano'}%0ANote: ${notes}`;
-    window.open(`https://wa.me/393440301412?text=${msg}`, '_blank');
-    modal.style.display = 'none';
-    document.body.classList.remove('modal-open');
-  }
+    const modeText = mode === "domicilio"
+      ? `🏠 *Consegna a domicilio*%0A📍 Indirizzo: ${address}`
+      : `🤝 *Ritiro a mano*`;
 
-  updateSummary();
+    const msg = `📦 *Hai un nuovo ordine!*%0A%0A👤 *Nome:* ${name}%0A🥚 *Uova di gallina:* ${g}%0A🦆 *Uova di papera:* ${p}%0A${modeText}%0A📝 *Note:* ${notes || 'Nessuna'}%0A%0A💶 *Totale:* €${total}`;
+
+    window.location.href = `https://wa.me/393440301412?text=${msg}`;
+
+    // Torna alla home dopo 2 secondi
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 2000);
+
+    // Chiudi modale
+    modal.style.display = "none";
+    document.body.classList.remove("modal-open");
+  }
 </script>
 
 </body>
