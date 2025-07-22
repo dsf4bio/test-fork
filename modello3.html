@@ -1,453 +1,319 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ordina Uova Fresche</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Reset base */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* Reset & corpo */
+    * { margin:0; padding:0; box-sizing:border-box; }
     html, body {
-      height: 100%;
-      overflow-x: hidden;
-      font-family: 'Roboto', sans-serif;
-      background: url('https://i.postimg.cc/QxrXHwmy/uova-cover.png') center/cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      height:100%; overflow-x:hidden;
+      font-family:Roboto,sans-serif;
+      background:#fef9f0;
+      color:#4b3b2a;
+      -webkit-font-smoothing:antialiased;
+      display:flex; flex-direction:column;
     }
+    body.modal-open { overflow:hidden; touch-action:none; }
 
-    /* Blocca scroll quando modale aperta */
-    body.modal-open {
-      overflow: hidden;
-      touch-action: none; /* blocca scroll e touch su mobile */
+    main {
+      flex:1;
+      max-width:720px;
+      width:100%;
+      margin:auto;
+      padding:2rem 1rem 4rem;
     }
-
-    /* Overlay contenuto */
-    .overlay {
-      background: rgba(255, 250, 230, 0.9);
-      padding: 2rem;
-      margin: 2rem auto;
-      border-radius: 16px;
-      max-width: 700px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
-
     h1 {
-      font-size: 2rem;
-      color: #3e2e14;
-      margin-bottom: 1rem;
+      font-size:2.2rem;
+      text-align:center;
+      margin-bottom:0.5rem;
+      color:#6b4f2f;
     }
     p {
-      font-size: 1.05rem;
-      margin-bottom: 1.5rem;
-      color: #5c4a2e;
+      text-align:center;
+      font-size:1.05rem;
+      margin-bottom:2rem;
+      color:#7b5e3d;
     }
 
-    /* Steps */
     .steps {
-      display: flex;
-      justify-content: space-between;
-      background: rgba(255, 255, 255, 0.3);
-      padding: 1rem;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-      flex-wrap: nowrap;
+      display:flex; justify-content:space-around;
+      background:#fffdf6;
+      border:1px solid #eee0c7;
+      border-radius:12px;
+      padding:1rem;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-bottom:2rem;
     }
     .step {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+      flex:1; min-width:90px;
+      display:flex; flex-direction:column;
+      align-items:center;
     }
     .step img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 0.5rem;
-      animation: bounce 2s infinite;
-      user-select: none;
-      pointer-events: none;
+      width:50px;
+      height:50px;
+      margin-bottom:0.3rem;
     }
     .step span {
-      font-size: 0.9rem;
-      color: #3e2e14;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-    @media (max-width: 600px) {
-      .step img {
-        width: 40px;
-        height: 40px;
-      }
-      .step span {
-        font-size: 0.75rem;
-      }
+      font-size:0.85rem;
+      text-align:center;
     }
 
-    /* Slider container */
-    .slider-container {
-      margin-bottom: 2rem;
-    }
+    .slider-container { margin-bottom:2rem; }
     .slider-container label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 0.5rem;
-      color: #3e2e14;
-      user-select: none;
+      display:block;
+      font-weight:600;
+      color:#5b4029;
+      margin-bottom:0.5rem;
     }
-    input[type='range'] {
-      width: 100%;
-      height: 32px;
-      background: #f1e3c1;
-      border-radius: 16px;
-      appearance: none;
-      outline: none;
-      cursor: pointer;
-
-      /* TOUCH OPTIMIZATION */
-      touch-action: pan-x;
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      user-select: none;
+    input[type=range] {
+      width:100%; height:8px;
+      background:#dfc7a4;
+      border-radius:4px;
+      appearance:none;
     }
-    input[type='range']::-webkit-slider-thumb {
-      appearance: none;
-      width: 20px;
-      height: 24px;
-      background: #d0803b;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      cursor: pointer;
-      touch-action: none;
-      -webkit-touch-callout: none;
-      user-select: none;
+    input[type=range]::-webkit-slider-thumb,
+    input[type=range]::-moz-range-thumb {
+      width:20px; height:20px;
+      background:#86b049;
+      border-radius:50%;
+      cursor:pointer;
+      border:2px solid #fff;
     }
-    input[type='range']::-moz-range-thumb {
-      width: 20px;
-      height: 24px;
-      background: #d0803b;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      cursor: pointer;
-      touch-action: none;
-      user-select: none;
-    }
-
     .quantity-display {
-      font-size: 1.5rem;
-      color: #7d5b38;
-      margin-top: 0.5rem;
-      font-weight: bold;
-      user-select: none;
+      font-size:1.3rem;
+      color:#6e4a28;
+      margin-top:0.5rem;
+      text-align:center;
+      font-weight:bold;
     }
 
-    /* Button */
     .btn {
-      background: #e0a96d;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      font-size: 1.1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-      user-select: none;
+      display:block;
+      width:100%;
+      background:#a7cf72;
+      color:#fff;
+      border:none;
+      padding:1rem;
+      font-size:1.1rem;
+      border-radius:8px;
+      cursor:pointer;
+      margin-top:2rem;
+      transition:background .2s;
     }
-    .btn:hover, .btn:focus {
-      background: #c8884d;
-      outline: none;
-    }
+    .btn:hover { background:#8cb960; }
 
-    /* Modal e overlay blur */
+    /* MODALE */
     .modal {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
-      -webkit-overflow-scrolling: touch;
-      touch-action: none; /* blocca scroll tocco fuori modale */
-    }
-    #backgroundBlur {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      background: rgba(0,0,0,0.1);
-      z-index: 90;
-      display: none;
-      touch-action: none; /* blocca scroll tocco */
+      position:fixed; top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(255,255,255,0.6);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:100;
     }
     .modal-content {
-      background: #fffaf0;
-      padding: 2rem;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 500px;
-      max-height: 80vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      box-shadow: 0 0 12px rgba(0,0,0,0.2);
-      touch-action: auto; /* abilita scroll contenuto */
+      background:#fffef8;
+      padding:2rem;
+      border-radius:12px;
+      width:90%; max-width:500px;
+      max-height:80vh;
+      display:flex; flex-direction:column;
+      position:relative;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      overflow:hidden;
     }
     .modal-body {
-      overflow-y: auto;
-      padding-right: 10px;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      flex-grow: 1;
-      user-select: text;
-      -webkit-overflow-scrolling: touch;
-      touch-action: auto; /* consenti scroll interno modale */
+      overflow-y:auto;
+      flex:1;
+      padding-right:8px;
+      -webkit-overflow-scrolling:touch;
     }
-    .modal-body::-webkit-scrollbar {
-      display: none;
-    }
-
     .modal-content h2 {
-      margin-bottom: 1rem;
-      color: #4e3b21;
-      user-select: none;
+      font-size:1.5rem;
+      margin-bottom:1rem;
+      color:#4b3925;
     }
     .modal-content label {
-      display: block;
-      margin-top: 1rem;
-      text-align: left;
-      font-weight: 400;
-      color: #3b2d19;
-      user-select: none;
+      display:block;
+      margin-top:1rem;
+      color:#5b4029;
+      font-weight:500;
     }
     .modal-content input,
     .modal-content select,
     .modal-content textarea {
-      width: 100%;
-      padding: 0.6rem;
-      margin-top: 0.3rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      font-family: inherit;
+      width:100%;
+      padding:0.6rem;
+      margin-top:0.3rem;
+      border:1px solid #ccc;
+      border-radius:6px;
+      font-size:1rem;
+      font-family:inherit;
     }
+    .modal-content button[type=submit] {
+      margin-top:1.5rem;
+      background:#86b049;
+      color:#fff;
+      border:none;
+      padding:1rem;
+      width:100%;
+      border-radius:6px;
+      font-size:1rem;
+      cursor:pointer;
+      transition:background .2s;
+    }
+    .modal-content button[type=submit]:hover { background:#6f9638; }
 
     .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      background: none;
-      border: none;
-      color: #666;
-      cursor: pointer;
-      user-select: none;
-      line-height: 1;
+      position:absolute;
+      top:12px; right:16px;
+      font-size:1.5rem;
+      background:none;
+      border:none;
+      color:#666;
+      cursor:pointer;
     }
-    .close-btn:hover, .close-btn:focus {
-      color: #333;
-      outline: none;
-    }
-
-    .modal-content button[type='submit'] {
-      margin-top: 1.5rem;
-      background: #86b049;
-      color: white;
-      border: none;
-      padding: 1rem;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-      width: 100%;
-      user-select: none;
-    }
-    .modal-content button[type='submit']:hover,
-    .modal-content button[type='submit']:focus {
-      background: #6f9638;
-      outline: none;
-    }
-
-    #address-group {
-      display: none;
-    }
+    .close-btn:hover { color:#333; }
 
     .sliders-wrapper {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+      display:flex; flex-wrap:wrap;
+      gap:1rem;
+      margin-top:1rem;
     }
-    .slider-box {
-      flex: 1 1 45%;
-    }
+    .slider-box { flex:1 1 45%; }
 
     #orderSummary {
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #3b2d19;
-      user-select: none;
+      margin-top:1rem;
+      display:flex;
+      flex-direction:column;
+      gap:0.3rem;
+      font-size:1rem;
+      font-weight:600;
+      color:#3b2d19;
     }
     #orderSummary span {
-      display: flex;
-      justify-content: space-between;
+      display:flex;
+      justify-content:space-between;
     }
-    #orderSummary strong {
-      color: #d0803b;
-    }
+    #orderSummary strong { color:#d0803b; }
 
     footer {
-      margin-top: auto;
-      padding: 2rem;
-      text-align: center;
-      background: rgba(255, 250, 230, 0.85);
-      user-select: none;
+      text-align:center;
+      padding:2rem 1rem;
+      background:rgba(254,249,240,0.9);
     }
     footer .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1rem;
+      display:flex;
+      justify-content:center;
+      gap:1.5rem;
+      margin-bottom:1rem;
     }
-    footer .social-icons a img {
-      width: 32px;
-      height: 32px;
-      pointer-events: none;
-      user-select: none;
+    footer .social-icons img {
+      width:32px; height:32px;
     }
     footer p {
-      color: #4e3b21;
-      font-size: 0.9rem;
+      font-size:0.9rem;
+      color:#6b4f2f;
     }
 
     /* Toast */
     #toast-container {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;
-      pointer-events: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      position:fixed; top:20px;
+      left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column;
+      gap:10px; pointer-events:none;
+      z-index:200;
     }
     .toast-message {
-      background: #333;
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: 6px;
-      font-weight: bold;
-      box-shadow: 0 0 8px rgba(0,0,0,0.3);
-      pointer-events: auto;
-      animation: fadeInOut 3.5s ease forwards;
-      user-select: none;
+      background:#4caf50;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:6px;
+      font-weight:bold;
+      box-shadow:0 0 8px rgba(0,0,0,0.3);
+      animation:fadeInOut 3.5s ease forwards;
     }
-    .toast-message.success { background-color: #4caf50; }
-    .toast-message.error { background-color: #f44336; }
-    .toast-message.info { background-color: #2196f3; }
     @keyframes fadeInOut {
-      0% { opacity: 0; transform: translateY(-10px); }
-      10% { opacity: 1; transform: translateY(0); }
-      90% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-10px); }
+      0%{opacity:0;transform:translateY(-10px);}
+      10%,90%{opacity:1;transform:translateY(0);}
+      100%{opacity:0;transform:translateY(-10px);}
+    }
+
+    @media(max-width:600px){
+      .steps { gap:0.5rem; padding:0.5rem; }
+      .step img { width:40px; height:40px; }
     }
   </style>
 </head>
 <body>
-  <div id="toast-container" aria-live="assertive"></div>
-  <div id="backgroundBlur" aria-hidden="true"></div>
 
-  <main class="overlay" role="main">
-    <h1>La casa delle galline uova fresche</h1>
-    <p>Uova genuine da galline libere, nutrite in modo naturale e allevate in 4.000 mq di verde recintato, direttamente dal produttore.</p>
+  <div id="toast-container" aria-live="assertive"></div>
+
+  <main>
+    <h1>La casa delle galline – Uova fresche</h1>
+    <p>Uova genuine da galline libere, nutrite in modo naturale e allevate su 4 000 m² di verde.</p>
 
     <section class="steps" aria-label="Passaggi ordine">
-      <div class="step">
-        <img src="https://i.postimg.cc/Gtm6yPB9/Pngtree-fresh-chicken-eggs-in-woven-13140306.png" alt="Seleziona quantità" />
-        <span>Scegli quantità</span>
-      </div>
-      <div class="step">
-        <img src="https://i.postimg.cc/vHpSYwv4/Pngtree-businessman-user-avatar-free-vector-4827807.png" alt="Inserisci dati" />
-        <span>Inserisci dati</span>
-      </div>
-      <div class="step">
-        <img src="https://i.postimg.cc/Jnmf1CMN/Pngtree-3d-message-bubble-icon-20969361.png" alt="Invia ordine" />
-        <span>Invia ordine</span>
-      </div>
+      <div class="step"><img src="https://i.postimg.cc/Gtm6yPB9/Pngtree-fresh-chicken-eggs-in-woven-13140306.png" alt="Seleziona quantità"><span>Scegli quantità</span></div>
+      <div class="step"><img src="https://i.postimg.cc/vHpSYwv4/Pngtree-businessman-user-avatar-free-vector-4827807.png" alt="Inserisci dati"><span>Inserisci dati</span></div>
+      <div class="step"><img src="https://i.postimg.cc/Jnmf1CMN/Pngtree-3d-message-bubble-icon-20969361.png" alt="Invia ordine"><span>Invia ordine</span></div>
     </section>
 
-    <section class="slider-container">
-      <label for="eggQuantity">Seleziona quantità</label>
-      <input type="range" id="eggQuantity" min="6" max="60" value="12" step="1" aria-valuemin="6" aria-valuemax="60" aria-valuenow="12" aria-label="Quantità uova gallina" />
-      <div class="quantity-display" aria-live="polite" aria-atomic="true"><span id="qtyDisplay">12</span> uova gallina</div>
-    </section>
+    <div class="slider-container">
+      <label for="eggQuantity">Quantità di uova di gallina</label>
+      <input type="range" id="eggQuantity" min="6" max="60" value="12" step="1" aria-valuemin="6" aria-valuemax="60" aria-valuenow="12">
+      <div class="quantity-display"><span id="qtyDisplay">12</span> uova</div>
+    </div>
 
-    <button class="btn" id="openBtn" aria-haspopup="dialog" aria-controls="orderModal">Ordina Ora</button>
+    <button class="btn" id="openBtn">Ordina Ora</button>
   </main>
 
-  <div class="modal" id="orderModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+  <div class="modal" id="orderModal" role="dialog" aria-hidden="true">
     <div class="modal-content">
-      <button class="close-btn" id="closeBtn" aria-label="Chiudi modale">&times;</button>
+      <button class="close-btn" id="closeBtn" aria-label="Chiudi">&times;</button>
       <h2 id="modalTitle">Modulo d'ordine</h2>
       <div class="modal-body">
         <form id="orderForm" novalidate>
-          <label for="name">Il tuo nome</label>
-          <input type="text" id="name" placeholder="Il tuo nome" required autocomplete="name" />
+          <label for="name">Nome</label>
+          <input type="text" id="name" placeholder="Il tuo nome" required autocomplete="name">
 
           <div class="sliders-wrapper">
             <div class="slider-box">
-              <label for="quantitySlider">Prezzo 0,35/unità</label>
-              <input type="range" id="quantitySlider" min="6" max="60" value="12" step="1" aria-label="Quantità uova gallina" />
-              <div class="quantity-display" aria-live="polite" aria-atomic="true">
-                <span id="qtyDisplayModal">12</span> Uova gallina
-              </div>
+              <label for="quantitySlider">Gallina (€0,35/uovo)</label>
+              <input type="range" id="quantitySlider" min="6" max="60" value="12" step="1">
+              <div class="quantity-display"><span id="qtyDisplayModal">12</span> uova</div>
             </div>
-
             <div class="slider-box">
-              <label for="quantitySliderDuck">Prezzo 0,45/unità</label>
-              <input type="range" id="quantitySliderDuck" min="0" max="60" value="0" step="1" aria-label="Quantità uova papera" />
-              <div class="quantity-display" aria-live="polite" aria-atomic="true">
-                <span id="qtyDisplayModalDuck">0</span> Uova papera
-              </div>
+              <label for="quantitySliderDuck">Papera (€0,45/uovo)</label>
+              <input type="range" id="quantitySliderDuck" min="0" max="60" value="0" step="1">
+              <div class="quantity-display"><span id="qtyDisplayModalDuck">0</span> uova</div>
             </div>
           </div>
 
-          <div class="summary" id="orderSummary" aria-live="polite" aria-atomic="true">
-            <span>Uova gallina <strong><span id="summaryGallina">12</span></strong></span>
-            <span>Uova papera <strong><span id="summaryPapera">0</span></strong></span>
-            <span>Totale  € <strong><span id="summaryTotal">4.20</span></strong></span>
+          <div id="orderSummary" aria-live="polite">
+            <span>Gallina <strong><span id="summaryGallina">12</span></strong></span>
+            <span>Papera <strong><span id="summaryPapera">0</span></strong></span>
+            <span>Totale € <strong><span id="summaryTotal">4.20</span></strong></span>
           </div>
 
-          <label for="delivery">Modalità di consegna</label>
-          <select id="delivery" aria-required="true">
+          <label for="delivery">Consegna</label>
+          <select id="delivery">
             <option value="ritiro">Ritiro a mano</option>
             <option value="domicilio">Consegna a domicilio</option>
           </select>
-
-          <div id="address-group">
-            <label for="address">Indirizzo per la consegna</label>
-            <input type="text" id="address" placeholder="Via, numero, città" autocomplete="street-address" />
+          <div id="address-group" style="display:none;">
+            <label for="address">Indirizzo</label>
+            <input type="text" id="address" placeholder="Via, numero, città" autocomplete="street-address">
           </div>
 
           <label for="note">Note aggiuntive</label>
-          <textarea id="note" maxlength="250" placeholder="Es. orario preferito per ritiro o consegna..." rows="3"></textarea>
-
+          <textarea id="note" maxlength="250" rows="3" placeholder="Es. orario preferito..."></textarea>
           <button type="submit">Invia via WhatsApp</button>
         </form>
       </div>
@@ -456,169 +322,101 @@
 
   <footer>
     <div class="social-icons">
-      <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" /></a>
-      <a href="https://www.instagram.com/lacasa.dellegalline/" target="_blank" rel="noopener noreferrer"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" /></a>
+      <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
+      <a href="https://www.instagram.com/lacasa.dellegalline/" target="_blank" rel="noopener"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
     </div>
-    <p>&copy; 2025 La casa delle galline - Tutti i diritti riservati</p>
+    <p>&copy; 2025 La casa delle galline – Tutti i diritti riservati</p>
   </footer>
 
   <script>
-    const priceGallina = 0.35;
-    const pricePapera = 0.45;
-
-    const openBtn = document.getElementById('openBtn');
-    const closeBtn = document.getElementById('closeBtn');
+    const priceGallina = 0.35, pricePapera = 0.45;
+    const openBtn = document.getElementById('openBtn'), closeBtn = document.getElementById('closeBtn');
     const modal = document.getElementById('orderModal');
     const eggQuantity = document.getElementById('eggQuantity');
     const quantitySlider = document.getElementById('quantitySlider');
     const quantitySliderDuck = document.getElementById('quantitySliderDuck');
-
     const qtyDisplay = document.getElementById('qtyDisplay');
     const qtyDisplayModal = document.getElementById('qtyDisplayModal');
     const qtyDisplayModalDuck = document.getElementById('qtyDisplayModalDuck');
-
     const summaryGallina = document.getElementById('summaryGallina');
     const summaryPapera = document.getElementById('summaryPapera');
     const summaryTotal = document.getElementById('summaryTotal');
-
     const deliverySelect = document.getElementById('delivery');
     const addressGroup = document.getElementById('address-group');
     const orderForm = document.getElementById('orderForm');
 
-    // Funzioni scroll blocco
-    function disableScroll() {
-      document.body.classList.add('modal-open');
-    }
-    function enableScroll() {
-      document.body.classList.remove('modal-open');
-    }
-
     function updateSummary() {
-      const gallina = parseInt(quantitySlider.value, 10);
-      const papera = parseInt(quantitySliderDuck.value, 10);
-      const total = gallina * priceGallina + papera * pricePapera;
-
-      summaryGallina.textContent = gallina;
-      summaryPapera.textContent = papera;
-      summaryTotal.textContent = total.toFixed(2);
-
-      qtyDisplayModal.textContent = gallina;
-      qtyDisplayModalDuck.textContent = papera;
-      qtyDisplay.textContent = gallina;
-      eggQuantity.value = gallina;
+      const g = +quantitySlider.value;
+      const p = +quantitySliderDuck.value;
+      const tot = g*priceGallina + p*pricePapera;
+      summaryGallina.textContent = g;
+      summaryPapera.textContent = p;
+      summaryTotal.textContent = tot.toFixed(2);
+      qtyDisplayModal.textContent = g;
+      qtyDisplayModalDuck.textContent = p;
+      qtyDisplay.textContent = g;
+      eggQuantity.value = g;
     }
 
-    // Sincronizza slider
     eggQuantity.addEventListener('input', e => {
-      const val = e.target.value;
-      quantitySlider.value = val;
+      quantitySlider.value = e.target.value;
       updateSummary();
     });
     quantitySlider.addEventListener('input', e => {
-      const val = e.target.value;
-      eggQuantity.value = val;
+      eggQuantity.value = e.target.value;
       updateSummary();
     });
     quantitySliderDuck.addEventListener('input', updateSummary);
 
-    // Cambia modalità consegna
     deliverySelect.addEventListener('change', () => {
-      if (deliverySelect.value === 'domicilio') {
-        addressGroup.style.display = 'block';
-      } else {
-        addressGroup.style.display = 'none';
-      }
+      addressGroup.style.display = deliverySelect.value === 'domicilio' ? 'block' : 'none';
     });
 
-    // Apri modale
     openBtn.addEventListener('click', () => {
       modal.style.display = 'flex';
-      document.getElementById('backgroundBlur').style.display = 'block';
-      disableScroll();
-      modal.setAttribute('aria-hidden', 'false');
-      document.getElementById('name').focus();
+      document.body.classList.add('modal-open');
+      modal.setAttribute('aria-hidden','false');
       updateSummary();
+      document.getElementById('name').focus();
     });
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
 
-    // Chiudi modale
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-      document.getElementById('backgroundBlur').style.display = 'none';
-      enableScroll();
-      modal.setAttribute('aria-hidden', 'true');
+    function closeModal() {
+      modal.style.display='none';
+      document.body.classList.remove('modal-open');
+      modal.setAttribute('aria-hidden','true');
       orderForm.reset();
       addressGroup.style.display = 'none';
+      eggQuantity.value = quantitySlider.value;
       qtyDisplay.textContent = eggQuantity.value;
-    });
-
-    // Chiudi modale se clicchi fuori (overlay)
-    document.getElementById('backgroundBlur').addEventListener('click', () => {
-      closeBtn.click();
-    });
-
-    // Gestione submit
-    orderForm.addEventListener('submit', e => {
-      e.preventDefault();
-
-      const name = orderForm.name.value.trim();
-      if (!name) {
-        alert('Inserisci il tuo nome');
-        orderForm.name.focus();
-        return;
-      }
-
-      if (deliverySelect.value === 'domicilio' && !orderForm.address.value.trim()) {
-        alert('Inserisci indirizzo per la consegna');
-        orderForm.address.focus();
-        return;
-      }
-
-      const gallina = parseInt(quantitySlider.value, 10);
-      const papera = parseInt(quantitySliderDuck.value, 10);
-
-      if (gallina + papera === 0) {
-        alert('Seleziona almeno una quantità di uova');
-        return;
-      }
-
-      // Prepara testo messaggio WhatsApp
-      let message = `Ordine uova fresche:\nNome: ${name}\n`;
-      message += `Uova gallina: ${gallina}\n`;
-      message += `Uova papera: ${papera}\n`;
-      message += `Consegna: ${deliverySelect.value === 'domicilio' ? 'A domicilio' : 'Ritiro a mano'}\n`;
-
-      if (deliverySelect.value === 'domicilio') {
-        message += `Indirizzo: ${orderForm.address.value.trim()}\n`;
-      }
-      if (orderForm.note.value.trim()) {
-        message += `Note: ${orderForm.note.value.trim()}\n`;
-      }
-      const total = (gallina * priceGallina + papera * pricePapera).toFixed(2);
-      message += `Totale: €${total}`;
-
-      const url = `https://wa.me/393440301412?text=${encodeURIComponent(message)}`;
-      window.location.href = url;
-
-      closeBtn.click();
-      showToast('Ordine inviato con WhatsApp!', 'success');
-    });
-
-    // Toast function
-    function showToast(message, type = "success") {
-      const container = document.getElementById("toast-container");
-      const toast = document.createElement("div");
-      toast.className = `toast-message ${type}`;
-      toast.textContent = message;
-      container.appendChild(toast);
-      setTimeout(() => {
-        toast.remove();
-      }, 3500);
     }
 
-    // Init aggiornamento riepilogo
+    orderForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = orderForm.name.value.trim();
+      if(!name){ alert('Inserisci il nome'); return; }
+      if(deliverySelect.value==='domicilio' && !orderForm.address.value.trim()){ alert('Inserisci indirizzo'); return; }
+      const g=+quantitySlider.value, p=+quantitySliderDuck.value;
+      if(g+p===0){ alert('Seleziona almeno 1 uovo'); return; }
+      let msg = `Ordine uova fresche:\nNome: ${name}\nGallina: ${g}\nPapera: ${p}\n`;
+      msg += deliverySelect.value==='domicilio'?`Consegna a domicilio\nIndirizzo: ${orderForm.address.value.trim()}\n`:'Ritiro a mano\n';
+      if(orderForm.note.value.trim()) msg += `Note: ${orderForm.note.value.trim()}\n`;
+      msg += `Totale: €${(g*priceGallina + p*pricePapera).toFixed(2)}`;
+      window.location.href = `https://wa.me/393440301412?text=${encodeURIComponent(msg)}`;
+      closeModal();
+      showToast('Ordine inviato!', 'success');
+    });
+
+    function showToast(text, type) {
+      const t = document.createElement('div');
+      t.className = 'toast-message';
+      t.textContent = text;
+      document.getElementById('toast-container').appendChild(t);
+      setTimeout(()=>t.remove(),3500);
+    }
+
     updateSummary();
   </script>
 </body>
 </html>
-
-
