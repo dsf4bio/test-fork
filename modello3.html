@@ -6,51 +6,115 @@
   <title>La Casa delle Galline</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0; font-family: 'Roboto', sans-serif;
-      background: #f2efe8; color: #2c2c2c;
+  * {
+      box-sizing: border-box;
     }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #f2efe8;
+      color: #2c2c2c;
+      overflow-x: hidden;
+    }
+
+    /* HERO HEADER */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      background: url('https://i.postimg.cc/QxrXHwmy/uova-cover.png') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .hero h1 {
+      position: relative;
+      color: white;
+      font-size: 2.5rem;
+      z-index: 1;
+      padding: 0 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        height: 45vh;
+      }
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+    }
+
+    header, .guide, .prices, .cta, footer {
+      transition: filter 0.3s ease;
+    }
+
     header {
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 2rem 1rem;
       background: #fffdf6;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    header h1 {
+    header h2 {
       margin: 0;
-      font-size: 2.8rem;
+      font-size: 2rem;
       color: #7a5c3e;
     }
     header p {
-      font-size: 1.2rem;
+      font-size: 1rem;
       margin-top: 10px;
+      color: #444;
     }
+
     .guide {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       flex-wrap: wrap;
+      gap: 2rem;
       padding: 2rem 1rem;
       background: #fff9ef;
     }
     .guide-item {
       text-align: center;
-      max-width: 120px;
-      margin-bottom: 1rem;
+      max-width: 180px;
     }
     .guide-item img {
-      width: 100px;
+      width: 120px;
       animation: float 2s ease-in-out infinite;
     }
     .guide-item p {
-      font-size: 0.9rem;
+      font-size: 1rem;
       margin-top: 0.5rem;
-      color: #555;
+      color: #444;
     }
     @keyframes float {
       0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-10px); }
     }
-    .cta { text-align: center; margin: 2rem 0; }
+
+    .prices {
+      background: #ffeecb;
+      padding: 1.5rem;
+      text-align: center;
+      margin: 0 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .cta {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
     .cta button {
       background: #86b049;
       color: white;
@@ -61,52 +125,72 @@
       cursor: pointer;
       transition: background 0.3s;
     }
+
     .cta button:hover {
       background: #6d9332;
     }
-    .prices {
-      background: #ffeecb;
-      padding: 1.5rem;
-      text-align: center;
-      margin: 0 1rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
+
     .modal {
-      display: none; position: fixed;
+      display: none;
+      position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.5);
       justify-content: center; align-items: center;
       z-index: 1000;
     }
     .modal-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      width: 95%;
-      max-width: 500px;
-      position: relative;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 95%;
+  max-width: 550px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;         /* Firefox */
+  -ms-overflow-style: none;      /* Internet Explorer e Edge legacy */
+}
+.modal-content::-webkit-scrollbar {
+  display: none;                 /* Chrome, Safari, Edge */
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+  
+
+    body.modal-open main > * {
+      filter: blur(5px);
     }
+
     .modal-content h2 {
       text-align: center;
       margin-bottom: 1rem;
       color: #7a5c3e;
     }
+
     .close-btn {
       position: absolute;
-      top: 12px; right: 16px;
+      top: 12px;
+      right: 16px;
       font-size: 1.5rem;
       color: #aaa;
       cursor: pointer;
     }
+
     .form-group {
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
+
     .form-group label {
       display: block;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
     }
+
     .form-group input,
     .form-group select,
     .form-group textarea {
@@ -115,32 +199,38 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
-      box-sizing: border-box;
     }
+
     input[type=range] {
       width: 100%;
       margin-top: 0.5rem;
-      height: 12px;
-      -webkit-appearance: none;
+      height: 16px;
       background: #eee;
-      border-radius: 6px;
+      border-radius: 8px;
+      -webkit-appearance: none;
     }
+
     input[type=range]::-webkit-slider-thumb {
-      width: 28px; height: 28px;
+      width: 28px;
+      height: 28px;
       background: #86b049;
-      border-radius: 50%;
+      border-radius: 40%;
       cursor: pointer;
       border: 2px solid white;
       transition: transform 0.1s;
     }
+
     input[type=range]:active::-webkit-slider-thumb {
-      transform: scale(1.1);
+      transform: scale(1.15);
     }
+
     .range-label {
-      margin-top: 6px;
-      font-weight: bold;
       text-align: center;
+      margin-top: 8px;
+      font-weight: bold;
+      font-size: 1.1rem;
     }
+
     .send-button {
       width: 100%;
       background: #86b049;
@@ -152,9 +242,11 @@
       cursor: pointer;
       margin-top: 1rem;
     }
+
     .send-button:hover {
       background: #6d9332;
     }
+
     .toast {
       position: fixed;
       bottom: 20px;
@@ -165,168 +257,237 @@
       padding: 12px 20px;
       border-radius: 8px;
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.3s ease;
       z-index: 1100;
     }
+
     .toast.show {
       opacity: 1;
     }
+
+    .hidden {
+      display: none;
+    }
+
     footer {
       text-align: center;
       padding: 2rem 1rem;
       background: #fffdf6;
       margin-top: 2rem;
     }
+
     footer .social-icons img {
       width: 32px;
       height: 32px;
       margin: 0 8px;
       vertical-align: middle;
     }
+
     footer p {
       margin: 0;
       font-size: 0.9rem;
       color: #555;
       margin-top: 0.5rem;
     }
+
+    .order-summary {
+      border-top: 1px solid #ccc;
+      padding-top: 1rem;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    .order-summary p { margin: 0.2rem 0; }
+
+    .guide {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  background: #fff9ef;
+  overflow-x: auto;
+}
+
+.guide-item {
+  flex: 1 0 0;
+  min-width: 0;
+  text-align: center;
+}
+
+.guide-item img {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+}
+
+
   </style>
 </head>
 <body>
+<main>
+  <div class="hero">
+    <h1>Uova fresche dal campo alla tua tavola</h1>
+  </div>
 
   <header>
-    <h1>La Casa delle Galline</h1>
-    <p>Uova fresche di gallina e papera, consegna rapida a casa tua</p>
+    <h2>La Casa delle Galline</h2>
+    <p>Uova genuine da galline libere, nutrite in modo naturale e allevate in 4.000 mq di verde recintato, direttamente dal produttore.</p>
   </header>
 
   <section class="guide">
     <div class="guide-item">
-      <img src="https://i.gifer.com/1am6.gif" alt="Gallina">
-      <p>Scegli le uova di gallina</p>
+      <img src="https://i.postimg.cc/Gtm6yPB9/Pngtree-fresh-chicken-eggs-in-woven-13140306.png" alt="Gallina">
+      <p>Scegli la quantità</p>
     </div>
     <div class="guide-item">
-      <img src="https://i.gifer.com/9fV.gif" alt="Uova">
-      <p>Scegli le uova di papera</p>
+      <img src="https://i.postimg.cc/vHpSYwv4/Pngtree-businessman-user-avatar-free-vector-4827807.png" alt="Papera">
+      <p>Compila il modulo</p>
     </div>
     <div class="guide-item">
-      <img src="https://i.gifer.com/7VE.gif" alt="Ordina">
-      <p>Conferma il tuo ordine</p>
+      <img src="https://i.postimg.cc/Jnmf1CMN/Pngtree-3d-message-bubble-icon-20969361.png" alt="Ordina">
+      <p>Invia il tuo ordine</p>
     </div>
   </section>
 
   <section class="prices">
-    <p>🥚 Gallina: <strong>0.35€</strong> cad.</p>
-    <p>🦆 Papera: <strong>0.45€</strong> cad.</p>
+    <p>🥚 Gallina: <strong>0.35€</strong> cad. &nbsp; | &nbsp; 🦆 Papera: <strong>0.45€</strong> cad.</p>
   </section>
 
   <div class="cta">
     <button id="openModal">Ordina ora</button>
   </div>
+</main>
 
-  <div class="modal" id="orderModal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeModal">&times;</span>
-      <h2>Modulo d’ordine</h2>
+<div class="modal" id="orderModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <h2>Modulo d’ordine</h2>
 
-      <div class="form-group">
-        <label for="name">Nome completo</label>
-        <input type="text" id="name" placeholder="Il tuo nome">
-      </div>
-
-      <div class="form-group">
-        <label>Uova di gallina</label>
-        <input type="range" id="gallinaRange" min="0" max="50" value="0">
-        <div class="range-label" id="gallinaQty">0</div>
-      </div>
-
-      <div class="form-group">
-        <label>Uova di papera</label>
-        <input type="range" id="paperaRange" min="0" max="50" value="0">
-        <div class="range-label" id="paperaQty">0</div>
-      </div>
-
-      <div class="form-group">
-        <label for="delivery">Modalità di consegna</label>
-        <select id="delivery">
-          <option value="ritiro">Ritiro a mano</option>
-          <option value="domicilio">Consegna a domicilio</option>
-        </select>
-      </div>
-
-      <div class="form-group hidden" id="addressGroup">
-        <label for="address">Indirizzo di consegna</label>
-        <input type="text" id="address" placeholder="Via, n° civico, città">
-      </div>
-
-      <div class="form-group">
-        <label for="notes">Note aggiuntive</label>
-        <textarea id="notes" rows="2" placeholder="Es. consegna dopo le 17..."></textarea>
-      </div>
-
-      <button class="send-button" onclick="sendOrder()">Invia Ordine</button>
+    <div class="form-group">
+      <label for="name">Nome completo</label>
+      <input type="text" id="name" placeholder="Il tuo nome">
     </div>
+
+    <div class="form-group">
+      <label>Uova di gallina</label>
+      <input type="range" id="gallinaRange" min="0" max="50" value="0">
+      <div class="range-label" id="gallinaQty">0</div>
+    </div>
+
+    <div class="form-group">
+      <label>Uova di papera</label>
+      <input type="range" id="paperaRange" min="0" max="50" value="0">
+      <div class="range-label" id="paperaQty">0</div>
+    </div>
+
+    <div class="form-group">
+      <label for="delivery">Modalità di consegna</label>
+      <select id="delivery">
+        <option value="ritiro">Ritiro a mano</option>
+        <option value="domicilio">Consegna a domicilio</option>
+      </select>
+    </div>
+
+    <div class="form-group hidden" id="addressGroup">
+      <label for="address">Indirizzo di consegna</label>
+      <input type="text" id="address" placeholder="Via, n° civico, città">
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Note aggiuntive</label>
+      <textarea id="notes" rows="2" placeholder="Es. consegna dopo le 17..."></textarea>
+    </div>
+
+    <div class="order-summary" id="orderSummary">
+      <p>Totale Gallina: <span id="totalGallina">0.00€</span></p>
+      <p>Totale Papera: <span id="totalPapera">0.00€</span></p>
+      <p><strong>Totale Ordine: <span id="totalOrdine">0.00€</span></strong></p>
+    </div>
+
+    <button class="send-button" onclick="sendOrder()">Invia su WhatsApp</button>
   </div>
+</div>
 
-  <div class="toast" id="toast"></div>
+<footer>
+  <div class="social-icons">
+    <a href="https://facebook.com" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
+    <a href="https://instagram.com" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
+  </div>
+  <p>© 2025 La Casa delle Galline - Tutti i diritti riservati</p>
+</footer>
 
-  <footer>
-    <div class="social-icons">
-      <a href="https://facebook.com" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"/></a>
-      <a href="https://instagram.com" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"/></a>
-    </div>
-    <p>© 2025 La Casa delle Galline</p>
-  </footer>
+<script>
+  const modal = document.getElementById('orderModal');
+  const openModal = document.getElementById('openModal');
+  const closeModal = document.getElementById('closeModal');
+  const delivery = document.getElementById('delivery');
+  const addressGroup = document.getElementById('addressGroup');
+  const gallinaRange = document.getElementById('gallinaRange');
+  const paperaRange = document.getElementById('paperaRange');
+  const gallinaQty = document.getElementById('gallinaQty');
+  const paperaQty = document.getElementById('paperaQty');
+  const totalGallina = document.getElementById('totalGallina');
+  const totalPapera = document.getElementById('totalPapera');
+  const totalOrdine = document.getElementById('totalOrdine');
 
-  <script>
-    const openModal = document.getElementById('openModal');
-    const modal = document.getElementById('orderModal');
-    const closeModalBtn = document.getElementById('closeModal');
-    const delivery = document.getElementById('delivery');
-    const addressGroup = document.getElementById('addressGroup');
-    const gallinaRange = document.getElementById('gallinaRange');
-    const paperaRange = document.getElementById('paperaRange');
-    const gallinaQty = document.getElementById('gallinaQty');
-    const paperaQty = document.getElementById('paperaQty');
-    const toast = document.getElementById('toast');
+  openModal.onclick = () => {
+    modal.style.display = 'flex';
+    document.body.classList.add('modal-open');
+  };
 
-    openModal.addEventListener('click', () => modal.style.display = 'flex');
-    closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
-    window.addEventListener('click', e => { if (e.target == modal) modal.style.display = 'none'; });
+  closeModal.onclick = () => {
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+  };
 
-    delivery.addEventListener('change', () => {
-      addressGroup.classList.toggle('hidden', delivery.value !== 'domicilio');
-    });
-
-    gallinaRange.oninput = () => gallinaQty.textContent = gallinaRange.value;
-    paperaRange.oninput = () => paperaQty.textContent = paperaRange.value;
-
-    function sendOrder() {
-      const name = document.getElementById('name').value.trim();
-      const address = document.getElementById('address').value.trim();
-      const notes = document.getElementById('notes').value.trim();
-      const g = +gallinaRange.value;
-      const p = +paperaRange.value;
-      const mode = delivery.value;
-
-      if (!name || (mode==='domicilio' && !address) || (g===0 && p===0)) {
-        showToast("Compila nome, quantità e indirizzo se serve", true);
-        return;
-      }
-
-      const total = (g * 0.35 + p * 0.45).toFixed(2);
-      const msg = `Ordine da ${name}%0AGallina: ${g}%0APapera: ${p}%0ATotale: €${total}%0AModo: ${mode==='domicilio' ? 'A domicilio – ' + address : 'Ritiro a mano'}%0ANote: ${notes}`;
-
-      window.open(`https://wa.me/393440301412?text=${msg}`, '_blank');
-      showToast("✅ Ordine inviato!", false);
+  window.onclick = e => {
+    if (e.target === modal) {
       modal.style.display = 'none';
+      document.body.classList.remove('modal-open');
+    }
+  };
+
+  delivery.onchange = () => {
+    addressGroup.classList.toggle('hidden', delivery.value !== 'domicilio');
+  };
+
+  function updateSummary() {
+    const g = +gallinaRange.value;
+    const p = +paperaRange.value;
+    gallinaQty.textContent = g;
+    paperaQty.textContent = p;
+    const gTot = g * 0.35;
+    const pTot = p * 0.45;
+    totalGallina.textContent = gTot.toFixed(2) + '€';
+    totalPapera.textContent = pTot.toFixed(2) + '€';
+    totalOrdine.textContent = (gTot + pTot).toFixed(2) + '€';
+  }
+
+  gallinaRange.oninput = updateSummary;
+  paperaRange.oninput = updateSummary;
+
+  function sendOrder() {
+    const name = document.getElementById('name').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const notes = document.getElementById('notes').value.trim();
+    const g = +gallinaRange.value;
+    const p = +paperaRange.value;
+    const mode = delivery.value;
+
+    if (!name || (mode === 'domicilio' && !address) || (g === 0 && p === 0)) {
+      alert("❌ Compila nome, quantità e indirizzo se richiesto");
+      return;
     }
 
-    function showToast(msg, error=false) {
-      toast.textContent = msg;
-      toast.style.background = error ? '#c0392b' : '#27ae60';
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-  </script>
+    const total = (g * 0.35 + p * 0.45).toFixed(2);
+    const msg = `Ordine da ${name}%0AGallina: ${g}%0APapera: ${p}%0ATotale: €${total}%0AModo: ${mode === 'domicilio' ? 'A domicilio – ' + address : 'Ritiro a mano'}%0ANote: ${notes}`;
+    window.open(`https://wa.me/393440301412?text=${msg}`, '_blank');
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+  }
+
+  updateSummary();
+</script>
 
 </body>
 </html>
