@@ -1,422 +1,332 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Ordina Uova Fresche</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Casa delle Galline</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Reset & corpo */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html, body {
-      height:100%; overflow-x:hidden;
-      font-family:Roboto,sans-serif;
-      background:#fef9f0;
-      color:#4b3b2a;
-      -webkit-font-smoothing:antialiased;
-      display:flex; flex-direction:column;
+    body {
+      margin: 0; font-family: 'Roboto', sans-serif;
+      background: #f2efe8; color: #2c2c2c;
     }
-    body.modal-open { overflow:hidden; touch-action:none; }
-
-    main {
-      flex:1;
-      max-width:720px;
-      width:100%;
-      margin:auto;
-      padding:2rem 1rem 4rem;
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: #fffdf6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    h1 {
-      font-size:2.2rem;
-      text-align:center;
-      margin-bottom:0.5rem;
-      color:#6b4f2f;
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      color: #7a5c3e;
     }
-    p {
-      text-align:center;
-      font-size:1.05rem;
-      margin-bottom:2rem;
-      color:#7b5e3d;
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
     }
-
-    .steps {
-      display:flex; justify-content:space-around;
-      background:#fffdf6;
-      border:1px solid #eee0c7;
-      border-radius:12px;
-      padding:1rem;
-      gap:1rem;
-      flex-wrap:wrap;
-      margin-bottom:2rem;
+    .guide {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 2rem 1rem;
+      background: #fff9ef;
     }
-    .step {
-      flex:1; min-width:90px;
-      display:flex; flex-direction:column;
-      align-items:center;
+    .guide-item {
+      text-align: center;
+      max-width: 120px;
+      margin-bottom: 1rem;
     }
-    .step img {
-      width:50px;
-      height:50px;
-      margin-bottom:0.3rem;
+    .guide-item img {
+      width: 100px;
+      animation: float 2s ease-in-out infinite;
     }
-    .step span {
-      font-size:0.85rem;
-      text-align:center;
+    .guide-item p {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: #555;
     }
-
-    .slider-container { margin-bottom:2rem; }
-    .slider-container label {
-      display:block;
-      font-weight:600;
-      color:#5b4029;
-      margin-bottom:0.5rem;
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
-    input[type=range] {
-      width:100%; height:8px;
-      background:#dfc7a4;
-      border-radius:4px;
-      appearance:none;
+    .cta { text-align: center; margin: 2rem 0; }
+    .cta button {
+      background: #86b049;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
     }
-    input[type=range]::-webkit-slider-thumb,
-    input[type=range]::-moz-range-thumb {
-      width:20px; height:20px;
-      background:#86b049;
-      border-radius:50%;
-      cursor:pointer;
-      border:2px solid #fff;
+    .cta button:hover {
+      background: #6d9332;
     }
-    .quantity-display {
-      font-size:1.3rem;
-      color:#6e4a28;
-      margin-top:0.5rem;
-      text-align:center;
-      font-weight:bold;
+    .prices {
+      background: #ffeecb;
+      padding: 1.5rem;
+      text-align: center;
+      margin: 0 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
-    .btn {
-      display:block;
-      width:100%;
-      background:#a7cf72;
-      color:#fff;
-      border:none;
-      padding:1rem;
-      font-size:1.1rem;
-      border-radius:8px;
-      cursor:pointer;
-      margin-top:2rem;
-      transition:background .2s;
-    }
-    .btn:hover { background:#8cb960; }
-
-    /* MODALE */
     .modal {
-      position:fixed; top:0; left:0;
-      width:100%; height:100%;
-      background:rgba(255,255,255,0.6);
-      display:none;
-      justify-content:center;
-      align-items:center;
-      z-index:100;
+      display: none; position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center; align-items: center;
+      z-index: 1000;
     }
     .modal-content {
-      background:#fffef8;
-      padding:2rem;
-      border-radius:12px;
-      width:90%; max-width:500px;
-      max-height:80vh;
-      display:flex; flex-direction:column;
-      position:relative;
-      box-shadow:0 2px 10px rgba(0,0,0,0.1);
-      overflow:hidden;
-    }
-    .modal-body {
-      overflow-y:auto;
-      flex:1;
-      padding-right:8px;
-      -webkit-overflow-scrolling:touch;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 95%;
+      max-width: 500px;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
     }
     .modal-content h2 {
-      font-size:1.5rem;
-      margin-bottom:1rem;
-      color:#4b3925;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #7a5c3e;
     }
-    .modal-content label {
-      display:block;
-      margin-top:1rem;
-      color:#5b4029;
-      font-weight:500;
-    }
-    .modal-content input,
-    .modal-content select,
-    .modal-content textarea {
-      width:100%;
-      padding:0.6rem;
-      margin-top:0.3rem;
-      border:1px solid #ccc;
-      border-radius:6px;
-      font-size:1rem;
-      font-family:inherit;
-    }
-    .modal-content button[type=submit] {
-      margin-top:1.5rem;
-      background:#86b049;
-      color:#fff;
-      border:none;
-      padding:1rem;
-      width:100%;
-      border-radius:6px;
-      font-size:1rem;
-      cursor:pointer;
-      transition:background .2s;
-    }
-    .modal-content button[type=submit]:hover { background:#6f9638; }
-
     .close-btn {
-      position:absolute;
-      top:12px; right:16px;
-      font-size:1.5rem;
-      background:none;
-      border:none;
-      color:#666;
-      cursor:pointer;
+      position: absolute;
+      top: 12px; right: 16px;
+      font-size: 1.5rem;
+      color: #aaa;
+      cursor: pointer;
     }
-    .close-btn:hover { color:#333; }
-
-    .sliders-wrapper {
-      display:flex; flex-wrap:wrap;
-      gap:1rem;
-      margin-top:1rem;
+    .form-group {
+      margin-bottom: 1rem;
     }
-    .slider-box { flex:1 1 45%; }
-
-    #orderSummary {
-      margin-top:1rem;
-      display:flex;
-      flex-direction:column;
-      gap:0.3rem;
-      font-size:1rem;
-      font-weight:600;
-      color:#3b2d19;
+    .form-group label {
+      display: block;
+      margin-bottom: 0.3rem;
     }
-    #orderSummary span {
-      display:flex;
-      justify-content:space-between;
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
     }
-    #orderSummary strong { color:#d0803b; }
-
+    input[type=range] {
+      width: 100%;
+      margin-top: 0.5rem;
+      height: 12px;
+      -webkit-appearance: none;
+      background: #eee;
+      border-radius: 6px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      width: 28px; height: 28px;
+      background: #86b049;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid white;
+      transition: transform 0.1s;
+    }
+    input[type=range]:active::-webkit-slider-thumb {
+      transform: scale(1.1);
+    }
+    .range-label {
+      margin-top: 6px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .send-button {
+      width: 100%;
+      background: #86b049;
+      color: white;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .send-button:hover {
+      background: #6d9332;
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #27ae60;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 1100;
+    }
+    .toast.show {
+      opacity: 1;
+    }
     footer {
-      text-align:center;
-      padding:2rem 1rem;
-      background:rgba(254,249,240,0.9);
-    }
-    footer .social-icons {
-      display:flex;
-      justify-content:center;
-      gap:1.5rem;
-      margin-bottom:1rem;
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #fffdf6;
+      margin-top: 2rem;
     }
     footer .social-icons img {
-      width:32px; height:32px;
+      width: 32px;
+      height: 32px;
+      margin: 0 8px;
+      vertical-align: middle;
     }
     footer p {
-      font-size:0.9rem;
-      color:#6b4f2f;
-    }
-
-    /* Toast */
-    #toast-container {
-      position:fixed; top:20px;
-      left:50%; transform:translateX(-50%);
-      display:flex; flex-direction:column;
-      gap:10px; pointer-events:none;
-      z-index:200;
-    }
-    .toast-message {
-      background:#4caf50;
-      color:#fff;
-      padding:12px 18px;
-      border-radius:6px;
-      font-weight:bold;
-      box-shadow:0 0 8px rgba(0,0,0,0.3);
-      animation:fadeInOut 3.5s ease forwards;
-    }
-    @keyframes fadeInOut {
-      0%{opacity:0;transform:translateY(-10px);}
-      10%,90%{opacity:1;transform:translateY(0);}
-      100%{opacity:0;transform:translateY(-10px);}
-    }
-
-    @media(max-width:600px){
-      .steps { gap:0.5rem; padding:0.5rem; }
-      .step img { width:40px; height:40px; }
+      margin: 0;
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.5rem;
     }
   </style>
 </head>
 <body>
 
-  <div id="toast-container" aria-live="assertive"></div>
+  <header>
+    <h1>La Casa delle Galline</h1>
+    <p>Uova fresche di gallina e papera, consegna rapida a casa tua</p>
+  </header>
 
-  <main>
-    <h1>La casa delle galline – Uova fresche</h1>
-    <p>Uova genuine da galline libere, nutrite in modo naturale e allevate su 4 000 m² di verde.</p>
-
-    <section class="steps" aria-label="Passaggi ordine">
-      <div class="step"><img src="https://i.postimg.cc/Gtm6yPB9/Pngtree-fresh-chicken-eggs-in-woven-13140306.png" alt="Seleziona quantità"><span>Scegli quantità</span></div>
-      <div class="step"><img src="https://i.postimg.cc/vHpSYwv4/Pngtree-businessman-user-avatar-free-vector-4827807.png" alt="Inserisci dati"><span>Inserisci dati</span></div>
-      <div class="step"><img src="https://i.postimg.cc/Jnmf1CMN/Pngtree-3d-message-bubble-icon-20969361.png" alt="Invia ordine"><span>Invia ordine</span></div>
-    </section>
-
-    <div class="slider-container">
-      <label for="eggQuantity">Quantità di uova di gallina</label>
-      <input type="range" id="eggQuantity" min="6" max="60" value="12" step="1" aria-valuemin="6" aria-valuemax="60" aria-valuenow="12">
-      <div class="quantity-display"><span id="qtyDisplay">12</span> uova</div>
+  <section class="guide">
+    <div class="guide-item">
+      <img src="https://i.gifer.com/1am6.gif" alt="Gallina">
+      <p>Scegli le uova di gallina</p>
     </div>
+    <div class="guide-item">
+      <img src="https://i.gifer.com/9fV.gif" alt="Uova">
+      <p>Scegli le uova di papera</p>
+    </div>
+    <div class="guide-item">
+      <img src="https://i.gifer.com/7VE.gif" alt="Ordina">
+      <p>Conferma il tuo ordine</p>
+    </div>
+  </section>
 
-    <button class="btn" id="openBtn">Ordina Ora</button>
-  </main>
+  <section class="prices">
+    <p>🥚 Gallina: <strong>0.35€</strong> cad.</p>
+    <p>🦆 Papera: <strong>0.45€</strong> cad.</p>
+  </section>
 
-  <div class="modal" id="orderModal" role="dialog" aria-hidden="true">
+  <div class="cta">
+    <button id="openModal">Ordina ora</button>
+  </div>
+
+  <div class="modal" id="orderModal">
     <div class="modal-content">
-      <button class="close-btn" id="closeBtn" aria-label="Chiudi">&times;</button>
-      <h2 id="modalTitle">Modulo d'ordine</h2>
-      <div class="modal-body">
-        <form id="orderForm" novalidate>
-          <label for="name">Nome</label>
-          <input type="text" id="name" placeholder="Il tuo nome" required autocomplete="name">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2>Modulo d’ordine</h2>
 
-          <div class="sliders-wrapper">
-            <div class="slider-box">
-              <label for="quantitySlider">Gallina (€0,35/uovo)</label>
-              <input type="range" id="quantitySlider" min="6" max="60" value="12" step="1">
-              <div class="quantity-display"><span id="qtyDisplayModal">12</span> uova</div>
-            </div>
-            <div class="slider-box">
-              <label for="quantitySliderDuck">Papera (€0,45/uovo)</label>
-              <input type="range" id="quantitySliderDuck" min="0" max="60" value="0" step="1">
-              <div class="quantity-display"><span id="qtyDisplayModalDuck">0</span> uova</div>
-            </div>
-          </div>
-
-          <div id="orderSummary" aria-live="polite">
-            <span>Gallina <strong><span id="summaryGallina">12</span></strong></span>
-            <span>Papera <strong><span id="summaryPapera">0</span></strong></span>
-            <span>Totale € <strong><span id="summaryTotal">4.20</span></strong></span>
-          </div>
-
-          <label for="delivery">Consegna</label>
-          <select id="delivery">
-            <option value="ritiro">Ritiro a mano</option>
-            <option value="domicilio">Consegna a domicilio</option>
-          </select>
-          <div id="address-group" style="display:none;">
-            <label for="address">Indirizzo</label>
-            <input type="text" id="address" placeholder="Via, numero, città" autocomplete="street-address">
-          </div>
-
-          <label for="note">Note aggiuntive</label>
-          <textarea id="note" maxlength="250" rows="3" placeholder="Es. orario preferito..."></textarea>
-          <button type="submit">Invia via WhatsApp</button>
-        </form>
+      <div class="form-group">
+        <label for="name">Nome completo</label>
+        <input type="text" id="name" placeholder="Il tuo nome">
       </div>
+
+      <div class="form-group">
+        <label>Uova di gallina</label>
+        <input type="range" id="gallinaRange" min="0" max="50" value="0">
+        <div class="range-label" id="gallinaQty">0</div>
+      </div>
+
+      <div class="form-group">
+        <label>Uova di papera</label>
+        <input type="range" id="paperaRange" min="0" max="50" value="0">
+        <div class="range-label" id="paperaQty">0</div>
+      </div>
+
+      <div class="form-group">
+        <label for="delivery">Modalità di consegna</label>
+        <select id="delivery">
+          <option value="ritiro">Ritiro a mano</option>
+          <option value="domicilio">Consegna a domicilio</option>
+        </select>
+      </div>
+
+      <div class="form-group hidden" id="addressGroup">
+        <label for="address">Indirizzo di consegna</label>
+        <input type="text" id="address" placeholder="Via, n° civico, città">
+      </div>
+
+      <div class="form-group">
+        <label for="notes">Note aggiuntive</label>
+        <textarea id="notes" rows="2" placeholder="Es. consegna dopo le 17..."></textarea>
+      </div>
+
+      <button class="send-button" onclick="sendOrder()">Invia Ordine</button>
     </div>
   </div>
 
+  <div class="toast" id="toast"></div>
+
   <footer>
     <div class="social-icons">
-      <a href="#"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
-      <a href="https://www.instagram.com/lacasa.dellegalline/" target="_blank" rel="noopener"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
+      <a href="https://facebook.com" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"/></a>
+      <a href="https://instagram.com" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"/></a>
     </div>
-    <p>&copy; 2025 La casa delle galline – Tutti i diritti riservati</p>
+    <p>© 2025 La Casa delle Galline</p>
   </footer>
 
   <script>
-    const priceGallina = 0.35, pricePapera = 0.45;
-    const openBtn = document.getElementById('openBtn'), closeBtn = document.getElementById('closeBtn');
+    const openModal = document.getElementById('openModal');
     const modal = document.getElementById('orderModal');
-    const eggQuantity = document.getElementById('eggQuantity');
-    const quantitySlider = document.getElementById('quantitySlider');
-    const quantitySliderDuck = document.getElementById('quantitySliderDuck');
-    const qtyDisplay = document.getElementById('qtyDisplay');
-    const qtyDisplayModal = document.getElementById('qtyDisplayModal');
-    const qtyDisplayModalDuck = document.getElementById('qtyDisplayModalDuck');
-    const summaryGallina = document.getElementById('summaryGallina');
-    const summaryPapera = document.getElementById('summaryPapera');
-    const summaryTotal = document.getElementById('summaryTotal');
-    const deliverySelect = document.getElementById('delivery');
-    const addressGroup = document.getElementById('address-group');
-    const orderForm = document.getElementById('orderForm');
+    const closeModalBtn = document.getElementById('closeModal');
+    const delivery = document.getElementById('delivery');
+    const addressGroup = document.getElementById('addressGroup');
+    const gallinaRange = document.getElementById('gallinaRange');
+    const paperaRange = document.getElementById('paperaRange');
+    const gallinaQty = document.getElementById('gallinaQty');
+    const paperaQty = document.getElementById('paperaQty');
+    const toast = document.getElementById('toast');
 
-    function updateSummary() {
-      const g = +quantitySlider.value;
-      const p = +quantitySliderDuck.value;
-      const tot = g*priceGallina + p*pricePapera;
-      summaryGallina.textContent = g;
-      summaryPapera.textContent = p;
-      summaryTotal.textContent = tot.toFixed(2);
-      qtyDisplayModal.textContent = g;
-      qtyDisplayModalDuck.textContent = p;
-      qtyDisplay.textContent = g;
-      eggQuantity.value = g;
+    openModal.addEventListener('click', () => modal.style.display = 'flex');
+    closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', e => { if (e.target == modal) modal.style.display = 'none'; });
+
+    delivery.addEventListener('change', () => {
+      addressGroup.classList.toggle('hidden', delivery.value !== 'domicilio');
+    });
+
+    gallinaRange.oninput = () => gallinaQty.textContent = gallinaRange.value;
+    paperaRange.oninput = () => paperaQty.textContent = paperaRange.value;
+
+    function sendOrder() {
+      const name = document.getElementById('name').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+      const g = +gallinaRange.value;
+      const p = +paperaRange.value;
+      const mode = delivery.value;
+
+      if (!name || (mode==='domicilio' && !address) || (g===0 && p===0)) {
+        showToast("Compila nome, quantità e indirizzo se serve", true);
+        return;
+      }
+
+      const total = (g * 0.35 + p * 0.45).toFixed(2);
+      const msg = `Ordine da ${name}%0AGallina: ${g}%0APapera: ${p}%0ATotale: €${total}%0AModo: ${mode==='domicilio' ? 'A domicilio – ' + address : 'Ritiro a mano'}%0ANote: ${notes}`;
+
+      window.open(`https://wa.me/393440301412?text=${msg}`, '_blank');
+      showToast("✅ Ordine inviato!", false);
+      modal.style.display = 'none';
     }
 
-    eggQuantity.addEventListener('input', e => {
-      quantitySlider.value = e.target.value;
-      updateSummary();
-    });
-    quantitySlider.addEventListener('input', e => {
-      eggQuantity.value = e.target.value;
-      updateSummary();
-    });
-    quantitySliderDuck.addEventListener('input', updateSummary);
-
-    deliverySelect.addEventListener('change', () => {
-      addressGroup.style.display = deliverySelect.value === 'domicilio' ? 'block' : 'none';
-    });
-
-    openBtn.addEventListener('click', () => {
-      modal.style.display = 'flex';
-      document.body.classList.add('modal-open');
-      modal.setAttribute('aria-hidden','false');
-      updateSummary();
-      document.getElementById('name').focus();
-    });
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
-
-    function closeModal() {
-      modal.style.display='none';
-      document.body.classList.remove('modal-open');
-      modal.setAttribute('aria-hidden','true');
-      orderForm.reset();
-      addressGroup.style.display = 'none';
-      eggQuantity.value = quantitySlider.value;
-      qtyDisplay.textContent = eggQuantity.value;
+    function showToast(msg, error=false) {
+      toast.textContent = msg;
+      toast.style.background = error ? '#c0392b' : '#27ae60';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
     }
-
-    orderForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const name = orderForm.name.value.trim();
-      if(!name){ alert('Inserisci il nome'); return; }
-      if(deliverySelect.value==='domicilio' && !orderForm.address.value.trim()){ alert('Inserisci indirizzo'); return; }
-      const g=+quantitySlider.value, p=+quantitySliderDuck.value;
-      if(g+p===0){ alert('Seleziona almeno 1 uovo'); return; }
-      let msg = `Ordine uova fresche:\nNome: ${name}\nGallina: ${g}\nPapera: ${p}\n`;
-      msg += deliverySelect.value==='domicilio'?`Consegna a domicilio\nIndirizzo: ${orderForm.address.value.trim()}\n`:'Ritiro a mano\n';
-      if(orderForm.note.value.trim()) msg += `Note: ${orderForm.note.value.trim()}\n`;
-      msg += `Totale: €${(g*priceGallina + p*pricePapera).toFixed(2)}`;
-      window.location.href = `https://wa.me/393440301412?text=${encodeURIComponent(msg)}`;
-      closeModal();
-      showToast('Ordine inviato!', 'success');
-    });
-
-    function showToast(text, type) {
-      const t = document.createElement('div');
-      t.className = 'toast-message';
-      t.textContent = text;
-      document.getElementById('toast-container').appendChild(t);
-      setTimeout(()=>t.remove(),3500);
-    }
-
-    updateSummary();
   </script>
+
 </body>
 </html>
