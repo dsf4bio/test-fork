@@ -24,6 +24,12 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
+    /* Blocca scroll quando modale aperta */
+    body.modal-open {
+      overflow: hidden;
+      touch-action: none; /* blocca scroll e touch su mobile */
+    }
+
     /* Overlay contenuto */
     .overlay {
       background: rgba(255, 250, 230, 0.9);
@@ -174,6 +180,7 @@
       align-items: center;
       z-index: 100;
       -webkit-overflow-scrolling: touch;
+      touch-action: none; /* blocca scroll tocco fuori modale */
     }
     #backgroundBlur {
       position: fixed;
@@ -183,6 +190,7 @@
       background: rgba(0,0,0,0.1);
       z-index: 90;
       display: none;
+      touch-action: none; /* blocca scroll tocco */
     }
     .modal-content {
       background: #fffaf0;
@@ -196,6 +204,7 @@
       flex-direction: column;
       position: relative;
       box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      touch-action: auto; /* abilita scroll contenuto */
     }
     .modal-body {
       overflow-y: auto;
@@ -204,6 +213,8 @@
       scrollbar-width: none;
       flex-grow: 1;
       user-select: text;
+      -webkit-overflow-scrolling: touch;
+      touch-action: auto; /* consenti scroll interno modale */
     }
     .modal-body::-webkit-scrollbar {
       display: none;
@@ -472,33 +483,130 @@
 
     const deliverySelect = document.getElementById('delivery');
     const addressGroup = document.getElementById('address-group');
-    const addressInput = document.getElementById('address');
+    const orderForm = document.getElementById('orderForm');
 
-    // Scroll position storage for modal open/close
-    let scrollPosition = 0;
-
+    // Funzioni scroll blocco
     function disableScroll() {
-      scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollPosition}px`;
-      document.body.style.left = '0';
-      document.body.style.right = '0';
-      document.body.style.width = '100%';
+      document.body.classList.add('modal-open');
     }
-
     function enableScroll() {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.width = '';
-      window.scrollTo(0, scrollPosition);
+      document.body.classList.remove('modal-open');
     }
 
-    // Toast
-    function showToast(message, type = 'success') {
-      const container = document.getElementById('toast-container');
-      const toast = document.createElement('div');
+    function updateSummary() {
+      const gallina = parseInt(quantitySlider.value, 10);
+      const papera = parseInt(quantitySliderDuck.value, 10);
+      const total = gallina * priceGallina + papera * pricePapera;
+
+      summaryGallina.textContent = gallina;
+      summaryPapera.textContent = papera;
+      summaryTotal.textContent = total.toFixed(2);
+
+      qtyDisplayModal.textContent = gallina;
+      qtyDisplayModalDuck.textContent = papera;
+      qtyDisplay.textContent = gallina;
+      eggQuantity.value = gallina;
+    }
+
+    // Sincronizza slider
+    eggQuantity.addEventListener('input', e => {
+      const val = e.target.value;
+      quantitySlider.value = val;
+      updateSummary();
+    });
+    quantitySlider.addEventListener('input', e => {
+      const val = e.target.value;
+      eggQuantity.value = val;
+      updateSummary();
+    });
+    quantitySliderDuck.addEventListener('input', updateSummary);
+
+    // Cambia modalità consegna
+    deliverySelect.addEventListener('change', () => {
+      if (deliverySelect.value === 'domicilio') {
+        addressGroup.style.display = 'block';
+      } else {
+        addressGroup.style.display = 'none';
+      }
+    });
+
+    // Apri modale
+    openBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      document.getElementById('backgroundBlur').style.display = 'block';
+      disableScroll();
+      modal.setAttribute('aria-hidden', 'false');
+      document.getElementById('name').focus();
+      updateSummary();
+    });
+
+    // Chiudi modale
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      document.getElementById('backgroundBlur').style.display = 'none';
+      enableScroll();
+      modal.setAttribute('aria-hidden', 'true');
+      orderForm.reset();
+      addressGroup.style.display = 'none';
+      qtyDisplay.textContent = eggQuantity.value;
+    });
+
+    // Chiudi modale se clicchi fuori (overlay)
+    document.getElementById('backgroundBlur').addEventListener('click', () => {
+      closeBtn.click();
+    });
+
+    // Gestione submit
+    orderForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const name = orderForm.name.value.trim();
+      if (!name) {
+        alert('Inserisci il tuo nome');
+        orderForm.name.focus();
+        return;
+      }
+
+      if (deliverySelect.value === 'domicilio' && !orderForm.address.value.trim()) {
+        alert('Inserisci indirizzo per la consegna');
+        orderForm.address.focus();
+        return;
+      }
+
+      const gallina = parseInt(quantitySlider.value, 10);
+      const papera = parseInt(quantitySliderDuck.value, 10);
+
+      if (gallina + papera === 0) {
+        alert('Seleziona almeno una quantità di uova');
+        return;
+      }
+
+      // Prepara testo messaggio WhatsApp
+      let message = `Ordine uova fresche:\nNome: ${name}\n`;
+      message += `Uova gallina: ${gallina}\n`;
+      message += `Uova papera: ${papera}\n`;
+      message += `Consegna: ${deliverySelect.value === 'domicilio' ? 'A domicilio' : 'Ritiro a mano'}\n`;
+
+      if (deliverySelect.value === 'domicilio') {
+        message += `Indirizzo: ${orderForm.address.value.trim()}\n`;
+      }
+      if (orderForm.note.value.trim()) {
+        message += `Note: ${orderForm.note.value.trim()}\n`;
+      }
+      const total = (gallina * priceGallina + papera * pricePapera).toFixed(2);
+      message += `Totale: €${total}`;
+
+      const url = `https://wa.me/393440301412?text=${encodeURIComponent(message)}`;
+      window.location.href = url;
+
+      closeBtn.click();
+      showToast('Ordine inviato con WhatsApp!', 'success');
+    });
+
+    // Toast function
+    function showToast(message, type = "success") {
+      const container = document.getElementById("toast-container");
+      const toast = document.createElement("div");
       toast.className = `toast-message ${type}`;
       toast.textContent = message;
       container.appendChild(toast);
@@ -507,133 +615,10 @@
       }, 3500);
     }
 
-    // Sincronizza slider e visualizzazioni
-    function updateDisplays() {
-      const gallina = Number(quantitySlider.value);
-      const papera = Number(quantitySliderDuck.value);
-
-      qtyDisplay.textContent = gallina;
-      qtyDisplayModal.textContent = gallina;
-      qtyDisplayModalDuck.textContent = papera;
-
-      summaryGallina.textContent = gallina;
-      summaryPapera.textContent = papera;
-
-      const total = (gallina * priceGallina + papera * pricePapera).toFixed(2);
-      summaryTotal.textContent = total;
-    }
-
-    // Sincronizza slider esterno e modale
-    function syncSlidersFromMain() {
-      const val = eggQuantity.value;
-      quantitySlider.value = val;
-      qtyDisplayModal.textContent = val;
-      updateDisplays();
-    }
-    function syncSlidersToMain() {
-      eggQuantity.value = quantitySlider.value;
-      qtyDisplay.textContent = quantitySlider.value;
-    }
-
-    // Mostra/nascondi indirizzo
-    function toggleAddressField() {
-      if (deliverySelect.value === 'domicilio') {
-        addressGroup.style.display = 'block';
-        addressInput.required = true;
-      } else {
-        addressGroup.style.display = 'none';
-        addressInput.required = false;
-        addressInput.value = '';
-      }
-    }
-
-    // Apri modale
-    openBtn.addEventListener('click', () => {
-      modal.style.display = 'flex';
-      document.getElementById('backgroundBlur').style.display = 'block';
-      modal.setAttribute('aria-hidden', 'false');
-      disableScroll();
-      // Sincronizza slider modale con esterno
-      quantitySlider.value = eggQuantity.value;
-      qtyDisplayModal.textContent = eggQuantity.value;
-      quantitySliderDuck.value = 0;
-      qtyDisplayModalDuck.textContent = '0';
-      updateDisplays();
-      toggleAddressField();
-      document.getElementById('name').focus();
-    });
-
-    // Chiudi modale
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-      document.getElementById('backgroundBlur').style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
-      enableScroll();
-    });
-
-    // Sincronizza slider modale con esterno
-    quantitySlider.addEventListener('input', () => {
-      syncSlidersToMain();
-      updateDisplays();
-    });
-    quantitySliderDuck.addEventListener('input', () => {
-      updateDisplays();
-    });
-
-    // Sincronizza slider esterno con modale (per comodità)
-    eggQuantity.addEventListener('input', () => {
-      qtyDisplay.textContent = eggQuantity.value;
-    });
-
-    // Cambio modalità consegna
-    deliverySelect.addEventListener('change', toggleAddressField);
-
-    // Gestione form invio WhatsApp
-    document.getElementById('orderForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const gallina = Number(quantitySlider.value);
-      const papera = Number(quantitySliderDuck.value);
-      const delivery = deliverySelect.value;
-      const address = addressInput.value.trim();
-      const note = document.getElementById('note').value.trim();
-
-      if (!name) {
-        showToast('Inserisci il tuo nome', 'error');
-        return;
-      }
-      if (gallina < 6) {
-        showToast('Quantità minima uova gallina è 6', 'error');
-        return;
-      }
-      if (delivery === 'domicilio' && !address) {
-        showToast('Inserisci l\'indirizzo per la consegna', 'error');
-        return;
-      }
-
-      let message = `Ordine uova fresche:%0A`;
-      message += `Nome: ${encodeURIComponent(name)}%0A`;
-      message += `Uova gallina: ${gallina}%0A`;
-      message += `Uova papera: ${papera}%0A`;
-      message += `Modalità di consegna: ${delivery === 'ritiro' ? 'Ritiro a mano' : 'Consegna a domicilio'}%0A`;
-      if (delivery === 'domicilio') {
-        message += `Indirizzo: ${encodeURIComponent(address)}%0A`;
-      }
-      if (note) {
-        message += `Note: ${encodeURIComponent(note)}%0A`;
-      }
-      const whatsappUrl = `https://wa.me/3440301412?text=${message}`;
-
-      showToast('Apro WhatsApp...', 'info');
-      setTimeout(() => {
-        window.open(whatsappUrl, '_blank');
-      }, 1000);
-    });
-
-    // Inizializza visualizzazioni
-    updateDisplays();
-    toggleAddressField();
+    // Init aggiornamento riepilogo
+    updateSummary();
   </script>
 </body>
 </html>
+
 
